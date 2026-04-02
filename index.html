@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sophie Finke</title>
+  <meta name="description" content="Wharton MBA, ex-quant trader, engineer. 8 products shipped solo in a year. Building at the intersection of AI and everything else.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Hero (full viewport) ── -->
+  <section class="hero">
+    <canvas class="hero-gradient" id="heroGradient"></canvas>
+    <nav class="hero-nav">
+      <span class="hero-nav-name">SF</span>
+      <div class="hero-nav-links">
+        <a href="mailto:sophiefinke@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/sophie-finke-886490b0/" target="_blank" rel="noopener">LinkedIn</a>
+
+        <a href="/sophie-finke-resume.pdf" target="_blank">Resume</a>
+      </div>
+    </nav>
+    <div class="hero-content">
+      <h1>Sophie Finke</h1>
+      <p class="hero-sub">I spent over three years as a quant trader automating processes for a delta one portfolio, then taught myself React to keep coding when I went to business school. I've shipped 6+ products in the past year, to solve my own personal painpoints. Several have real users. Only one was (accidentally) illegal.</p>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-chips">
+        <span class="hero-chip">Wharton MBA '26</span>
+        <span class="hero-chip">Georgia Tech EE</span>
+        <span class="hero-chip">10 projects shipped</span>
+        <span class="hero-chip">NYC starting June</span>
+      </div>
+      <a href="#work" class="scroll-cue">
+        <span>See what I've built</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- ── What I've Built ── -->
+    <section class="projects" id="work">
+      <h2><span class="section-number">01</span> What I've Built</h2>
+
+      <div class="project-card" style="--delay: 0">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>Forekast / WhartBets</h3>
+            <span class="project-tag">Platform</span>
+            <span class="project-date">2025</span>
+          </div>
+          <div class="project-urls">
+            <a href="https://forekast.me" target="_blank" rel="noopener" class="project-url">forekast.me</a>
+            <a href="https://whartbets.com" target="_blank" rel="noopener" class="project-url">whartbets.com</a>
+          </div>
+          <p class="project-oneliner">Prediction market platform with real LMSR pricing math.</p>
+          <p class="project-desc">Started as a Wharton-only betting exchange (WhartBets), then realized the platform was general enough that anyone should be able to spin up their own. Trades execute atomically via Cloud Functions with log-sum-exp numerical stability. Real-time portfolios, market charts, forum, DMs, simulated traders for liquidity. iOS app in progress.</p>
+        </div>
+        <div class="project-visual">
+          <img src="images/forekast-screenshot.png" alt="Forekast landing page" loading="lazy">
+        </div>
+      </div>
+
+      <div class="project-card" style="--delay: 1">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>Sortiva</h3>
+            <span class="project-tag">SaaS</span>
+            <span class="project-date">2026</span>
+          </div>
+          <a href="https://getsortiva.com" target="_blank" rel="noopener" class="project-url">getsortiva.com</a>
+          <p class="project-oneliner">AI email triage that actually works.</p>
+          <p class="project-desc">Built it because I was drowning in my Wharton inbox. Connects to Gmail via OAuth, classifies unread emails into priority buckets using Claude, and auto-drafts replies that match your writing style via a learned voice profile. Stripe billing, scheduled Cloud Functions, push notifications.</p>
+        </div>
+        <div class="project-visual">
+          <img src="images/sortiva-screenshot.png" alt="Sortiva landing page" loading="lazy">
+        </div>
+      </div>
+
+      <div class="project-card" style="--delay: 2">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>SuSense</h3>
+            <span class="project-tag">iOS</span>
+            <span class="project-date">2025</span>
+          </div>
+          <a href="https://susense.me" target="_blank" rel="noopener" class="project-url">susense.me</a>
+          <p class="project-oneliner">Diabetes management, built around real Dexcom CGM data.</p>
+          <p class="project-desc">Built for a friend's family. Pulls real glucose readings from Dexcom, does photo-based meal logging with AI nutritional breakdowns, and sends push notifications to caregivers when glucose goes out of range. TestFlight beta with a companion web dashboard.</p>
+        </div>
+        <div class="project-visual">
+          <img src="images/susense-screenshot.png" alt="SuSense landing page" loading="lazy">
+        </div>
+      </div>
+
+      <div class="project-card" style="--delay: 3">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>TravelBug</h3>
+            <span class="project-tag">iOS</span>
+            <span class="project-date">2025</span>
+          </div>
+          <a href="https://travelbug.tech" target="_blank" rel="noopener" class="project-url">travelbug.tech</a>
+          <p class="project-oneliner">Turn your camera roll into a trip journal, automatically.</p>
+          <p class="project-desc">Import photos and the app extracts GPS metadata to auto-detect every place you visited via Google Places API. Swipe to review, rate, and edit. Generates shareable interactive trip maps. Built it after a trip to Europe where I forgot half the restaurants I loved.</p>
+        </div>
+        <div class="project-visual">
+          <img src="images/travelbug-screenshot.png" alt="TravelBug landing page" loading="lazy">
+        </div>
+      </div>
+
+      <div class="project-card project-card-small" style="--delay: 4">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>RE PE Portfolio Dashboard</h3>
+            <span class="project-tag">Internal Tool</span>
+            <span class="project-date">2026</span>
+          </div>
+          <p class="project-oneliner">Automated reporting pipeline for a real estate PE firm.</p>
+          <p class="project-desc">The fund's quarterly reporting process was entirely manual. Analysts pulling numbers from Excel models, reformatting in spreadsheets, and copy-pasting into Workiva. Built a pipeline that parses their Excel deal models from Google Drive, runs scenario calculations (IRR, equity multiples, waterfall, promote structures), and pushes results directly to Workiva via their WDATA API. Cut what used to take days of analyst time down to a few clicks. React dashboard on top for portfolio-level views and what-if modeling. React + FastAPI + SQLAlchemy.</p>
+        </div>
+      </div>
+
+      <div class="project-card project-card-small" style="--delay: 5">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>Job Radar</h3>
+            <span class="project-tag">Tool</span>
+            <span class="project-date">2026</span>
+          </div>
+          <p class="project-oneliner">Automated daily job search that actually matches what I want.</p>
+          <p class="project-desc">Got tired of manually checking job boards, so I built my own. Scrapes Lever and Greenhouse career pages, scores listings against my criteria using Claude API, deduplicates, and sends a daily digest. Currently building it out into a full web app for friends to use.</p>
+        </div>
+      </div>
+
+      <div class="project-card" style="--delay: 6">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>CeCe</h3>
+            <span class="project-tag project-tag-wip">In Progress</span>
+            <span class="project-date">2024</span>
+          </div>
+          <p class="project-oneliner">Credit card rewards optimizer that tells you which card to use.</p>
+          <p class="project-desc">Links bank accounts via Plaid, syncs transactions, and calculates which credit card would have earned the most rewards on every purchase. Shows missed points, optimization score, and per-card comparisons across Amex, Chase, Capital One, Citi, and Discover programs.</p>
+        </div>
+        <div class="project-visual">
+          <div class="placeholder-icon" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+            <span style="font-size: 2.5rem; font-family: 'DM Serif Display', serif; color: #fff;">CeCe</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card project-card-small" style="--delay: 7">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>Clothing Scanner</h3>
+            <span class="project-tag project-tag-wip">In Progress</span>
+            <span class="project-date">2026</span>
+          </div>
+          <p class="project-oneliner">Snap a photo of a clothing tag, get the product.</p>
+          <p class="project-desc">Take a photo of any clothing label and GPT-4o Vision identifies the brand, product, and style number. Returns clean product images and shopping links. Searches by RN number, style code, or visual match.</p>
+        </div>
+      </div>
+
+      <div class="project-card project-card-small" style="--delay: 8">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>CallForChange</h3>
+            <span class="project-tag project-tag-muted">Retired</span>
+            <span class="project-date">2025</span>
+          </div>
+          <a href="https://callforchange.us" target="_blank" rel="noopener" class="project-url">callforchange.us</a>
+          <p class="project-oneliner">AI civic engagement platform. Accidentally illegal.</p>
+          <p class="project-desc">Built a tool that let users call their congressional representatives with AI-generated talking-point scripts via Twilio, personalized with the user's cloned voice. Congress.gov API for rep lookup, OpenAI for script generation. Shipped it, felt great about democracy, then discovered automated calling is a federal violation. Paused indefinitely.</p>
+        </div>
+      </div>
+
+      <div class="project-card project-card-small" style="--delay: 9">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>Susie B's Gluten-Free</h3>
+            <span class="project-date">2020&ndash;2023</span>
+          </div>
+          <p class="project-oneliner">Online dessert company. $25K+ in sales before we ate the profits.</p>
+          <p class="project-desc">Co-founded a gluten-free baked goods business. Built the Shopify site, ran digital marketing campaigns, handled fulfillment. Shut down in 2023, but the snickerdoodles live on in memory.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── How I Build ── -->
+    <section class="background">
+      <h2><span class="section-number">02</span> How I Build</h2>
+      <div class="background-content">
+        <p>I prototype in <strong>Claude Code</strong> and ship on <strong>Expo + Firebase + React</strong>. Everything above was built solo. I use AI tools heavily and have from the start.</p>
+      </div>
+    </section>
+
+    <!-- ── Background ── -->
+    <section class="background">
+      <h2><span class="section-number">03</span> Background</h2>
+      <div class="background-content">
+        <p>I spent over three years on the index desk at <strong>RBC Capital Markets</strong>, where I automated trading processes in Python and kdb+/q, managed desk-wide funding, and built real-time monitoring tools that got adopted firmwide during the SVB crisis. I also spent a summer at <strong>Amazon</strong> building forecast models and data pipelines for advertising finance.</p>
+        <p>Now at <strong>Wharton</strong> finishing my MBA and building software on the side.</p>
+      </div>
+      <div class="extras">
+        <div class="extra-item">
+          <span class="extra-label">Nonprofit</span>
+          <span>Co-founded Foursquare Education, a financial literacy program for foster youth</span>
+        </div>
+        <div class="extra-item">
+          <span class="extra-label">Certifications</span>
+          <span>SIE, Series 7, Series 57 &middot; Certified ski instructor &middot; Certified yoga instructor</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Skills ── -->
+    <section class="skills">
+      <h2><span class="section-number">04</span> Skills</h2>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">React Native / Expo</span>
+        <span class="skill-tag">Firebase</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Claude Code</span>
+        <span class="skill-tag">Claude API</span>
+        <span class="skill-tag">GPT-4o</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">kdb+/q</span>
+        <span class="skill-tag">C++</span>
+      </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer>
+      <div class="footer-left">
+        <p class="footer-heading">Let's talk</p>
+        <div class="footer-contact">
+          <a href="mailto:sophiefinke@gmail.com">sophiefinke@gmail.com</a>
+          <a href="https://www.linkedin.com/in/sophie-finke-886490b0/" target="_blank" rel="noopener">LinkedIn</a>
+  
+        </div>
+      </div>
+      <p class="signoff">NYC starting June 2026. Looking to build products or run operations at a company working on something that matters.</p>
+    </footer>
+
+  </main>
+
+  <script>
+    // Animated gradient mesh — soft, organic blobs that drift slowly
+    const canvas = document.getElementById('heroGradient');
+    const ctx = canvas.getContext('2d');
+    let w, h, blobs, mouse = { x: 0.5, y: 0.5 };
+
+    function resize() {
+      w = canvas.width = canvas.offsetWidth * devicePixelRatio;
+      h = canvas.height = canvas.offsetHeight * devicePixelRatio;
+    }
+
+    function initBlobs() {
+      blobs = [
+        { x: 0.25, y: 0.3, r: 0.35, vx: 0.0003, vy: 0.0002, color: 'rgba(37, 99, 235, 0.12)' },
+        { x: 0.7, y: 0.6, r: 0.4, vx: -0.0002, vy: 0.0003, color: 'rgba(139, 92, 246, 0.09)' },
+        { x: 0.5, y: 0.8, r: 0.3, vx: 0.0004, vy: -0.0002, color: 'rgba(14, 165, 233, 0.08)' },
+        { x: 0.8, y: 0.2, r: 0.25, vx: -0.0003, vy: 0.0001, color: 'rgba(245, 158, 11, 0.06)' },
+      ];
+    }
+
+    function draw(t) {
+      ctx.clearRect(0, 0, w, h);
+      for (const b of blobs) {
+        // Drift + subtle mouse influence
+        b.x += b.vx + (mouse.x - 0.5) * 0.00008;
+        b.y += b.vy + (mouse.y - 0.5) * 0.00008;
+        // Wrap around
+        if (b.x < -0.2) b.x = 1.2;
+        if (b.x > 1.2) b.x = -0.2;
+        if (b.y < -0.2) b.y = 1.2;
+        if (b.y > 1.2) b.y = -0.2;
+
+        const cx = b.x * w;
+        const cy = b.y * h;
+        const r = b.r * Math.min(w, h);
+        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        grad.addColorStop(0, b.color);
+        grad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX / window.innerWidth;
+      mouse.y = e.clientY / window.innerHeight;
+    });
+
+    resize();
+    initBlobs();
+    requestAnimationFrame(draw);
+
+    // Smooth scroll for anchor
+    document.querySelector('.scroll-cue')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('#work')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
