@@ -148,15 +148,20 @@
         </div>
       </div>
 
-      <div class="project-card project-card-small" style="--delay: 5">
+      <div class="project-card" style="--delay: 5">
         <div class="project-text">
           <div class="project-header">
-            <h3>Job Radar</h3>
-            <span class="project-tag">Tool</span>
+            <h3>Type A</h3>
+            <span class="project-tag">SaaS</span>
             <span class="project-date">2026</span>
           </div>
-          <p class="project-oneliner">Automated daily job search that actually matches what I want.</p>
-          <p class="project-desc">Got tired of manually checking job boards, so I built my own. Scrapes Lever and Greenhouse career pages, scores listings against my criteria using Claude API, deduplicates, and sends a daily digest. Currently building it out into a full web app for friends to use.</p>
+          <a href="https://typea.io" target="_blank" rel="noopener" class="project-url">typea.io ↗</a>
+          <p class="project-oneliner">AI job search agent that reads postings the way a recruiter would.</p>
+          <p class="project-desc">Started as a daily scraper for my own search, grew into a paid SaaS. An agent crawls 20+ ATS and job boards — Greenhouse, Lever, Ashby, Workday, SmartRecruiters, Workable, Wellfound, LinkedIn, Indeed, BuiltIn, YC, HN Who's Hiring, and more — via Serper and Firecrawl, dedupes across sources, then uses Claude to score every posting against your resume and criteria. For each match, it generates strengths, gaps, and recruiter-ready talking points. Stripe-billed tiers (free / search / pro) with usage metering, invite codes, and a shared scoring cache so paid users' enrichments subsidize the pool. Daily email digests via Resend, error monitoring via Sentry. React + Vite + Tailwind on the frontend, Firebase Functions + Firestore on the backend.</p>
+        </div>
+        <div class="project-visual">
+          <img src="images/typea-dashboard.png" alt="Type A dashboard with daily matches and search criteria" loading="lazy">
+          <img src="images/typea-job-detail.png" alt="Type A job detail with AI fit score, strengths, gaps, and talking points" loading="lazy">
         </div>
       </div>
 
