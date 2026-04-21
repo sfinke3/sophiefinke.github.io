@@ -61,10 +61,16 @@
             <a href="https://whartbets.com" target="_blank" rel="noopener" class="project-url">whartbets.com ↗</a>
           </div>
           <p class="project-oneliner">Prediction market platform with real LMSR pricing math.</p>
-          <p class="project-desc">Started as a Wharton-only betting exchange (WhartBets), then realized the platform was general enough that anyone should be able to spin up their own. Trades execute atomically via Cloud Functions with log-sum-exp numerical stability. Real-time portfolios, market charts, forum, DMs, simulated traders for liquidity. iOS app in progress.</p>
+          <p class="project-desc">Started as a Wharton-only betting exchange (WhartBets), then realized the platform was general enough that anyone should be able to spin up their own. Trades execute atomically via Cloud Functions with log-sum-exp numerical stability. Real-time portfolios, market charts, forum, DMs, simulated traders for liquidity. Native iOS app built in Expo/React Native with a shared TypeScript logic package so web and mobile trade against the same pricing engine.</p>
         </div>
         <div class="project-visual">
           <img src="images/forekast-screenshot.png" alt="Forekast landing page" loading="lazy">
+          <div class="ios-gallery">
+            <img src="images/forekast-ios-home.png" alt="Forekast iOS home screen with portfolio and quests" loading="lazy">
+            <img src="images/forekast-ios-discover.png" alt="Forekast iOS exchange discovery" loading="lazy">
+            <img src="images/forekast-ios-market.png" alt="Forekast iOS market detail with YES/NO trading" loading="lazy">
+          </div>
+          <p class="ios-caption">iOS app (TestFlight) — home, discover, trade</p>
         </div>
       </div>
 
@@ -97,6 +103,12 @@
         </div>
         <div class="project-visual">
           <img src="images/susense-screenshot.png" alt="SuSense landing page" loading="lazy">
+          <div class="ios-gallery">
+            <img src="images/susense-ios-dashboard.png" alt="SuSense iOS home with live glucose and prediction" loading="lazy">
+            <img src="images/susense-ios-history.png" alt="SuSense iOS history with time-in-range and eA1C" loading="lazy">
+            <img src="images/susense-ios-meal.png" alt="SuSense iOS AI meal logging" loading="lazy">
+          </div>
+          <p class="ios-caption">iOS app (TestFlight) — live CGM, history, AI meal logging</p>
         </div>
       </div>
 
@@ -116,6 +128,11 @@
         </div>
         <div class="project-visual">
           <img src="images/travelbug-screenshot.png" alt="TravelBug landing page" loading="lazy">
+          <div class="ios-gallery ios-gallery-2">
+            <img src="images/travelbug-ios-trips.png" alt="TravelBug iOS trips list" loading="lazy">
+            <img src="images/travelbug-ios-trip.png" alt="TravelBug iOS trip detail with map and places" loading="lazy">
+          </div>
+          <p class="ios-caption">iOS app (App Store) — trips, auto-detected places</p>
         </div>
       </div>
 
@@ -320,6 +337,50 @@
       e.preventDefault();
       document.querySelector('#work')?.scrollIntoView({ behavior: 'smooth' });
     });
+
+    // Lightbox for iOS gallery images
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const galleries = document.querySelectorAll('.ios-gallery');
+    const allImgs = [];
+    galleries.forEach(g => g.querySelectorAll('img').forEach(img => allImgs.push(img)));
+    let currentIndex = -1;
+
+    function showAt(i) {
+      if (i < 0 || i >= allImgs.length) return;
+      currentIndex = i;
+      lightboxImg.src = allImgs[i].src;
+      lightboxImg.alt = allImgs[i].alt;
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+      currentIndex = -1;
+    }
+
+    allImgs.forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => showAt(i));
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showAt((currentIndex + 1) % allImgs.length);
+      if (e.key === 'ArrowLeft') showAt((currentIndex - 1 + allImgs.length) % allImgs.length);
+    });
   </script>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog">
+    <button class="lightbox-close" aria-label="Close">×</button>
+    <img alt="">
+  </div>
 </body>
 </html>
