@@ -52,31 +52,6 @@
       <div class="project-card" style="--delay: 0">
         <div class="project-text">
           <div class="project-header">
-            <h3>Forekast / WhartBets</h3>
-            <span class="project-tag">Platform</span>
-            <span class="project-date">2025</span>
-          </div>
-          <div class="project-urls">
-            <a href="https://forekast.me" target="_blank" rel="noopener" class="project-url">forekast.me ↗</a>
-            <a href="https://whartbets.com" target="_blank" rel="noopener" class="project-url">whartbets.com ↗</a>
-          </div>
-          <p class="project-oneliner">Prediction market platform with real LMSR pricing math.</p>
-          <p class="project-desc">Started as a Wharton-only betting exchange (WhartBets), then realized the platform was general enough that anyone should be able to spin up their own. Trades execute atomically via Cloud Functions with log-sum-exp numerical stability. Real-time portfolios, market charts, forum, DMs, simulated traders for liquidity. Native iOS app built in Expo/React Native with a shared TypeScript logic package so web and mobile trade against the same pricing engine.</p>
-        </div>
-        <div class="project-visual">
-          <img src="images/forekast-screenshot.png" alt="Forekast landing page" loading="lazy">
-          <div class="ios-gallery">
-            <img src="images/forekast-ios-home.png" alt="Forekast iOS home screen with portfolio and quests" loading="lazy">
-            <img src="images/forekast-ios-discover.png" alt="Forekast iOS exchange discovery" loading="lazy">
-            <img src="images/forekast-ios-market.png" alt="Forekast iOS market detail with YES/NO trading" loading="lazy">
-          </div>
-          <p class="ios-caption">iOS app (TestFlight) — home, discover, trade</p>
-        </div>
-      </div>
-
-      <div class="project-card" style="--delay: 1">
-        <div class="project-text">
-          <div class="project-header">
             <h3>Sortiva</h3>
             <span class="project-tag">SaaS</span>
             <span class="project-date">2026</span>
@@ -90,25 +65,46 @@
         </div>
       </div>
 
+      <div class="project-card" style="--delay: 1">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>Type A</h3>
+            <span class="project-tag">SaaS</span>
+            <span class="project-date">2026</span>
+          </div>
+          <a href="https://typea.io" target="_blank" rel="noopener" class="project-url">typea.io ↗</a>
+          <p class="project-oneliner">AI job search agent that reads postings the way a recruiter would.</p>
+          <p class="project-desc">Started as a daily scraper for my own search, grew into a paid SaaS. An agent crawls 20+ ATS and job boards — Greenhouse, Lever, Ashby, Workday, SmartRecruiters, Workable, Wellfound, LinkedIn, Indeed, BuiltIn, YC, HN Who's Hiring, and more — via Serper and Firecrawl, dedupes across sources, then uses Claude to score every posting against your resume and criteria. For each match, it generates strengths, gaps, and recruiter-ready talking points. Stripe-billed tiers (free / search / pro) with usage metering, invite codes, and a shared scoring cache so paid users' enrichments subsidize the pool. Daily email digests via Resend, error monitoring via Sentry. React + Vite + Tailwind on the frontend, Firebase Functions + Firestore on the backend.</p>
+        </div>
+        <div class="project-visual">
+          <img src="images/typea-dashboard.png" alt="Type A dashboard with daily matches and search criteria" loading="lazy">
+          <img src="images/typea-job-detail.png" alt="Type A job detail with AI fit score, strengths, gaps, and talking points" loading="lazy">
+        </div>
+      </div>
+
       <div class="project-card" style="--delay: 2">
         <div class="project-text">
           <div class="project-header">
-            <h3>SuSense</h3>
-            <span class="project-tag">iOS</span>
-            <span class="project-date">2025</span>
+            <h3>Forekast / WhartBets</h3>
+            <span class="project-tag">Platform</span>
+            <span class="project-date">2025&ndash;26</span>
           </div>
-          <a href="https://susense.me" target="_blank" rel="noopener" class="project-url">susense.me ↗</a>
-          <p class="project-oneliner">Diabetes management, built around real Dexcom CGM data.</p>
-          <p class="project-desc">Built for a friend's family. Pulls real glucose readings from Dexcom, does photo-based meal logging with AI nutritional breakdowns, and sends push notifications to caregivers when glucose goes out of range. TestFlight beta with a companion web dashboard.</p>
+          <div class="project-urls">
+            <a href="https://forekast.me" target="_blank" rel="noopener" class="project-url">forekast.me ↗</a>
+            <a href="https://whartbets.com" target="_blank" rel="noopener" class="project-url">whartbets.com ↗</a>
+            <a href="https://apps.apple.com/us/app/forekast-markets/id6761634804" target="_blank" rel="noopener" class="project-url">App Store ↗</a>
+          </div>
+          <p class="project-oneliner">Prediction market platform with real LMSR pricing math.</p>
+          <p class="project-desc">Started as a Wharton-only betting exchange (WhartBets), then realized the platform was general enough that anyone should be able to spin up their own. Trades execute atomically via Cloud Functions with log-sum-exp numerical stability. Real-time portfolios, market charts, forum, DMs, simulated traders for liquidity. Native iOS app built in Expo/React Native with a shared TypeScript logic package so web and mobile trade against the same pricing engine.</p>
         </div>
         <div class="project-visual">
-          <img src="images/susense-screenshot.png" alt="SuSense landing page" loading="lazy">
+          <img src="images/forekast-screenshot.png" alt="Forekast landing page" loading="lazy">
           <div class="ios-gallery">
-            <img src="images/susense-ios-dashboard.png" alt="SuSense iOS home with live glucose and prediction" loading="lazy">
-            <img src="images/susense-ios-history.png" alt="SuSense iOS history with time-in-range and eA1C" loading="lazy">
-            <img src="images/susense-ios-meal.png" alt="SuSense iOS AI meal logging" loading="lazy">
+            <img src="images/forekast-ios-home.png" alt="Forekast iOS home screen with portfolio and quests" loading="lazy">
+            <img src="images/forekast-ios-discover.png" alt="Forekast iOS exchange discovery" loading="lazy">
+            <img src="images/forekast-ios-market.png" alt="Forekast iOS market detail with YES/NO trading" loading="lazy">
           </div>
-          <p class="ios-caption">iOS app (TestFlight) — live CGM, history, AI meal logging</p>
+          <p class="ios-caption">iOS app (App Store) — home, discover, trade</p>
         </div>
       </div>
 
@@ -117,7 +113,7 @@
           <div class="project-header">
             <h3>TravelBug</h3>
             <span class="project-tag">iOS</span>
-            <span class="project-date">2025</span>
+            <span class="project-date">2025&ndash;26</span>
           </div>
           <div class="project-urls">
             <a href="https://travelbug.tech" target="_blank" rel="noopener" class="project-url">travelbug.tech ↗</a>
@@ -136,7 +132,29 @@
         </div>
       </div>
 
-      <div class="project-card project-card-small" style="--delay: 4">
+      <div class="project-card" style="--delay: 4">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>SuSense</h3>
+            <span class="project-tag">iOS</span>
+            <span class="project-date">2025&ndash;26</span>
+          </div>
+          <a href="https://susense.me" target="_blank" rel="noopener" class="project-url">susense.me ↗</a>
+          <p class="project-oneliner">Diabetes management, built around real Dexcom CGM data.</p>
+          <p class="project-desc">Built for a friend's family. Pulls real glucose readings from Dexcom, does photo-based meal logging with AI nutritional breakdowns, and sends push notifications to caregivers when glucose goes out of range. TestFlight beta with a companion web dashboard.</p>
+        </div>
+        <div class="project-visual">
+          <img src="images/susense-screenshot.png" alt="SuSense landing page" loading="lazy">
+          <div class="ios-gallery">
+            <img src="images/susense-ios-dashboard.png" alt="SuSense iOS home with live glucose and prediction" loading="lazy">
+            <img src="images/susense-ios-history.png" alt="SuSense iOS history with time-in-range and eA1C" loading="lazy">
+            <img src="images/susense-ios-meal.png" alt="SuSense iOS AI meal logging" loading="lazy">
+          </div>
+          <p class="ios-caption">iOS app (TestFlight) — live CGM, history, AI meal logging</p>
+        </div>
+      </div>
+
+      <div class="project-card project-card-small" style="--delay: 5">
         <div class="project-text">
           <div class="project-header">
             <h3>RE PE Portfolio Dashboard</h3>
@@ -148,41 +166,7 @@
         </div>
       </div>
 
-      <div class="project-card" style="--delay: 5">
-        <div class="project-text">
-          <div class="project-header">
-            <h3>Type A</h3>
-            <span class="project-tag">SaaS</span>
-            <span class="project-date">2026</span>
-          </div>
-          <a href="https://typea.io" target="_blank" rel="noopener" class="project-url">typea.io ↗</a>
-          <p class="project-oneliner">AI job search agent that reads postings the way a recruiter would.</p>
-          <p class="project-desc">Started as a daily scraper for my own search, grew into a paid SaaS. An agent crawls 20+ ATS and job boards — Greenhouse, Lever, Ashby, Workday, SmartRecruiters, Workable, Wellfound, LinkedIn, Indeed, BuiltIn, YC, HN Who's Hiring, and more — via Serper and Firecrawl, dedupes across sources, then uses Claude to score every posting against your resume and criteria. For each match, it generates strengths, gaps, and recruiter-ready talking points. Stripe-billed tiers (free / search / pro) with usage metering, invite codes, and a shared scoring cache so paid users' enrichments subsidize the pool. Daily email digests via Resend, error monitoring via Sentry. React + Vite + Tailwind on the frontend, Firebase Functions + Firestore on the backend.</p>
-        </div>
-        <div class="project-visual">
-          <img src="images/typea-dashboard.png" alt="Type A dashboard with daily matches and search criteria" loading="lazy">
-          <img src="images/typea-job-detail.png" alt="Type A job detail with AI fit score, strengths, gaps, and talking points" loading="lazy">
-        </div>
-      </div>
-
-      <div class="project-card" style="--delay: 6">
-        <div class="project-text">
-          <div class="project-header">
-            <h3>CeCe</h3>
-            <span class="project-tag project-tag-wip">In Progress</span>
-            <span class="project-date">2024</span>
-          </div>
-          <p class="project-oneliner">Credit card rewards optimizer that tells you which card to use.</p>
-          <p class="project-desc">Links bank accounts via Plaid, syncs transactions, and calculates which credit card would have earned the most rewards on every purchase. Shows missed points, optimization score, and per-card comparisons across Amex, Chase, Capital One, Citi, and Discover programs.</p>
-        </div>
-        <div class="project-visual">
-          <div class="placeholder-icon" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
-            <span style="font-size: 2.5rem; font-family: 'DM Serif Display', serif; color: #fff;">CeCe</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card project-card-small" style="--delay: 7">
+      <div class="project-card project-card-small" style="--delay: 6">
         <div class="project-text">
           <div class="project-header">
             <h3>Clothing Scanner</h3>
@@ -191,6 +175,18 @@
           </div>
           <p class="project-oneliner">Snap a photo of a clothing tag, get the product.</p>
           <p class="project-desc">Take a photo of any clothing label and GPT-4o Vision identifies the brand, product, and style number. Returns clean product images and shopping links. Searches by RN number, style code, or visual match.</p>
+        </div>
+      </div>
+
+      <div class="project-card project-card-small" style="--delay: 7">
+        <div class="project-text">
+          <div class="project-header">
+            <h3>CeCe</h3>
+            <span class="project-tag project-tag-wip">In Progress</span>
+            <span class="project-date">2024</span>
+          </div>
+          <p class="project-oneliner">Credit card rewards optimizer that tells you which card to use.</p>
+          <p class="project-desc">Links bank accounts via Plaid, syncs transactions, and calculates which credit card would have earned the most rewards on every purchase. Shows missed points, optimization score, and per-card comparisons across Amex, Chase, Capital One, Citi, and Discover programs.</p>
         </div>
       </div>
 
