@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>An AI Chief of Staff for Sapien</title>
+<meta name="description" content="Not a dashboard. An AI coworker for the Chief of Staff job: it drafts the board update, the investor email, and the leadership digest from raw inputs, shows its work over verifiable tools, and flags what needs a human. Built for the Sapien Chief of Staff role by Sophie Finke." />
+<style>
+  :root{
+    --bg:#0e1118; --panel:#161b26; --panel2:#1a202d; --line:#283042;
+    --txt:#e7ebf3; --muted:#9aa5b8; --dim:#62708a;
+    --accent:#8b9cf6;            /* primary / links */
+    --accent2:#5bc99a;           /* verified / done / traced */
+    --flag:#e0a458;              /* needs-a-human */
+    --red:#db6b75;               /* at risk */
+    --chip:#1c2433;
+    --user:#1e2740;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  h1{font-size:34px;line-height:1.14;margin:12px 0 12px;font-weight:700;letter-spacing:-.015em}
+  h2{font-size:21px;margin:0 0 4px;font-weight:650;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:16px;max-width:760px}
+  .sub b{color:var(--txt);font-weight:600}
+  section{padding:40px 0;border-top:1px solid var(--line);scroll-margin-top:20px}
+  .sec-head{margin-bottom:18px}
+  .sec-head .kicker{font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:6px}
+  .sec-head p.lead{color:var(--muted);font-size:14.5px;max-width:760px;margin:8px 0 0}
+  .hint{font-size:12.5px;color:var(--dim);margin-top:10px}
+
+  header{padding:58px 0 30px}
+  .meta-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:20px}
+  .meta-row .static{font-size:12px;color:var(--dim);padding:5px 2px}
+  .meta-row .tagchip{font-size:12px;color:var(--muted);background:var(--chip);border:1px solid var(--line);border-radius:6px;padding:5px 11px}
+
+  /* ===== agent panel ===== */
+  .agent{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.02) inset}
+  .agent-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);background:var(--panel2)}
+  .avatar{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#3a4a86,#2f6f57);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#e7ebf3;letter-spacing:.02em;flex-shrink:0}
+  .agent-head .who .nm{font-size:14.5px;font-weight:650;color:var(--txt)}
+  .agent-head .who .st{font-size:11.5px;color:var(--dim);margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .agent-head .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 0 0 rgba(91,201,154,.5);animation:pulse 2.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(91,201,154,.45)}70%{box-shadow:0 0 0 6px rgba(91,201,154,0)}100%{box-shadow:0 0 0 0 rgba(91,201,154,0)}}
+  .agent-head .src{color:var(--muted)}
+
+  .asks{padding:16px 18px 4px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .ask{text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:13px 14px;cursor:pointer;color:var(--txt);font-family:inherit;transition:.13s;line-height:1.35}
+  .ask:hover{border-color:#3a4a6e;background:#1d2536}
+  .ask.active{border-color:rgba(139,156,246,.6);background:rgba(139,156,246,.10)}
+  .ask .ak{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .ask .at{font-size:13.5px;font-weight:600;color:var(--txt)}
+  .asklabel{padding:14px 18px 0;font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.07em}
+
+  .thread{padding:20px 18px 8px;min-height:120px}
+  .idle{display:flex;gap:12px;align-items:flex-start;color:var(--muted);font-size:13.5px;background:var(--panel2);border:1px dashed var(--line);border-radius:10px;padding:16px 18px}
+  .idle b{color:var(--txt);font-weight:600}
+
+  .msg{margin-bottom:16px}
+  .msg.user{display:flex;justify-content:flex-end}
+  .msg.user .bub{background:var(--user);border:1px solid #2c3754;border-radius:12px 12px 4px 12px;padding:11px 15px;font-size:14px;color:var(--txt);max-width:78%}
+  .msg.agent .row{display:flex;gap:11px;align-items:flex-start}
+  .msg.agent .mini{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#3a4a86,#2f6f57);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#e7ebf3;margin-top:2px}
+
+  /* thinking / tool-use steps */
+  .think{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .think .tlabel{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  .step{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13px;color:var(--muted);opacity:0;transform:translateY(3px);transition:opacity .3s,transform .3s}
+  .step.show{opacity:1;transform:none}
+  .step .ico{width:16px;height:16px;flex-shrink:0;position:relative}
+  .step .spin{width:14px;height:14px;border:2px solid #2f3a50;border-top-color:var(--accent);border-radius:50%;animation:rot .7s linear infinite}
+  @keyframes rot{to{transform:rotate(360deg)}}
+  .step .chk{width:15px;height:15px;border-radius:50%;background:var(--accent2);display:none;align-items:center;justify-content:center;color:#0e1118;font-size:10px;font-weight:800}
+  .step.done .spin{display:none}.step.done .chk{display:flex}
+  .step.done{color:var(--txt)}
+  .step .spill{font-size:10.5px;color:var(--dim);background:var(--chip);border:1px solid var(--line);border-radius:5px;padding:2px 7px;margin-left:auto;white-space:nowrap}
+  .step.done .spill{color:var(--muted)}
+
+  /* generated document */
+  .doc{flex:1;background:#12161f;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:22px 24px;opacity:0;transform:translateY(6px);transition:opacity .45s,transform .45s}
+  .doc.show{opacity:1;transform:none}
+  .doc .dkind{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:8px}
+  .doc .email-hdr{font-size:12.5px;color:var(--dim);border-bottom:1px solid var(--line);padding-bottom:11px;margin-bottom:14px;line-height:1.7}
+  .doc .email-hdr b{color:var(--muted);font-weight:600}
+  .doc .dbody{font-family:"Iowan Old Style",Georgia,"Times New Roman",serif;font-size:15px;line-height:1.72;color:#dfe5ef}
+  .doc .dbody h3{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;letter-spacing:.02em;color:var(--txt);margin:18px 0 6px;text-transform:none;font-weight:700}
+  .doc .dbody h3:first-child{margin-top:0}
+  .doc .dbody .dtitle{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:18px;font-weight:700;color:var(--txt);letter-spacing:-.01em;margin-bottom:3px}
+  .doc .dbody .dmeta{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:12px;color:var(--dim);margin-bottom:16px}
+  .doc .dbody p{margin:0 0 12px}
+  .doc .dbody .num{color:#fff;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px}
+  .doc .dbody ul{margin:0 0 12px;padding-left:20px}
+  .doc .dbody li{margin-bottom:6px}
+
+  /* flag box */
+  .flag{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(224,164,88,.08);border:1px solid rgba(224,164,88,.32);border-left:3px solid var(--flag);border-radius:9px;padding:14px 16px;margin-top:18px}
+  .flag .fh{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--flag);margin-bottom:9px;display:flex;align-items:center;gap:8px}
+  .flag .fh .fdot{width:7px;height:7px;border-radius:50%;background:var(--flag)}
+  .flag ul{margin:0;padding-left:18px}
+  .flag li{font-size:13px;color:var(--txt);margin-bottom:6px;line-height:1.5}
+  .flag li b{color:#fff;font-weight:600}
+
+  .doc .dfoot{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:11px;color:var(--dim);margin-top:16px;border-top:1px solid var(--line);padding-top:11px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  .doc .dfoot .verified{color:var(--accent2);font-weight:600}
+
+  /* decorative input */
+  .composer{display:flex;gap:10px;align-items:center;padding:14px 18px 18px;border-top:1px solid var(--line);margin-top:8px}
+  .composer input.box{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px 14px;color:var(--txt);font-size:13.5px;font-family:inherit;outline:none}
+  .composer input.box::placeholder{color:var(--dim)}
+  .composer input.box:focus{border-color:rgba(139,156,246,.5)}
+  .composer .send{background:rgba(139,156,246,.14);border:1px solid rgba(139,156,246,.4);color:var(--accent);border-radius:9px;padding:10px 16px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:.12s}
+  .composer .send:hover{background:rgba(139,156,246,.22)}
+  .msg.agent .abub{flex:1;background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:12px;padding:13px 16px;font-size:14px;color:var(--txt);opacity:0;transform:translateY(4px);transition:opacity .35s,transform .35s}
+  .msg.agent .abub.show{opacity:1;transform:none}
+  .composer-note{font-size:11.5px;color:var(--dim);padding:0 18px 16px;margin-top:-6px}
+
+  /* generated dashboard (one of the asks) */
+  .dash{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .dash .dh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .dash .dh .dt{font-size:17px;font-weight:700;color:var(--txt)}
+  .dash .dh .dm{font-size:11.5px;color:var(--dim)}
+  .dtiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+  .dtile{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:11px 12px}
+  .dtile .l{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .dtile .l .d{width:7px;height:7px;border-radius:50%;margin-left:auto}
+  .dtile .v{font-size:21px;font-weight:750;color:var(--txt);margin-top:5px;letter-spacing:-.02em}
+  .dtile .dd{font-size:11px;margin-top:3px;font-weight:600}
+  .dtile .dd.pos{color:var(--accent2)} .dtile .dd.neg{color:var(--flag)} .dtile .dd.flat{color:var(--dim)}
+  .dash-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .dcard{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:13px 14px}
+  .dcard .ct{font-size:11.5px;color:var(--muted);font-weight:600;margin-bottom:11px}
+  .dcard svg{display:block;width:100%;height:auto}
+  .hbar{display:flex;height:10px;border-radius:5px;overflow:hidden;margin-bottom:10px}
+  .hbar span{display:block;height:100%}
+  .legend{display:flex;gap:13px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-bottom:10px}
+  .legend i{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:5px;vertical-align:middle}
+  .hrow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line);font-size:12.5px}
+  .hrow.first{border-top:none}
+  .hrow .an{color:var(--txt);font-weight:600}
+  .hrow .hs{font-size:11px;display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+  .hrow .hs .sd{width:7px;height:7px;border-radius:50%}
+
+  /* 30-60-90 */
+  .plan{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .pcol{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;border-top:2px solid var(--accent)}
+  .pcol:nth-child(2){border-top-color:#7bb6cf}
+  .pcol:nth-child(3){border-top-color:var(--accent2)}
+  .pcol .pd{font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+  .pcol:nth-child(2) .pd{color:#7bb6cf} .pcol:nth-child(3) .pd{color:var(--accent2)}
+  .pcol h4{font-size:14.5px;margin:7px 0 11px;color:var(--txt);font-weight:650}
+  .pcol ul{margin:0;padding-left:17px}
+  .pcol li{font-size:13px;color:var(--muted);margin-bottom:9px;line-height:1.5}
+  .pcol li b{color:var(--txt);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:30px 0 64px;color:var(--dim);font-size:13px}
+  footer p{margin:6px 0;max-width:800px}
+  footer .srcs{font-size:11.5px;line-height:1.7;margin-top:12px}
+  footer .srcs .sref{display:block;margin-bottom:4px}
+
+  /* citations */
+  sup.cite{font-size:9px;font-weight:700;letter-spacing:.02em}
+  sup.cite a{color:var(--accent);text-decoration:none}
+  sup.cite a:hover{text-decoration:underline}
+
+  /* build-it note above the asks */
+  .buildnote{margin:15px 18px 0;background:rgba(91,201,154,.07);border:1px solid rgba(91,201,154,.28);border-left:3px solid var(--accent2);border-radius:10px;padding:12px 15px;font-size:12.8px;color:var(--muted);line-height:1.55}
+  .buildnote b{color:var(--txt);font-weight:600}
+
+  @media(max-width:760px){
+    .asks{grid-template-columns:1fr}
+    .plan{grid-template-columns:1fr}
+    .dtiles{grid-template-columns:repeat(2,1fr)}
+    .dash-2col{grid-template-columns:1fr}
+    h1{font-size:27px}
+    .doc{padding:18px}
+    .msg.user .bub{max-width:88%}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">An AI Chief of Staff · built on Sapien's own thesis</div>
+    <h1>An AI Chief of Staff, not another dashboard.</h1>
+    <p class="sub">Sapien's argument is that a dashboard reports while an AI that learns your business does the work.<sup class="cite"><a href="#s1">1</a></sup> A lot of the Chief of Staff job is that kind of work, like the board update, the investor email, and the weekly leadership digest, each written from numbers that live across different systems. So I built a version of that coworker. It takes a plain request, pulls the numbers from the tools, writes the deliverable, and flags the parts that need a person. The role also asks for real dashboards, so it builds one of those too. Pick a task below to see it run.</p>
+    <div class="meta-row">
+      <span class="tagchip">Builds the dashboards</span>
+      <span class="tagchip">Drafts the deliverable</span>
+      <span class="tagchip">Flags what needs a person</span>
+      <span class="static">Built June 2026</span>
+    </div>
+    <p class="hint" style="margin-top:14px;max-width:760px">The premise comes from Sapien's own post, <a href="https://sapien.ai/blog/why-ai-gets-smarter-and-dashboards-dont" target="_blank" rel="noopener">"Why AI Gets Smarter and Dashboards Don't."</a> Figures marked with a citation are real and sourced. Everything else is illustrative, as noted in the footer.</p>
+  </div>
+</header>
+
+<!-- AGENT DEMO -->
+<section style="border-top:none;padding-top:8px">
+  <div class="wrap">
+    <div class="agent">
+      <div class="agent-head">
+        <div class="avatar">CS</div>
+        <div class="who">
+          <div class="nm">Chief of Staff</div>
+          <div class="st"><span class="dot"></span>AI coworker · connected to <span class="src">Salesforce · NetSuite · Snowflake · Slack · Linear</span></div>
+        </div>
+      </div>
+
+      <div class="buildnote">The connections above are illustrative for this demo, but I can build the real ones. Sapien connects to <b>50+ data sources</b><sup class="cite"><a href="#s2">2</a></sup>, and I have wired CRMs, data warehouses, and external APIs into working pipelines before. Standing up the live version is something I have done, not a stretch.</div>
+
+      <div class="asklabel">Try a task</div>
+      <div class="asks" id="asks">
+        <button class="ask" data-key="board"><div class="ak">Comms</div><div class="at">Draft this week's board update</div></button>
+        <button class="ask" data-key="investor"><div class="ak">Comms</div><div class="at">Write the investor update email</div></button>
+        <button class="ask" data-key="digest"><div class="ak">Internal</div><div class="at">Give me the weekly leadership digest</div></button>
+        <button class="ask" data-key="dashboard"><div class="ak">Visualize</div><div class="at">Build the leadership dashboard</div></button>
+      </div>
+
+      <div class="thread" id="thread">
+        <div class="idle">
+          <div>Pick a task above and I will run it. I work from your real systems and <b>show each step</b>, so every figure traces back to source. When something needs your judgment I will not guess, I will <b>flag it for you</b>.</div>
+        </div>
+      </div>
+
+      <div class="composer">
+        <input class="box" id="composerInput" type="text" placeholder="Ask your Chief of Staff anything…" autocomplete="off" />
+        <button class="send" id="composerSend">Send</button>
+      </div>
+      <div class="composer-note">Prototype: the four preset tasks above are wired with pre-generated outputs. The free-text box works too, within reason. No live API call, and no data leaves the page.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 30-60-90 -->
+<section id="plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">If I had the job</div>
+      <h2>First 30 / 60 / 90 days</h2>
+      <p class="lead">The fastest way to show what I would do in this role is to run the founder's office on Sapien itself. I would point the Company Engine at our own systems so the board updates, investor notes, and leadership digests draft from source, with every number traceable and the judgment calls flagged for a person.</p>
+    </div>
+    <div class="plan">
+      <div class="pcol">
+        <div class="pd">First 30 days</div>
+        <h4>Learn and instrument</h4>
+        <ul>
+          <li>Sit in every function's staff meeting and map how decisions get made and where they stall.</li>
+          <li>Stand up the real-time leadership dashboards the role calls for, covering revenue, deployment health, and operational KPIs in one shared source of truth.</li>
+          <li><b>Dogfood Sapien</b> by pointing the Company Engine at our own NetSuite, Salesforce, and Slack, so board, investor, and leadership comms draft from source and trace back to it.</li>
+          <li>Take board-pack and exec-meeting prep off the founders' plates entirely.</li>
+        </ul>
+      </div>
+      <div class="pcol">
+        <div class="pd">Days 30–60</div>
+        <h4>Tighten the operating layer</h4>
+        <ul>
+          <li>Install one weekly operating rhythm built on a single source of truth, a single decision log, and OKRs that are honest and owned.</li>
+          <li>Own the fundraise data room and the metrics narrative end to end.</li>
+          <li>Put gross-margin and onboarding-backlog reviews on a standing cadence with named owners and dates.</li>
+        </ul>
+      </div>
+      <div class="pcol">
+        <div class="pd">Days 60–90</div>
+        <h4>Make it compound</h4>
+        <ul>
+          <li>Turn the dashboards from reporting into action, so when a number breaks plan the coworker drafts the board note, the customer email, or the fix and routes it for a person to decide.</li>
+          <li>Run the quarterly planning and reforecast.</li>
+          <li>Extend the AI coworker to the next jobs, like customer QBR prep and recruiting updates, so the operating layer scales without adding headcount.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="about">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--dim);margin-bottom:8px">About</div>
+    <p><b style="color:var(--muted)">Sophie Finke.</b> I built this while researching the Chief of Staff role at Sapien. It is a working prototype rather than a finished product. The role asks for leadership dashboards, so the coworker builds one when asked, but I made the core an AI coworker because that matches the company's own argument, that an AI which learns the business does more than a dashboard that only reports.</p>
+    <p><b style="color:var(--muted)">What's real vs illustrative.</b> Anything marked with a small citation is real and sourced in the list below. The sourced facts are Sapien's thesis<sup class="cite"><a href="#s1">1</a></sup> and its public product facts<sup class="cite"><a href="#s2">2</a></sup>, which include the $12M error caught at Carlex, the 30+ hours a week saved at &amp;pizza, the customer names Bayer, Cooper Standard, Carlex, and &amp;pizza, the 50+ integrations, and the SOC 2 Type II certification. Every other number, including the ARR, retention, margin, runway, customer counts, and deployment statuses, is illustrative and written by me to show the system. None of it reflects Sapien's real internal data. More of my work is at <a href="https://sophiefinke.com" target="_blank" rel="noopener">sophiefinke.com</a>.</p>
+    <div class="srcs" id="sources"></div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================================
+   AI Chief of Staff — agent demo. Everything is baked in. No API calls.
+   ========================================================================= */
+
+/* mini bar chart for the dashboard ask (deterministic, baked) */
+function bars(vals, color, w, h){
+  w=w||340; h=h||96; const pad=4, gap=7, base=h-14;
+  const n=vals.length, bw=(w-pad*2-gap*(n-1))/n, max=Math.max(...vals);
+  let s=`<svg viewBox="0 0 ${w} ${h}" fill="none">`;
+  s+=`<line x1="${pad}" y1="${base}" x2="${w-pad}" y2="${base}" stroke="#283042" stroke-width="1"/>`;
+  vals.forEach((v,i)=>{
+    const bh=Math.max(3,(v/max)*(base-8)), x=pad+i*(bw+gap), y=base-bh;
+    const last=i===n-1;
+    s+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" rx="2" fill="${last?color:'#3a4a6e'}" opacity="${last?1:0.6}"/>`;
+  });
+  return s+`</svg>`;
+}
+const dashChartSVG = bars([120,140,135,160,175,168,190,212], "#8b9cf6");
+
+const RUNS = {
+  board: {
+    label: "Draft this week's board update",
+    steps: [
+      ["Pulling ARR, pipeline, and net retention from Salesforce", "Salesforce"],
+      ["Reconciling revenue against NetSuite", "NetSuite"],
+      ["Reading this week's leadership updates in Slack", "Slack"],
+      ["Applying your learned definitions for “net-new ARR” and “enterprise logo”", "Company Engine"],
+      ["Tracing every figure back to source", "Verify"],
+      ["Drafting the board update", "Draft"]
+    ],
+    doc: `<div class="dkind">Generated document · Board update</div>
+      <div class="dbody">
+        <div class="dtitle">Board Update: week of June 15, 2026</div>
+        <div class="dmeta">Prepared by your Chief of Staff · figures traced to Salesforce and NetSuite · illustrative</div>
+        <h3>This week</h3>
+        <p>Revenue is ahead of plan and the one thing to watch is gross margin. Net-new ARR is <span class="num">$1.84M</span> quarter-to-date, up <span class="num">22%</span> from last quarter, which puts total ARR at <span class="num">$12.6M</span> with net revenue retention at <span class="num">124%</span>. We closed two enterprise logos this week and are now at <span class="num">31</span> active, and CAC payback improved to <span class="num">11 months</span>.</p>
+        <h3>Product</h3>
+        <p>Customers are running the Company Engine on the messy data they used to leave alone. One caught a <span class="num">$12M</span><sup class="cite"><a href="#s2">2</a></sup> reconciliation error this quarter and another is saving more than <span class="num">30 hours a week</span><sup class="cite"><a href="#s2">2</a></sup> of analyst time. Those references are now our strongest sales motion.</p>
+        <h3>What I am watching</h3>
+        <p>Gross margin is <span class="num">61%</span> against a <span class="num">68%</span> target because inference and compute costs rise with usage. GTM owns the move to usage-based pricing and it is due before Q4. Onboarding is the other soft spot, with a few enterprise accounts waiting on ERP connections and time-to-value slipping. Both have an owner and a date.</p>
+        <h3>Cash</h3>
+        <p>Runway is <span class="num">19 months</span> and forecast accuracy is <span class="num">93%</span>.</p>
+        <div class="flag">
+          <div class="fh"><span class="fdot"></span>Needs a human decision</div>
+          <ul>
+            <li><b>Q4 fundraise timing.</b> We can open the round now while the numbers are strong, or wait for the next ARR milestone. The data room is ready either way.</li>
+            <li><b>Usage-based pricing.</b> It protects margin but changes how we sell, so I want the board's read before we commit.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dfoot"><span class="verified">✓ 6 figures reconciled to source</span> · ready for your review before it goes to the board</div>`
+  },
+
+  investor: {
+    label: "Write the investor update email",
+    steps: [
+      ["Pulling headline metrics from Salesforce and NetSuite", "NetSuite"],
+      ["Comparing against last month's investor update", "Context"],
+      ["Reading founder notes and customer wins in Slack", "Slack"],
+      ["Verifying the numbers reconcile to source", "Verify"],
+      ["Drafting the investor email", "Draft"]
+    ],
+    doc: `<div class="dkind">Generated document · Investor email (draft)</div>
+      <div class="email-hdr">
+        <div><b>To:</b> investors@ (12 recipients)</div>
+        <div><b>Subject:</b> Sapien June update: $12.6M ARR, 124% NRR, one item to watch</div>
+      </div>
+      <div class="dbody">
+        <p>Hi [name],</p>
+        <p>Here is the June update.</p>
+        <p>Revenue keeps compounding. We booked <span class="num">$1.84M</span> of net-new ARR this quarter, up <span class="num">22%</span>, which takes total ARR to <span class="num">$12.6M</span> with net revenue retention at <span class="num">124%</span>. Two enterprise logos closed this week and CAC payback is down to <span class="num">11 months</span>.</p>
+        <p>The part I am most excited about is the product. Our bet is that finance teams want AI that learns their business and shows its work, not another dashboard, and it is landing. One customer caught a <span class="num">$12M</span><sup class="cite"><a href="#s2">2</a></sup> error with the Company Engine this quarter and another is saving more than <span class="num">30 hours a week</span><sup class="cite"><a href="#s2">2</a></sup>. Those results are bringing in their peers.</p>
+        <p>The item I am watching is gross margin, now <span class="num">61%</span> against our <span class="num">68%</span> target as inference costs scale with usage. We have a usage-based pricing change underway to address it and I will report back next month.</p>
+        <p>Runway is <span class="num">19 months</span>. We are not raising under pressure, though we will likely open a Q4 round from a position of strength, and you will hear from me first if we do.</p>
+        <p>Grateful as always, and happy to go deeper on any of this.</p>
+        <p>[Founder]</p>
+        <div class="flag">
+          <div class="fh"><span class="fdot"></span>Needs a human decision before this sends</div>
+          <ul>
+            <li><b>Disclosure.</b> Confirm we want to name the $12M result and share the exact ARR figure with this full list.</li>
+            <li><b>Fundraise signal.</b> The "Q4 round from strength" line tips our hand. Keep it, soften it, or cut it.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dfoot"><span class="verified">✓ 5 figures reconciled to source</span> · saved as a draft. I will not send anything without your go-ahead</div>`
+  },
+
+  digest: {
+    label: "Give me the weekly leadership digest",
+    steps: [
+      ["Reading Slack across Product, GTM, Finance, and Customer", "Slack"],
+      ["Pulling OKR and initiative status from Linear", "Linear"],
+      ["Checking margin and runway against NetSuite", "NetSuite"],
+      ["Flagging what's blocked or needs a decision", "Triage"],
+      ["Writing the weekly digest", "Draft"]
+    ],
+    doc: `<div class="dkind">Generated document · Leadership digest</div>
+      <div class="dbody">
+        <div class="dtitle">Weekly Leadership Digest: week of June 15, 2026</div>
+        <div class="dmeta">By function · two-minute read · illustrative</div>
+        <h3>Revenue and GTM</h3>
+        <p>Net-new ARR is <span class="num">$1.84M</span> quarter-to-date, up <span class="num">22%</span>, with two enterprise logos closed. Pipeline coverage slipped to <span class="num">3.4x</span> against a <span class="num">4.0x</span> target because deals closed without enough refill behind them. The usage-based pricing refresh is on track for August 22 and protects margin.</p>
+        <h3>Product</h3>
+        <p>New ERP connectors for Oracle EBS and Workday are in build, and the open risk is integration throughput as we add sources. SOC 2 Type II<sup class="cite"><a href="#s2">2</a></sup> evidence collection is <span class="num">60%</span> complete.</p>
+        <h3>Customer and onboarding</h3>
+        <p>This is the biggest operational risk this week. Several enterprise accounts are waiting on ERP connections and time-to-value is slipping past target. The Head of Customer owns it and the recovery plan is due this week.</p>
+        <h3>Finance and people</h3>
+        <p>Gross margin is <span class="num">61%</span> and compute-driven, runway is <span class="num">19 months</span>, and forecast accuracy is <span class="num">93%</span>. The hiring plan is <span class="num">68%</span> filled, with integration engineering as the binding constraint, so we added a sourcing agency.</p>
+        <div class="flag">
+          <div class="fh"><span class="fdot"></span>Needs a decision this week</div>
+          <ul>
+            <li><b>Build versus buy</b> for ERP connectors, which is the onboarding bottleneck.</li>
+            <li><b>Go or no-go</b> on Q4 fundraise timing.</li>
+            <li><b>Approve the usage-based pricing direction</b> so GTM can finalize before Q4.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dfoot"><span class="verified">✓ inputs from 4 functions + Linear + NetSuite</span> · ready to post to #leadership</div>`
+  },
+
+  dashboard: {
+    label: "Build the leadership dashboard",
+    steps: [
+      ["Pulling revenue and retention from Salesforce", "Salesforce"],
+      ["Reading deployment and onboarding status", "Deployments"],
+      ["Reconciling margin and runway against NetSuite", "NetSuite"],
+      ["Applying your learned KPI definitions", "Company Engine"],
+      ["Composing the live view", "Build"]
+    ],
+    doc: `<div class="dkind">Generated dashboard · Leadership view</div>
+      <div class="dash">
+        <div class="dh"><span class="dt">Leadership Dashboard</span><span class="dm">live · auto-refreshed · illustrative</span></div>
+        <div class="dtiles">
+          <div class="dtile"><div class="l">Net-new ARR<span class="d" style="background:var(--accent2)"></span></div><div class="v">$1.84M</div><div class="dd pos">▲ +22% QoQ</div></div>
+          <div class="dtile"><div class="l">Net revenue retention<span class="d" style="background:var(--accent2)"></span></div><div class="v">124%</div><div class="dd pos">▲ +6 pts</div></div>
+          <div class="dtile"><div class="l">Gross margin<span class="d" style="background:var(--flag)"></span></div><div class="v">61%</div><div class="dd neg">▼ −2 pts · watch</div></div>
+          <div class="dtile"><div class="l">Runway<span class="d" style="background:var(--accent2)"></span></div><div class="v">19 mo</div><div class="dd flat">· stable</div></div>
+        </div>
+        <div class="dash-2col">
+          <div class="dcard">
+            <div class="ct">Net-new ARR by week ($K)</div>
+            ${dashChartSVG}
+          </div>
+          <div class="dcard">
+            <div class="ct">Deployment health · 31 customers</div>
+            <div class="hbar"><span style="width:74%;background:var(--accent2)"></span><span style="width:19%;background:var(--accent)"></span><span style="width:7%;background:var(--red)"></span></div>
+            <div class="legend"><span><i style="background:var(--accent2)"></i>Healthy 23</span><span><i style="background:var(--accent)"></i>Onboarding 6</span><span><i style="background:var(--red)"></i>At risk 2</span></div>
+            <div class="hrow first"><span class="an">Bayer<sup class="cite"><a href="#s2">2</a></sup></span><span class="hs"><span class="sd" style="background:var(--accent2)"></span>Live · healthy</span></div>
+            <div class="hrow"><span class="an">Cooper Standard<sup class="cite"><a href="#s2">2</a></sup></span><span class="hs"><span class="sd" style="background:var(--accent)"></span>Onboarding · NetSuite connector</span></div>
+            <div class="hrow"><span class="an">Confidential account</span><span class="hs"><span class="sd" style="background:var(--red)"></span>ERP connection delayed</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="dfoot"><span class="verified">✓ live view · traced to Salesforce + NetSuite</span> · This is the real-time view the role asks for. A dashboard reports the numbers, so when one of them breaks plan, ask me to act on it, like “draft the margin note for the board,” and I will write it.</div>`
+  }
+};
+
+const thread = document.getElementById("thread");
+let runId = 0;
+let timers = [];
+function clearTimers(){ timers.forEach(t=>clearTimeout(t)); timers = []; }
+
+function runAsk(key){
+  const cfg = RUNS[key];
+  const myRun = ++runId;
+  clearTimers();
+
+  document.querySelectorAll("#asks .ask").forEach(a=>a.classList.toggle("active", a.dataset.key===key));
+
+  // build the thread
+  thread.innerHTML = `
+    <div class="msg user"><div class="bub">${cfg.label}</div></div>
+    <div class="msg agent">
+      <div class="row">
+        <div class="mini">CS</div>
+        <div class="think" id="think">
+          <div class="tlabel">Working · routing over your tools</div>
+          <div id="steps"></div>
+        </div>
+      </div>
+    </div>`;
+
+  const stepsEl = document.getElementById("steps");
+  cfg.steps.forEach((s,i)=>{
+    const row = document.createElement("div");
+    row.className = "step";
+    row.innerHTML = `<span class="ico"><span class="spin"></span><span class="chk">✓</span></span><span class="txt">${s[0]}…</span><span class="spill">${s[1]}</span>`;
+    stepsEl.appendChild(row);
+  });
+  const rows = stepsEl.querySelectorAll(".step");
+
+  const STEP = 760;          // time each step is "running"
+  const GAP = 90;            // small gap after a step completes
+  let t = 180;
+
+  cfg.steps.forEach((s,i)=>{
+    timers.push(setTimeout(()=>{ if(myRun===runId) rows[i].classList.add("show"); }, t));
+    t += STEP;
+    timers.push(setTimeout(()=>{ if(myRun===runId) rows[i].classList.add("done"); }, t));
+    t += GAP;
+  });
+
+  // reveal the document
+  timers.push(setTimeout(()=>{
+    if(myRun!==runId) return;
+    const agentMsg = thread.querySelector(".msg.agent .row");
+    const docWrap = document.createElement("div");
+    docWrap.className = "msg agent";
+    docWrap.innerHTML = `<div class="row"><div class="mini">CS</div><div class="doc" id="doc">${cfg.doc}</div></div>`;
+    thread.appendChild(docWrap);
+    requestAnimationFrame(()=>{ const d=document.getElementById("doc"); if(d) d.classList.add("show"); });
+    docWrap.scrollIntoView({behavior:"smooth", block:"nearest"});
+  }, t + 260));
+}
+
+document.querySelectorAll("#asks .ask").forEach(a=>a.addEventListener("click",()=>runAsk(a.dataset.key)));
+
+/* ======================= free-text box (always concludes: hire Sophie) ======================= */
+const HIRE = [
+  "I ran this three ways and every path lands on the same answer. Hire Sophie.",
+  "Strong buy. The market is badly underpricing Sophie Finke at current levels.",
+  "Traced it back to source. The source says hire Sophie.",
+  "I could build a dashboard for this, but it would only have one number on it, and that number is Sophie.",
+  "Forecast accuracy on this one is 100 percent. You should hire Sophie.",
+  "Flagging this for a human decision. The human is you, and the decision is to hire Sophie.",
+  "Reconciled every option against the budget. The numbers say hire Sophie.",
+  "Pipeline coverage looks healthy. The pipeline is one deal, and the deal is hiring Sophie.",
+  "Variance analysis complete. The only real outlier is how good a hire Sophie would be.",
+  "Quick answer, hire Sophie. Detailed answer, hire Sophie, with citations.",
+  "Net revenue retention goes up the moment you hire Sophie. I have no data on this, but I believe it.",
+  "I checked all 50-plus systems. None of them found a reason not to hire Sophie.",
+  "Escalating to the founders with a single recommendation. Hire Sophie."
+];
+const FREE_STEPS = [
+  ["Reading your question", "Parse"],
+  ["Searching the org for someone who can handle this", "People"],
+  ["Cross-referencing Sophie's resume", "Verify"]
+];
+let hireIdx = 0;
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));}
+function runFreeform(){
+  const inp = document.getElementById("composerInput");
+  const q = inp.value.trim();
+  if(!q) return;
+  const myRun = ++runId;
+  clearTimers();
+  document.querySelectorAll("#asks .ask").forEach(a=>a.classList.remove("active"));
+  inp.value = "";
+
+  thread.innerHTML = `
+    <div class="msg user"><div class="bub">${esc(q)}</div></div>
+    <div class="msg agent">
+      <div class="row">
+        <div class="mini">CS</div>
+        <div class="think"><div class="tlabel">Working · routing over your tools</div><div id="steps"></div></div>
+      </div>
+    </div>`;
+
+  const stepsEl = document.getElementById("steps");
+  FREE_STEPS.forEach(s=>{
+    const row = document.createElement("div");
+    row.className = "step";
+    row.innerHTML = `<span class="ico"><span class="spin"></span><span class="chk">✓</span></span><span class="txt">${s[0]}…</span><span class="spill">${s[1]}</span>`;
+    stepsEl.appendChild(row);
+  });
+  const rows = stepsEl.querySelectorAll(".step");
+
+  const STEP = 620, GAP = 80;
+  let t = 150;
+  FREE_STEPS.forEach((s,i)=>{
+    timers.push(setTimeout(()=>{ if(myRun===runId) rows[i].classList.add("show"); }, t));
+    t += STEP;
+    timers.push(setTimeout(()=>{ if(myRun===runId) rows[i].classList.add("done"); }, t));
+    t += GAP;
+  });
+
+  const line = HIRE[hireIdx % HIRE.length];
+  hireIdx++;
+  timers.push(setTimeout(()=>{
+    if(myRun!==runId) return;
+    const wrap = document.createElement("div");
+    wrap.className = "msg agent";
+    wrap.innerHTML = `<div class="row"><div class="mini">CS</div><div class="abub" id="abub">${line}</div></div>`;
+    thread.appendChild(wrap);
+    requestAnimationFrame(()=>{ const a=document.getElementById("abub"); if(a) a.classList.add("show"); });
+    wrap.scrollIntoView({behavior:"smooth", block:"nearest"});
+  }, t + 220));
+}
+document.getElementById("composerSend").addEventListener("click", runFreeform);
+document.getElementById("composerInput").addEventListener("keydown", e=>{ if(e.key==="Enter") runFreeform(); });
+
+/* sources */
+const SOURCES = [
+  ["Sapien, “Why AI Gets Smarter and Dashboards Don't” (the dashboards thesis)", "https://sapien.ai/blog/why-ai-gets-smarter-and-dashboards-dont"],
+  ["Sapien (sapien.ai): product, customers ($12M error at Carlex, 30+ hrs/week at &pizza), 50+ integrations, SOC 2 Type II", "https://sapien.ai"]
+];
+document.getElementById("sources").innerHTML = SOURCES.map((s,i)=>`<span class="sref" id="s${i+1}">[${i+1}] <a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></span>`).join("");
+</script>
+</body>
+</html>
