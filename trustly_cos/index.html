@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chief of Staff &amp; Head of PMO · Trustly · Sophie Finke</title>
 <meta name="description" content="A working artifact for the Chief of Staff & Head of PMO role at Trustly: an AI-native PMO that assembles its own reporting, a live control tower for the H2 2026 hiring program, and the posting answered line by line. Data is illustrative." />
-<link rel="stylesheet" href="style.css?v=2" />
+<link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
 
@@ -84,7 +84,7 @@
 
         <div class="outcard" id="oc4">
           <h3>Nudges sent, so a human did not have to</h3>
-          <div class="ostamp">Four owners, four specific asks, zero meetings scheduled</div>
+          <div class="ostamp">Four owners, four specific asks, and one the agent added on its own</div>
           <div id="nudges"></div>
         </div>
 
@@ -210,7 +210,8 @@ const NUDGES = [
   {to:"@data-lead", m:"The security review request for model validation has no update in 8 days. Reply with a date and I will chase the rest of the chain."},
   {to:"@eng-manager", m:"The failover test has slipped twice. If the release calendar is the blocker, say so and it goes on Thursday's decision queue with a resourcing option attached."},
   {to:"@partnerships", m:"The bank sandbox dependency is now on the exec risk register. Any movement since Tuesday, even a no, is useful."},
-  {to:"@recruiting", m:"Two offers age past five days tomorrow. If comp is the blocker, flag it today and it gets escalated with the Friday decision."}
+  {to:"@recruiting", m:"Two offers age past five days tomorrow. If comp is the blocker, flag it today and it gets escalated with the Friday decision."},
+  {to:"@hiring-manager", hire:true, m:"The Chief of Staff &amp; Head of PMO req has a candidate who built this page instead of a cover letter. Candidates like that age faster than offers do. Reply with an interview slot and I will handle the rest."}
 ];
 
 document.getElementById("riskrows").innerHTML = RISKS.map(x=>`
@@ -221,7 +222,7 @@ document.getElementById("decisions").innerHTML = DECISIONS.map(a=>`
     <div class="ibody"><div class="it">${a.t}</div><div class="id">${a.d}</div><div class="own">${a.own}</div></div>
   </div>`).join("");
 document.getElementById("nudges").innerHTML = NUDGES.map(n=>`
-  <div class="nudge"><span class="to">${n.to}</span><span>${n.m}</span></div>`).join("");
+  <div class="nudge${n.hire?" hire":""}"><span class="to">${n.to}</span><span>${n.m}</span></div>`).join("");
 
 const stepsEl = document.getElementById("steps");
 const outputs = document.getElementById("outputs");

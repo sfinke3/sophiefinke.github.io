@@ -79,6 +79,8 @@ header{padding:56px 0 36px}
 .nudge{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
 .nudge:first-of-type{border-top:none;padding-top:0}
 .nudge .to{color:var(--accent);font-weight:600;white-space:nowrap}
+.nudge.hire{background:rgba(58,208,122,.06);border:1px solid rgba(58,208,122,.3);border-radius:8px;
+  padding:11px 13px;margin-top:8px;color:var(--txt)}
 .runfoot{font-size:12.5px;color:var(--dim);margin-top:16px}
 .runfoot b{color:var(--muted)}
 
