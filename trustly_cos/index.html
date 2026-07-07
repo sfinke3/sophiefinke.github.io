@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chief of Staff &amp; Head of PMO · Trustly · Sophie Finke</title>
 <meta name="description" content="A working artifact for the Chief of Staff & Head of PMO role at Trustly: an AI-native PMO that assembles its own reporting, a live control tower for the H2 2026 hiring program, and the posting answered line by line. Data is illustrative." />
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css?v=2" />
 </head>
 <body>
 
@@ -13,21 +13,35 @@
   <div class="wrap">
     <div class="eyebrow">Built for the Chief of Staff &amp; Head of PMO role at Trustly</div>
     <h1>A PMO with zero status meetings</h1>
-    <p class="sub">The posting asks for two things that usually fight each other: program visibility for leadership, and no added bureaucracy. Every PMO turns into bureaucracy the same way, people spending their week asking other people for status. So instead of describing how I would avoid that, I built the tool version. The reporting assembles itself from where the work already lives, the H2 2026 hiring program runs as a model you can steer instead of a tracker you read, and the humans only get pulled in when there is a decision to make. Every figure is illustrative. <span class="illus">All figures illustrative</span></p>
+    <p class="sub">Trustly says it is building an AI-native organization. The PMO should be the first proof: status collects itself, and leadership's time goes to decisions. Everything below is a working demo. <span class="illus">All figures illustrative</span></p>
 
-    <div class="thesis">
-      <p><b>The idea in one line:</b> Trustly says it is building an AI-native organization. The PMO should be the first proof. Status collects itself, risks surface themselves, and leadership's time goes to decisions instead of updates.</p>
+    <div class="mods">
+      <a class="mod" href="#run">
+        <div class="mn">1 · Press the button</div>
+        <h3>The Monday run</h3>
+        <p>An agent assembles the week: brief, risks, decisions, nudges.</p>
+      </a>
+      <a class="mod" href="#tower">
+        <div class="mn">2 · Move the sliders</div>
+        <h3>The hiring control tower</h3>
+        <p>The H2 2026 hiring plan as live math you can steer.</p>
+      </a>
+      <a class="mod" href="#qbr">
+        <div class="mn">3 · Read the output</div>
+        <h3>The QBR that drafts itself</h3>
+        <p>Executive materials assembled from the two modules above.</p>
+      </a>
     </div>
   </div>
 </header>
 
 <!-- MODULE 1: MONDAY RUN -->
-<section style="padding-top:36px">
+<section style="padding-top:36px" id="run">
   <div class="wrap">
     <div class="sec-head">
       <div class="kicker">JD line 1 · Visibility into status, risks, and dependencies, without adding bureaucracy</div>
       <h2>The Monday run</h2>
-      <p class="lead">Every Monday, an agent reads where the work already lives: the tickets, the standups, the hiring pipeline, the headcount actuals. It drafts the program brief, the risk register, and the decision queue, and it nudges the owners whose updates went stale. Nobody fills out a status template, and the meeting that used to collect this information stops existing. Press the button to watch a week get assembled.</p>
+      <p class="lead">Nobody fills out a status template. An agent reads where the work already lives and assembles the week. Press the button.</p>
     </div>
     <div class="runbox">
       <div class="runhead">
@@ -81,12 +95,12 @@
 </section>
 
 <!-- MODULE 2: CONTROL TOWER -->
-<section>
+<section id="tower">
   <div class="wrap">
     <div class="sec-head">
       <div class="kicker">JD line 2 · The H2 2026 hiring program, coordinated across Recruiting, Finance, and P&amp;T</div>
       <h2>The hiring control tower</h2>
-      <p class="lead">The posting's flagship program deserves better than a tracker. This is a model you can steer: move the assumptions Recruiting and Finance actually argue about, and watch starts, budget, and coverage react. The math runs live on this page. I built this exact kind of operating model at Playground when leadership needed a hiring plan they could run the business on, not just read.</p>
+      <p class="lead">Move the assumptions Recruiting and Finance actually argue about, and watch the plan react. The math runs live on this page, and I built this exact kind of model at Playground.</p>
     </div>
     <div class="tower">
       <div class="controls">
@@ -124,12 +138,12 @@
 </section>
 
 <!-- MODULE 3: QBR -->
-<section>
+<section id="qbr">
   <div class="wrap">
     <div class="sec-head">
       <div class="kicker">JD line 3 · Crisp executive materials and the quarterly business review</div>
       <h2>The QBR, drafted before anyone asks for it</h2>
-      <p class="lead">If the Monday run and the control tower exist, the quarterly business review stops being a two-week scramble for slides. It assembles itself from the same data, and the humans spend their time on the recommendation instead of the retrieval.</p>
+      <p class="lead">If the two modules above exist, the QBR stops being a two-week scramble for slides. The humans spend their time on the recommendation, not the retrieval.</p>
     </div>
     <div class="note">
       <h3>Q3 business review · one-page draft</h3>
@@ -306,10 +320,10 @@ recompute();
 /* ===== fit table ===== */
 const FIT = [
   ["<b>10+ years across strategy, operations, or program management</b>", "I will be upfront that I am earlier in my career than that. What I offer instead is on this page: the operating rhythm, the materials, and the tooling, already built. Behind it are three years trading index derivatives at RBC, a summer in Amazon's FP&amp;A org, a Wharton MBA, and startup BizOps since."],
-  ["<b>Exceptionally organized, tight operating rhythms, nothing falls through the cracks</b>", "The Monday run exists because I do not trust memory, mine or anyone else's. At RBC I ran the desk's daily rhythm and built the real-time liquidity tracker that four teams across the firm adopted."],
-  ["<b>Synthesizing complex inputs into clear recommendations</b>", "At Playground I was handed a broad project, improve the outbound sales lists, and came back with a web scraper, an AI enrichment pipeline, and a ranked list leadership could act on."],
-  ["<b>PM tooling fluency, lightweight structures that add value without bureaucracy</b>", "I live in Jira and Linear as a user, and I build my own tooling when the off-the-shelf version adds process instead of removing it. That is the whole argument of this page."],
-  ["<b>Influence without authority</b>", "Nobody reported to me at RBC. The tools spread to four teams because they made people's weeks easier, not because anyone was told to use them."],
+  ["<b>Exceptionally organized, tight operating rhythms, nothing falls through the cracks</b>", "At RBC I ran the desk's daily rhythm and built the real-time liquidity tracker that four teams across the firm adopted."],
+  ["<b>Synthesizing complex inputs into clear recommendations</b>", "At Playground I was handed a broad project, improve the outbound sales lists, and came back with a web scraper, an AI enrichment pipeline, and a ranked list sales reps could act on."],
+  ["<b>PM tooling fluency, lightweight structures that add value without bureaucracy</b>", "My default is to build the tool. Type A started as a spreadsheet where I tracked my own projects and applications and is now a paid product, at RBC I replaced manual spreadsheets with real-time tooling, and this page is the same instinct pointed at a PMO."],
+  ["<b>Influence without authority</b>", "The tools I built at RBC, such as real-time LCR tracking and daily trading updates, spread to four teams because they made people's weeks easier, not because anyone was told to use them."],
   ["<b>Fintech or payments experience a strong plus</b>", "Three years on RBC's index derivatives desk, and my current work at Halluminate is building the environments that evaluate AI agents on real financial workflows."],
   ["<b>An AI-native organization</b>", "I have shipped about ten apps of my own, several on the Claude API, and building with AI is my default way of working, not a skill I am adding. I built this page that way."],
   ["<b>Based in New York, in office Tuesday through Thursday</b>", "I live in New York."]
