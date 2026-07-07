@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chief of Staff &amp; Head of PMO · Trustly · Sophie Finke</title>
+<meta name="description" content="A working artifact for the Chief of Staff & Head of PMO role at Trustly: an AI-native PMO that assembles its own reporting, a live control tower for the H2 2026 hiring program, and the posting answered line by line. Data is illustrative." />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Built for the Chief of Staff &amp; Head of PMO role at Trustly</div>
+    <h1>A PMO with zero status meetings</h1>
+    <p class="sub">The posting asks for two things that usually fight each other: program visibility for leadership, and no added bureaucracy. Every PMO turns into bureaucracy the same way, people spending their week asking other people for status. So instead of describing how I would avoid that, I built the tool version. The reporting assembles itself from where the work already lives, the H2 2026 hiring program runs as a model you can steer instead of a tracker you read, and the humans only get pulled in when there is a decision to make. Every figure is illustrative. <span class="illus">All figures illustrative</span></p>
+
+    <div class="thesis">
+      <p><b>The idea in one line:</b> Trustly says it is building an AI-native organization. The PMO should be the first proof. Status collects itself, risks surface themselves, and leadership's time goes to decisions instead of updates.</p>
+    </div>
+  </div>
+</header>
+
+<!-- MODULE 1: MONDAY RUN -->
+<section style="padding-top:36px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD line 1 · Visibility into status, risks, and dependencies, without adding bureaucracy</div>
+      <h2>The Monday run</h2>
+      <p class="lead">Every Monday, an agent reads where the work already lives: the tickets, the standups, the hiring pipeline, the headcount actuals. It drafts the program brief, the risk register, and the decision queue, and it nudges the owners whose updates went stale. Nobody fills out a status template, and the meeting that used to collect this information stops existing. Press the button to watch a week get assembled.</p>
+    </div>
+    <div class="runbox">
+      <div class="runhead">
+        <span class="rt">P&amp;T weekly sync · six programs</span>
+        <button class="runbtn" id="runbtn">Run the weekly sync</button>
+      </div>
+      <div class="sources">
+        <span class="src-pill"><span class="dot"></span>Jira · 23 ticket updates this week</span>
+        <span class="src-pill"><span class="dot"></span>Slack · 14 standup threads</span>
+        <span class="src-pill"><span class="dot"></span>Greenhouse · H2 hiring pipeline</span>
+        <span class="src-pill"><span class="dot"></span>Finance · headcount actuals</span>
+      </div>
+      <div class="steps" id="steps"></div>
+      <div class="outputs" id="outputs">
+
+        <div class="outcard" id="oc1">
+          <h3>Program brief</h3>
+          <div class="ostamp">Drafted Monday 7:00am · read time 90 seconds</div>
+          <p>Four of six programs are on track. The returning-user checkout flow shipped to 10% of traffic and conversion is up where it is live. Bank coverage added three integrations and sits one short of the Q3 target.</p>
+          <p><b>Two programs need attention.</b> Risk engine v2 has been blocked on production data access for model validation for eight days, and the reliability program's failover test slipped a second time because the same two engineers keep getting pulled into releases. Both are framed in the decision queue below.</p>
+          <p>The H2 hiring program is two starts behind plan. Detail and the levers are in the control tower.</p>
+        </div>
+
+        <div class="outcard" id="oc2">
+          <h3>Risk register</h3>
+          <div class="ostamp">Assembled from ticket age, dependency links, and standup language</div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>Risk</th><th>Program</th><th>Depends on</th><th>Owner</th><th>Severity</th></tr></thead>
+              <tbody id="riskrows"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="outcard attn" id="oc3">
+          <h3>Decision queue for leadership</h3>
+          <div class="ostamp">Each one framed as a choice, not a status</div>
+          <div id="decisions"></div>
+        </div>
+
+        <div class="outcard" id="oc4">
+          <h3>Nudges sent, so a human did not have to</h3>
+          <div class="ostamp">Four owners, four specific asks, zero meetings scheduled</div>
+          <div id="nudges"></div>
+        </div>
+
+      </div>
+      <div class="runfoot" id="runfoot"><b>No status meeting produced this page.</b> The data is staged for this demo, but every step is buildable with today's tools, and I have shipped this pattern before: an inbox-triage app on the Claude API, scraping and enrichment pipelines in production at Playground.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 2: CONTROL TOWER -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD line 2 · The H2 2026 hiring program, coordinated across Recruiting, Finance, and P&amp;T</div>
+      <h2>The hiring control tower</h2>
+      <p class="lead">The posting's flagship program deserves better than a tracker. This is a model you can steer: move the assumptions Recruiting and Finance actually argue about, and watch starts, budget, and coverage react. The math runs live on this page. I built this exact kind of operating model at Playground when leadership needed a hiring plan they could run the business on, not just read.</p>
+    </div>
+    <div class="tower">
+      <div class="controls">
+        <div class="ctrl">
+          <div class="cl"><span>Offer accept rate</span><b id="v-accept">75%</b></div>
+          <input type="range" id="s-accept" min="60" max="95" value="75" step="1">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Recruiters on P&amp;T reqs</span><b id="v-rec">6</b></div>
+          <input type="range" id="s-rec" min="3" max="10" value="6" step="1">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Average start slippage</span><b id="v-slip">2 weeks</b></div>
+          <input type="range" id="s-slip" min="0" max="8" value="2" step="1">
+        </div>
+      </div>
+      <div class="towergrid">
+        <div class="tcell"><div class="tk">Starts by Dec 31, against a plan of 48</div><div class="tv" id="t-starts"></div><div class="tn" id="t-startsn"></div></div>
+        <div class="tcell"><div class="tk">Q3 starts (Jul&#8211;Sep)</div><div class="tv" id="t-q3"></div><div class="tn">plan calls for 24</div></div>
+        <div class="tcell"><div class="tk">H2 comp spend vs plan</div><div class="tv" id="t-comp"></div><div class="tn">unspent comp is unstaffed work</div></div>
+        <div class="tcell"><div class="tk">Coverage lost to slippage</div><div class="tv" id="t-cov"></div><div class="tn">person-months of planned work unstaffed</div></div>
+      </div>
+      <div class="chart">
+        <h4>Monthly starts vs plan</h4>
+        <div class="csub">Plan assumes 8 starts a month, July through December. The bars recompute as you move the levers above.</div>
+        <div class="bars" id="bars"></div>
+        <div class="legend">
+          <span class="leg"><span class="sw" style="background:var(--accent)"></span>Modeled starts</span>
+          <span class="leg"><span class="sw" style="background:#2a3630"></span>Plan</span>
+        </div>
+      </div>
+      <p class="hint">Assumptions kept deliberately simple and visible: each recruiter closes about two offers a month, July ramps at half capacity, and slippage pushes starts to the right. A real version plugs into Greenhouse and the comp model, and the assumptions become live numbers instead of sliders.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 3: QBR -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD line 3 · Crisp executive materials and the quarterly business review</div>
+      <h2>The QBR, drafted before anyone asks for it</h2>
+      <p class="lead">If the Monday run and the control tower exist, the quarterly business review stops being a two-week scramble for slides. It assembles itself from the same data, and the humans spend their time on the recommendation instead of the retrieval.</p>
+    </div>
+    <div class="note">
+      <h3>Q3 business review · one-page draft</h3>
+      <div class="stamp">Assembled from the two modules above · narrative edited by a human, once</div>
+      <p><b>Programs:</b> five of six Q3 program milestones hit. The returning-user checkout flow is the quarter's standout, live to 50% of traffic with conversion up meaningfully where deployed. Bank coverage closed the Q3 target late but closed it. The failover test finally ran after we protected two engineers from the release rotation for a sprint, which is a resourcing pattern worth keeping.</p>
+      <p><b>Hiring:</b> 22 starts against a Q3 plan of 24, with the gap concentrated in staff-level engineering. Offer accept rate held at 76%. The two aged offers from September both closed after comp was escalated inside 48 hours, and that faster escalation path is now standing policy.</p>
+      <p><b>Carried risks:</b> production data access for model validation remains the slowest dependency in P&amp;T, three programs touched it this quarter. A scoped-access framework is drafted and sits with security.</p>
+      <p><b>Asks for Q4:</b> a decision on the scoped-access framework, and one incremental recruiter through year-end to de-risk the Q4 hiring tail.</p>
+      <div class="signed">Prepared by the office of P&amp;T leadership</div>
+    </div>
+  </div>
+</section>
+
+<!-- FIT -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">The rest of the posting</div>
+      <h2>The role, line by line</h2>
+      <p class="lead">The modules above are the job's core responsibilities, built. This is the rest of the posting, answered directly.</p>
+    </div>
+    <div class="table-scroll fit">
+      <table>
+        <thead><tr><th>The posting asks for</th><th>Where I have already done it</th></tr></thead>
+        <tbody id="fitrows"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="kicker">About</div>
+    <p><b style="color:var(--muted)">Sophie Finke.</b> I built this while researching the Chief of Staff &amp; Head of PMO role at Trustly, as a concrete answer to the job description rather than a description of one. It is a rough working prototype.</p>
+    <p>Every program, number, and name on this page is <b style="color:var(--muted)">illustrative</b>, since I have no access to Trustly's internal information. The Monday run is a staged demo of a buildable system, and the control tower math runs live in your browser. More of my work is at <a href="https://sophiefinke.com" target="_blank" rel="noopener">sophiefinke.com</a>.</p>
+  </div>
+</footer>
+
+<script>
+/* All values illustrative, designed to read like a real P&T org rather than pulled from Trustly. */
+
+/* ===== module 1: the monday run ===== */
+const STEPS = [
+  "Reading 23 Jira updates across six programs",
+  "Parsing 14 Slack standup threads",
+  "Pulling the Greenhouse pipeline for the H2 hiring program",
+  "Reconciling headcount actuals against the plan",
+  "Flagging stale milestones and aging dependencies",
+  "Drafting the brief, the risk register, and the nudges"
+];
+const RISKS = [
+  {r:"Model validation blocked on production data access, day 8", p:"Risk engine v2", d:"Platform security review", o:"Data lead", sev:"var(--red)", sl:"High"},
+  {r:"Two H2 offers aging past five days, accept-rate risk rising", p:"H2 hiring", d:"Comp escalation decision", o:"Recruiting", sev:"var(--red)", sl:"High"},
+  {r:"Failover test slipped twice, same two engineers pulled to releases", p:"Reliability", d:"Release calendar", o:"Eng manager", sev:"var(--amber)", sl:"Medium"},
+  {r:"Top-10 bank sandbox access delayed by their vendor", p:"Bank coverage", d:"External vendor", o:"Partnerships", sev:"var(--amber)", sl:"Medium"},
+  {r:"Checkout experiment needs legal sign-off before 50% rollout", p:"Pay by Bank conversion", d:"Legal review queue", o:"Product lead", sev:"var(--amber)", sl:"Medium"}
+];
+const DECISIONS = [
+  {sev:"var(--red)", t:"Risk engine data access: scoped production access now, or wait for the full security review", d:"Both paths are costed. Scoped access unblocks model validation this week with an agreed audit trail. Waiting protects the process and slips the program roughly three weeks.", own:"Framed for the CTO · 10 minutes"},
+  {sev:"var(--red)", t:"Staff engineer offer: approve out-of-band comp before Friday", d:"The candidate's competing deadline is real. Recruiting recommends matching, Finance impact is inside the H2 envelope because two other starts slipped.", own:"Framed for CPO + Finance · yes or no"},
+  {sev:"var(--amber)", t:"Reliability: protect two engineers from the release rotation for two weeks, or formally slip the failover test", d:"The test has slipped twice for the same reason. Either answer is fine, the silent third option of hoping is the only bad one.", own:"Framed for the CTO · either works"}
+];
+const NUDGES = [
+  {to:"@data-lead", m:"The security review request for model validation has no update in 8 days. Reply with a date and I will chase the rest of the chain."},
+  {to:"@eng-manager", m:"The failover test has slipped twice. If the release calendar is the blocker, say so and it goes on Thursday's decision queue with a resourcing option attached."},
+  {to:"@partnerships", m:"The bank sandbox dependency is now on the exec risk register. Any movement since Tuesday, even a no, is useful."},
+  {to:"@recruiting", m:"Two offers age past five days tomorrow. If comp is the blocker, flag it today and it gets escalated with the Friday decision."}
+];
+
+document.getElementById("riskrows").innerHTML = RISKS.map(x=>`
+  <tr><td><span class="name">${x.r}</span></td><td><span class="pill">${x.p}</span></td><td>${x.d}</td><td>${x.o}</td>
+  <td><span class="sev-dot" style="background:${x.sev}"></span>${x.sl}</td></tr>`).join("");
+document.getElementById("decisions").innerHTML = DECISIONS.map(a=>`
+  <div class="item"><span class="sev" style="background:${a.sev}"></span>
+    <div class="ibody"><div class="it">${a.t}</div><div class="id">${a.d}</div><div class="own">${a.own}</div></div>
+  </div>`).join("");
+document.getElementById("nudges").innerHTML = NUDGES.map(n=>`
+  <div class="nudge"><span class="to">${n.to}</span><span>${n.m}</span></div>`).join("");
+
+const stepsEl = document.getElementById("steps");
+const outputs = document.getElementById("outputs");
+const runbtn = document.getElementById("runbtn");
+let running = false;
+runbtn.addEventListener("click", ()=>{
+  if(running) return;
+  running = true;
+  runbtn.disabled = true;
+  outputs.classList.remove("show");
+  document.querySelectorAll(".outcard").forEach(c=>c.classList.remove("show"));
+  stepsEl.innerHTML = STEPS.map(s=>`
+    <div class="step"><span class="ico"><span class="spin"></span><span class="chk">✓</span></span><span>${s}…</span></div>`).join("");
+  const rows = stepsEl.querySelectorAll(".step");
+  const STEP=520, GAP=90;
+  let t=150;
+  STEPS.forEach((s,i)=>{
+    setTimeout(()=>rows[i].classList.add("show"), t);
+    t += STEP;
+    setTimeout(()=>rows[i].classList.add("done"), t);
+    t += GAP;
+  });
+  setTimeout(()=>{
+    outputs.classList.add("show");
+    ["oc1","oc2","oc3","oc4"].forEach((id,i)=>{
+      setTimeout(()=>document.getElementById(id).classList.add("show"), 120 + i*260);
+    });
+    runbtn.disabled = false;
+    runbtn.textContent = "Run it again";
+    running = false;
+  }, t + 250);
+});
+
+/* ===== module 2: control tower (live math) ===== */
+const PLAN_TOTAL = 48, PLAN_MONTHLY = 8, MONTHS = ["Jul","Aug","Sep","Oct","Nov","Dec"];
+const OFFERS_PER_REC = 2, LOADED_MONTHLY_COST = 19200;  /* ~$230k loaded, per month */
+function recompute(){
+  const A = +document.getElementById("s-accept").value / 100;
+  const R = +document.getElementById("s-rec").value;
+  const S = +document.getElementById("s-slip").value;
+  document.getElementById("v-accept").textContent = Math.round(A*100)+"%";
+  document.getElementById("v-rec").textContent = R;
+  document.getElementById("v-slip").textContent = S + (S===1?" week":" weeks");
+
+  const slipM = S/4.33;
+  const starts = [];
+  let cum = 0;
+  for(let m=0;m<6;m++){
+    const avail = Math.max(0, Math.min(1, (m+1) - slipM));       /* fraction of month producing after slip */
+    const ramp = m===0 ? 0.5 : 1;                                 /* july pipelines still warming */
+    let s = R * OFFERS_PER_REC * A * avail * ramp;
+    s = Math.min(s, PLAN_TOTAL - cum);
+    starts.push(s);
+    cum += s;
+  }
+  const total = Math.round(cum);
+  const q3 = Math.round(starts[0]+starts[1]+starts[2]);
+
+  /* coverage lost: person-months short vs plan, cumulative */
+  let lost = 0;
+  let planCum = 0, actCum = 0;
+  for(let m=0;m<6;m++){
+    planCum += PLAN_MONTHLY; actCum += starts[m];
+    lost += Math.max(0, planCum - actCum);
+  }
+  const compDelta = Math.round(lost * LOADED_MONTHLY_COST / 1000);   /* $k under plan */
+
+  const tv = document.getElementById("t-starts");
+  tv.textContent = total + " of 48";
+  tv.className = "tv " + (total >= 46 ? "good" : total >= 40 ? "warn" : "bad");
+  document.getElementById("t-startsn").textContent = total >= 46 ? "plan holds" : (48-total) + " roll into 2027";
+  const q3el = document.getElementById("t-q3");
+  q3el.textContent = q3;
+  q3el.className = "tv " + (q3 >= 23 ? "good" : q3 >= 19 ? "warn" : "bad");
+  const compEl = document.getElementById("t-comp");
+  compEl.textContent = compDelta === 0 ? "on plan" : "-$" + (compDelta/1000).toFixed(1) + "M";
+  compEl.className = "tv " + (compDelta === 0 ? "good" : compDelta < 800 ? "warn" : "bad");
+  const covEl = document.getElementById("t-cov");
+  covEl.textContent = Math.round(lost);
+  covEl.className = "tv " + (lost < 8 ? "good" : lost < 20 ? "warn" : "bad");
+
+  const maxBar = Math.max(PLAN_MONTHLY, ...starts) * 1.15;
+  document.getElementById("bars").innerHTML = MONTHS.map((mo,m)=>`
+    <div class="bcol">
+      <div class="bv">${Math.round(starts[m])}</div>
+      <div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center">
+        <span class="bar" style="height:${Math.max(2,(starts[m]/maxBar)*100)}%;"></span>
+        <span class="bar plan" style="height:${(PLAN_MONTHLY/maxBar)*100}%;"></span>
+      </div>
+      <div class="bl">${mo}</div>
+    </div>`).join("");
+}
+["s-accept","s-rec","s-slip"].forEach(id=>document.getElementById(id).addEventListener("input", recompute));
+recompute();
+
+/* ===== fit table ===== */
+const FIT = [
+  ["<b>10+ years across strategy, operations, or program management</b>", "I will be upfront that I am earlier in my career than that. What I offer instead is on this page: the operating rhythm, the materials, and the tooling, already built. Behind it are three years trading index derivatives at RBC, a summer in Amazon's FP&amp;A org, a Wharton MBA, and startup BizOps since."],
+  ["<b>Exceptionally organized, tight operating rhythms, nothing falls through the cracks</b>", "The Monday run exists because I do not trust memory, mine or anyone else's. At RBC I ran the desk's daily rhythm and built the real-time liquidity tracker that four teams across the firm adopted."],
+  ["<b>Synthesizing complex inputs into clear recommendations</b>", "At Playground I was handed a broad project, improve the outbound sales lists, and came back with a web scraper, an AI enrichment pipeline, and a ranked list leadership could act on."],
+  ["<b>PM tooling fluency, lightweight structures that add value without bureaucracy</b>", "I live in Jira and Linear as a user, and I build my own tooling when the off-the-shelf version adds process instead of removing it. That is the whole argument of this page."],
+  ["<b>Influence without authority</b>", "Nobody reported to me at RBC. The tools spread to four teams because they made people's weeks easier, not because anyone was told to use them."],
+  ["<b>Fintech or payments experience a strong plus</b>", "Three years on RBC's index derivatives desk, and my current work at Halluminate is building the environments that evaluate AI agents on real financial workflows."],
+  ["<b>An AI-native organization</b>", "I have shipped about ten apps of my own, several on the Claude API, and building with AI is my default way of working, not a skill I am adding. I built this page that way."],
+  ["<b>Based in New York, in office Tuesday through Thursday</b>", "I live in New York."]
+];
+document.getElementById("fitrows").innerHTML = FIT.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
+</script>
+</body>
+</html>

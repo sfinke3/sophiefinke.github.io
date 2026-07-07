@@ -1,0 +1,152 @@
+/* =========================================================================
+   Chief of Staff & Head of PMO — Trustly. Shared design system.
+   Dark analytic base, Trustly green as the single accent.
+   No emoji, no glow. Declarative analytical voice.
+   ========================================================================= */
+:root{
+  --bg:#0b0d0c; --panel:#121614; --panel2:#171c19; --line:#242b27;
+  --txt:#eef2ef; --muted:#98a29c; --dim:#68716c;
+  --accent:#3ad07a;            /* trustly green */
+  --green:#3ad07a; --amber:#dfa958; --red:#d96b74;
+  --chip:#1a201d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--dim)}
+a:hover{text-decoration-color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1{font-size:36px;line-height:1.12;margin:12px 0 10px;font-weight:700;letter-spacing:-.015em}
+h2{font-size:21px;margin:0 0 4px;font-weight:650;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:16px;max-width:840px}
+section{padding:46px 0;border-top:1px solid var(--line);scroll-margin-top:20px}
+.sec-head{margin-bottom:20px}
+.sec-head .kicker{font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:6px}
+.sec-head p.lead{color:var(--muted);font-size:14.5px;max-width:840px;margin:8px 0 0}
+.hint{font-size:12.5px;color:var(--dim);margin-top:10px}
+
+header{padding:56px 0 36px}
+
+.illus{display:inline-block;background:rgba(223,169,88,.08);border:1px solid rgba(223,169,88,.3);color:var(--amber);
+  font-size:11.5px;font-weight:600;letter-spacing:.04em;padding:5px 11px;border-radius:6px}
+
+.thesis{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;
+  padding:20px 24px;margin-top:30px;max-width:840px}
+.thesis p{margin:0;font-size:14.5px;color:var(--muted)}
+.thesis p b{color:var(--txt);font-weight:600}
+
+/* ===================== monday run ===================== */
+.runbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}
+.runhead{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.runhead .rt{font-size:15px;font-weight:650;color:var(--txt)}
+.runbtn{appearance:none;border:none;background:var(--accent);color:#08110c;font-size:14px;font-weight:700;
+  padding:11px 22px;border-radius:8px;cursor:pointer;font-family:inherit;transition:.15s}
+.runbtn:hover{filter:brightness(1.1)}
+.runbtn:disabled{opacity:.45;cursor:default}
+.sources{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.src-pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);
+  background:var(--chip);border:1px solid var(--line);border-radius:20px;padding:5px 12px}
+.src-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.steps{display:grid;gap:8px;margin:6px 0 4px}
+.step{display:flex;align-items:center;gap:11px;font-size:13.5px;color:var(--dim);opacity:0;transform:translateY(3px);transition:.25s}
+.step.show{opacity:1;transform:none}
+.step .ico{width:17px;height:17px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.step .spin{width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+.step .chk{display:none;color:var(--accent);font-weight:700;font-size:13px}
+.step.done{color:var(--muted)}
+.step.done .spin{display:none}
+.step.done .chk{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.outputs{display:none;margin-top:22px;gap:18px;flex-direction:column}
+.outputs.show{display:flex}
+.outcard{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:20px;opacity:0;transform:translateY(6px);transition:.35s}
+.outcard.show{opacity:1;transform:none}
+.outcard h3{margin:0 0 3px;font-size:14.5px;font-weight:650;color:var(--txt)}
+.outcard .ostamp{font-size:11.5px;color:var(--dim);margin-bottom:13px}
+.outcard p{font-size:13.5px;color:var(--muted);margin:0 0 10px}
+.outcard p b{color:var(--txt);font-weight:600}
+.nudge{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.nudge:first-of-type{border-top:none;padding-top:0}
+.nudge .to{color:var(--accent);font-weight:600;white-space:nowrap}
+.runfoot{font-size:12.5px;color:var(--dim);margin-top:16px}
+.runfoot b{color:var(--muted)}
+
+/* ===================== tables ===================== */
+.table-scroll{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 16px 10px}
+.outcard .table-scroll{background:transparent;border:none;padding:0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{text-align:left;color:var(--dim);font-weight:600;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:14px 12px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+tbody tr:last-child td{border-bottom:none}
+tbody td .name{color:var(--txt);font-weight:600;font-size:13.5px}
+.pill{display:inline-block;font-size:11px;padding:3px 8px;border-radius:5px;background:var(--chip);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.sev-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle}
+
+/* ===================== attn ===================== */
+.attn .item{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.attn .item:first-of-type{border-top:none;padding-top:0}
+.attn .sev{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.attn .ibody .it{font-size:13.5px;color:var(--txt);font-weight:600;margin-bottom:3px}
+.attn .ibody .id{font-size:12.5px;color:var(--muted)}
+.attn .ibody .own{font-size:11.5px;color:var(--dim);margin-top:4px}
+
+/* ===================== control tower ===================== */
+.tower{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}
+.tower .controls{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:22px}
+.ctrl .cl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:8px}
+.ctrl .cl b{color:var(--txt);font-weight:700}
+input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
+.towergrid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
+.tcell{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:15px}
+.tcell .tk{font-size:12px;color:var(--muted);min-height:30px;line-height:1.3}
+.tcell .tv{font-size:25px;font-weight:750;letter-spacing:-.02em;margin-top:7px}
+.tcell .tv.good{color:var(--green)} .tcell .tv.warn{color:var(--amber)} .tcell .tv.bad{color:var(--red)}
+.tcell .tn{font-size:11.5px;color:var(--dim);margin-top:3px}
+.chart{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:16px}
+.chart h4{margin:0 0 4px;font-size:13.5px;font-weight:650;color:var(--txt)}
+.chart .csub{font-size:11.5px;color:var(--dim);margin-bottom:14px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:120px}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.bar{width:100%;max-width:54px;background:var(--accent);border-radius:4px 4px 0 0;transition:height .25s;position:relative;min-height:2px}
+.bar.plan{background:#2a3630}
+.bcol .bl{font-size:11px;color:var(--dim)}
+.bcol .bv{font-size:11.5px;color:var(--muted);font-weight:600}
+.legend{display:flex;gap:16px;margin-top:12px}
+.leg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
+.leg .sw{width:10px;height:10px;border-radius:3px}
+
+/* ===================== qbr note ===================== */
+.note{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:22px}
+.note h3{margin:0 0 4px;font-size:15px;font-weight:650;color:var(--txt)}
+.note .stamp{font-size:11.5px;color:var(--dim);margin-bottom:14px}
+.note p{font-size:13.5px;color:var(--muted);margin:0 0 11px}
+.note p b{color:var(--txt);font-weight:600}
+.note .signed{font-size:12.5px;color:var(--dim);margin-top:14px;font-style:italic}
+
+/* ===================== fit table ===================== */
+.fit td:first-child{color:var(--dim);width:42%}
+.fit td:first-child b{color:var(--muted);font-weight:600}
+.fit td:last-child{color:var(--muted)}
+.fit td:last-child b{color:var(--txt);font-weight:600}
+
+/* ===================== footer ===================== */
+footer{border-top:1px solid var(--line);padding:30px 0 64px;color:var(--dim);font-size:13px}
+footer p{margin:6px 0;max-width:800px}
+footer .kicker{font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:8px}
+
+@media(max-width:900px){
+  .tower .controls{grid-template-columns:1fr}
+  .towergrid{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:27px}
+  .table-scroll{overflow-x:auto}
+  .table-scroll table{min-width:760px}
+  .outcard .table-scroll{overflow-x:auto}
+  .outcard table{min-width:680px}
+}
