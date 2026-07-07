@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chief of Staff · Runway · Sophie Finke</title>
-<meta name="description" content="A working artifact for the Chief of Staff to the Co-CEO role at Runway: a single source of truth for initiatives, relationships, and asks, with the hire itself simulated first. Data is illustrative." />
+<meta name="description" content="A working artifact for the Chief of Staff to the Co-CEO role at Runway: the whole office simulated before and after the hire, plus the posting answered line by line. Data is illustrative." />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,7 +13,7 @@
   <div class="wrap">
     <div class="eyebrow">Built for the Chief of Staff role at Runway</div>
     <h1>A world model of the company</h1>
-    <p class="sub">Runway's argument is that trial and error is cheap in simulation and expensive in the real world. Running a company works the same way. The expensive way to learn that an initiative stalled, or that a promise to a studio slipped, is to find out three weeks later. So instead of describing how I would do this job, I built the thing the role description asks for: a single source of truth where every top-priority initiative has a scope, an owner, and a timeline, every relationship is developed on a cadence instead of from memory, and every ask from the Co-CEO's conversations is tracked until it closes. Every figure is illustrative and built from public information. <span class="illus">All figures illustrative</span></p>
+    <p class="sub">Runway's argument is that trial and error is cheap in simulation and expensive in the real world. Running a company works the same way. The expensive way to learn that an initiative stalled, or that a promise to a studio slipped, is to find out three weeks later. So instead of describing how I would do this job, I simulated it. One toggle flips this entire page between the Co-CEO's office as it typically runs and the same office with me in this seat. Every figure is illustrative and built from public information. <span class="illus">All figures illustrative</span></p>
 
     <div class="thesis">
       <p><b>The idea in one line:</b> Runway builds world models so mistakes can happen in simulation instead of in the real world. A Chief of Staff is that layer for a Co-CEO. Plans get pressure-tested against a live model of the company, and nothing has to quietly fail for three weeks to get noticed.</p>
@@ -27,7 +27,7 @@
     <div class="sec-head">
       <div class="kicker">Run it in simulation first</div>
       <h2>The hire, simulated</h2>
-      <p class="lead">Runway would not ship a model without evals, and a Co-CEO should not make a hire without a before and after. These are the five numbers I would move in my first quarter. Each one maps to a section further down this page, because the number is only the output. The section is the work.</p>
+      <p class="lead">Runway would not ship a model without evals, and a Co-CEO should not make a hire without a before and after. The toggle controls the whole page. Every section below has an as-it-runs-today state and a with-me state, because the difference a Chief of Staff makes is easier to show than to describe.</p>
     </div>
     <div class="simbox">
       <div class="simhead">
@@ -38,7 +38,7 @@
         </span>
       </div>
       <div class="simgrid" id="simgrid"></div>
-      <div class="simfoot" id="simfoot">Illustrative baseline for a company at this stage. Toggle to run the simulation.</div>
+      <div class="simfoot" id="simfoot"></div>
     </div>
   </div>
 </section>
@@ -47,9 +47,9 @@
 <section>
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">The single source of truth</div>
-      <h2>Every top-priority initiative, with a scope, an owner, and a timeline</h2>
-      <p class="lead">One list the whole executive team works from, spanning the fronts Runway is actually fighting on: the Gen-4.5 enterprise motion, the studio partnerships that followed Lionsgate, GWM-1 and the Robotics SDK, the AI Film Festival and the Hundred Film Fund. Each card carries the state, the owner, the date, and how long it has sat untouched. The red cards are the reason this page exists. Nobody decided to drop them, they went quiet, and finding them on a Tuesday is a lot cheaper than finding them at the board meeting.</p>
+      <div class="kicker">JD line 1 · A single source of truth with scope, owners, and timelines</div>
+      <h2>Every top-priority initiative</h2>
+      <p class="lead" id="boardlead"></p>
     </div>
     <div class="agents" id="board"></div>
   </div>
@@ -59,9 +59,9 @@
 <section>
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">The relationship layer</div>
-      <h2>Every relationship, developed and sustained</h2>
-      <p class="lead">The role description says this seat shapes how every relationship the Co-CEO builds is developed over time. In practice that is a cadence, a record of what was promised, and a next touch that is already on the calendar. A studio chief, a design partner CTO, and a research lab lead in the same week, each conversation picking up exactly where it left off.</p>
+      <div class="kicker">JD line 2 · Every relationship developed and sustained over time</div>
+      <h2>The relationship layer</h2>
+      <p class="lead" id="rellead"></p>
     </div>
     <div class="table-scroll">
       <table>
@@ -79,9 +79,9 @@
 <section>
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">From conversation to execution</div>
+      <div class="kicker">JD line 3 · Customer insights turned into structured asks and follow-up</div>
       <h2>Said once, tracked to done</h2>
-      <p class="lead">The Co-CEO has a conversation and something in it should become work. My job is to catch it, turn it into a scoped ask with an owner and a date, and follow through so nothing depends on anyone's memory, including his.</p>
+      <p class="lead" id="asklead"></p>
     </div>
     <div class="table-scroll">
       <table>
@@ -98,23 +98,38 @@
 <section>
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">The Friday note</div>
-      <h2>One page, every week</h2>
-      <p class="lead">Everything above gets compressed into one note on Friday: what moved, what went quiet, and the few decisions that need the Co-CEO next week. The rest I just handle.</p>
+      <div class="kicker">JD line 4 · Surface issues early, keep the right people informed before being prompted</div>
+      <h2>The Friday note</h2>
+      <p class="lead" id="notelead"></p>
     </div>
     <div class="twocol">
       <div class="attn">
-        <h3>Needs the Co-CEO next week</h3>
+        <h3 id="attnhead"></h3>
         <div id="attnlist"></div>
       </div>
       <div class="note">
         <h3>Weekly note</h3>
-        <div class="stamp">Drafted from the live board · Friday, end of day</div>
-        <p>Seven of nine initiatives moved this week. Gen-4.5 enterprise pricing is in testing with both design partners, and the Robotics SDK program signed its sixth design partner. <b>Two went quiet:</b> the second studio partnership has sat in the studio's legal review for nine days with the greenlight window closing August 15, and the FY27 compute commitments have had no owner since the ops lead left.</p>
-        <p>What I did about each: I have the studio's associate GC on Thursday to walk the redlines, and a proposal below for how the compute model gets owned.</p>
-        <p><b>Needs you next week:</b> ten minutes on the GWM-1 quality bar before the release call, and the compute financing introduction your board member offered, which is staged and waiting on your go.</p>
-        <div class="signed">Prepared by the office of the Co-CEO</div>
+        <div class="stamp" id="notestamp"></div>
+        <div id="notebody"></div>
+        <div class="signed" id="notesigned"></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIT -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">The rest of the posting</div>
+      <h2>The role, line by line</h2>
+      <p class="lead">The sections above are the responsibilities from the job description, built. This is the rest of the posting, answered directly.</p>
+    </div>
+    <div class="table-scroll fit">
+      <table>
+        <thead><tr><th>The posting asks for</th><th>Where I have already done it</th></tr></thead>
+        <tbody id="fitrows"></tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -127,125 +142,236 @@
   </div>
 </footer>
 
+<span class="simpill" id="simpill"><span class="pd"></span><span id="pilltxt"></span><span class="swap">⇄ switch</span></span>
+
 <script>
-/* All values illustrative, designed to read like a real Co-CEO's office rather than pulled from Runway. */
+/* All values illustrative, designed to read like a real Co-CEO's office rather than pulled from Runway.
+   One global state: false = as it runs today, true = with Sophie. Every section renders from it. */
 
-/* ===== simulation toggle ===== */
+let COS = false;
+
+/* ===== sim stats ===== */
 const SIM = [
-  {k:"Initiatives with a named owner and a date", now:"6 of 9", cos:"9 of 9", nNote:"3 exist only in someone's head", cNote:"I build and run the board below", nBad:true},
-  {k:"Asks from the Co-CEO's conversations closed inside a week", now:"44%", cos:"92%", nNote:"the rest resurface as apologies", cNote:"I catch them in the room, they leave with an owner and a date", nBad:true},
-  {k:"Oldest decision waiting on the Co-CEO", now:"9 days", cos:"1 day", nNote:"nobody framed it for a yes or no", cNote:"I frame every decision as a yes or no with a deadline", nBad:true},
-  {k:"Versions of the priority list in circulation", now:"3", cos:"1", nNote:"GTM, research, and finance each keep one", cNote:"one list, and keeping it current is my job", nBad:true},
-  {k:"Co-CEO hours per week on coordination", now:"11", cos:"4", nNote:"chasing status instead of setting direction", cNote:"I take the prep, the follow-ups, and the chasing", nBad:true}
+  {k:"Initiatives with a named owner and a date", now:"6 of 9", cos:"9 of 9", nNote:"3 exist only in someone's head", cNote:"I build and run the board below"},
+  {k:"Asks from the Co-CEO's conversations closed inside a week", now:"44%", cos:"92%", nNote:"the rest resurface as apologies", cNote:"I catch them in the room, they leave with an owner and a date"},
+  {k:"Oldest decision waiting on the Co-CEO", now:"9 days", cos:"1 day", nNote:"nobody framed it for a yes or no", cNote:"I frame every decision as a yes or no with a deadline"},
+  {k:"Versions of the priority list in circulation", now:"3", cos:"1", nNote:"GTM, research, and finance each keep one", cNote:"one list, and keeping it current is my job"},
+  {k:"Co-CEO hours per week on coordination", now:"11", cos:"4", nNote:"chasing status instead of setting direction", cNote:"I take the prep, the follow-ups, and the chasing"}
 ];
-const simgrid = document.getElementById("simgrid");
-const simfoot = document.getElementById("simfoot");
-function renderSim(withCos){
-  simgrid.innerHTML = SIM.map(s=>`
-    <div class="simcell">
-      <div class="sk">${s.k}</div>
-      <div class="sv ${withCos ? "good" : (s.nBad ? "bad" : "")}">${withCos ? s.cos : s.now}</div>
-      <div class="sn">${withCos ? s.cNote : s.nNote}</div>
-    </div>`).join("");
-  simfoot.textContent = withCos
-    ? "Simulated first quarter. The numbers are illustrative, but the mechanism under each one is real and sits on this page."
-    : "Illustrative baseline for a company at this stage. Toggle to run the simulation.";
-}
-const btnNow = document.getElementById("btn-now"), btnCos = document.getElementById("btn-cos");
-btnNow.addEventListener("click", ()=>{ btnNow.classList.add("on"); btnCos.classList.remove("on"); renderSim(false); });
-btnCos.addEventListener("click", ()=>{ btnCos.classList.add("on"); btnNow.classList.remove("on"); renderSim(true); });
-renderSim(false);
 
-/* ===== initiative board ===== */
+/* ===== initiative board: [today, withSophie] per card ===== */
 const BOARD = [
-  {fn:"GTM", t:"Enterprise pricing for the Gen-4.5 API", touch:1,
-   state:"Two design partners are testing seat-plus-usage pricing. Early read is that per-seat alone breaks for large VFX teams, usage caps fix it.",
-   owner:"GTM lead", due:"Pricing v3 by Jul 24", tag:"ok", tagtxt:"On track"},
-  {fn:"Partnerships", t:"Second studio partnership after Lionsgate", touch:9, idle:true,
-   state:"The Lionsgate work proved a custom model can live inside a studio pipeline. The second studio's legal team has held the redlines for nine days, and their greenlight window closes August 15.",
-   owner:"Partnerships + me", due:"Signature before Aug 15", tag:"blocked", tagtxt:"Blocked in their legal"},
-  {fn:"Research", t:"GWM-1 release quality bar", touch:2,
-   state:"Four of six internal benchmarks clear the bar. Physical-consistency and long-horizon evals are still under, and the release call is next week.",
-   owner:"Research lead", due:"Release call next week", tag:"watch", tagtxt:"Quality-bar call needed"},
-  {fn:"Partnerships", t:"Robotics SDK design-partner program", touch:4,
-   state:"Six partners signed since the SDK opened. The next milestone is sim-to-real eval numbers, which are waiting on a research team that is heads-down on the release.",
-   owner:"Partnerships lead", due:"Evals by Jul 18", tag:"watch", tagtxt:"Waiting on research"},
-  {fn:"Product", t:"Real-time conversational agents beta", touch:2,
-   state:"Forty-creator cohort is live and the weekly feedback loop is running. Top request is timeline control, already on the roadmap.",
-   owner:"Product lead", due:"Cohort report Jul 31", tag:"ok", tagtxt:"On track"},
-  {fn:"Studios", t:"AI Film Festival and Hundred Film Fund cycle", touch:3,
-   state:"Next AIFF cycle planning is underway and the fund has a full review queue. Both are the company's best proof that the tools change how stories get made.",
-   owner:"Studios lead", due:"Cycle plan by Aug 1", tag:"ok", tagtxt:"On track"},
-  {fn:"Finance", t:"FY27 compute commitments against the revenue model", touch:12, idle:true,
-   state:"Unowned since the ops lead left. Renewal negotiations start in September and walking in without a current model gives away the leverage.",
-   owner:"None", due:"Owner needed now", tag:"blocked", tagtxt:"Unowned for 12 days"},
-  {fn:"Talent", t:"Research recruiting, next five hires", touch:7, idle:true,
-   state:"Stalled after the last two closes. The referral channels that produced them have no standing owner, and two target candidates are in other processes.",
-   owner:"Me, as of this week", due:"Calendar rebuilt by Mon", tag:"watch", tagtxt:"Picked up as a standing lane"},
-  {fn:"Leadership", t:"The single source of truth itself", touch:0,
-   state:"This board. One list, reviewed with the executive team weekly, so visibility never depends on who was in which meeting.",
-   owner:"Me, permanently", due:"Standing", tag:"ok", tagtxt:"CoS-run"}
+  {fn:"GTM", t:"Enterprise pricing for the Gen-4.5 API",
+   today:{touch:"3 days since last touch", state:"Two design partners are testing seat-plus-usage pricing. The current read lives across three Slack threads and a call nobody wrote up.", owner:"GTM lead", due:"None set", tag:"watch", tagtxt:"No date, no write-up", miss:true},
+   cos:{touch:"worked yesterday", state:"Two design partners are testing seat-plus-usage pricing. Early read is that per-seat alone breaks for large VFX teams, usage caps fix it. Write-up is in the deal doc.", owner:"GTM lead", due:"Pricing v3 by Jul 24", tag:"ok", tagtxt:"On track"}},
+  {fn:"Partnerships", t:"Second studio partnership after Lionsgate",
+   today:{touch:"9 days since last touch", idle:true, state:"The Lionsgate work proved a custom model can live inside a studio pipeline. The second studio's legal team has held the redlines for nine days, and nobody noticed until the studio asked what was taking so long.", owner:"Unclear", due:"Greenlight closes Aug 15", tag:"blocked", tagtxt:"Aging quietly", miss:true},
+   cos:{touch:"worked today", state:"Same nine days in their legal, but it is on the board, so it got caught on day three. I have their associate GC on Thursday to walk the redlines, and the escalation path is framed if that call does not move it.", owner:"Partnerships + me", due:"Signature before Aug 15", tag:"watch", tagtxt:"Caught, being worked"}},
+  {fn:"Research", t:"GWM-1 release quality bar",
+   today:{touch:"2 days since last touch", state:"Four of six internal benchmarks clear the bar. The release call is next week and no read-out exists, so the call will run on whoever speaks last.", owner:"Research lead", due:"Release call next week", tag:"watch", tagtxt:"No read-out written", miss:true},
+   cos:{touch:"worked today", state:"Four of six benchmarks clear. Physical-consistency and long-horizon are still under. The read-out is written, and the call opens with a framed decision: hold or ship.", owner:"Research lead", due:"Release call next week", tag:"ok", tagtxt:"Decision framed"}},
+  {fn:"Partnerships", t:"Robotics SDK design-partner program",
+   today:{touch:"12 days since last touch", idle:true, state:"Six partners signed since the SDK opened. One was promised sim-to-real eval numbers twelve days ago, and the promise is aging while research is heads-down on the release.", owner:"Partnerships lead", due:"Overdue", tag:"blocked", tagtxt:"Promise aging", miss:true},
+   cos:{touch:"worked yesterday", state:"Same promise, but tracked. The partner got a new date the day it slipped, and the Co-CEO has a framed choice below: formally move the date or pull one researcher for two days.", owner:"Partnerships lead", due:"Evals by Jul 18", tag:"watch", tagtxt:"Tracked, choice framed"}},
+  {fn:"Product", t:"Real-time conversational agents beta",
+   today:{touch:"5 days since last touch", state:"Forty-creator cohort is live. Feedback arrives as screenshots in DMs, and whether anyone is synthesizing it depends on who has spare time this week.", owner:"Product lead", due:"None set", tag:"watch", tagtxt:"Feedback unstructured", miss:true},
+   cos:{touch:"worked yesterday", state:"Forty-creator cohort is live with a weekly synthesis loop. Top request is timeline control, already on the roadmap, and the cohort report has a date.", owner:"Product lead", due:"Cohort report Jul 31", tag:"ok", tagtxt:"On track"}},
+  {fn:"Studios", t:"AI Film Festival and Hundred Film Fund cycle",
+   today:{touch:"6 days since last touch", state:"Next AIFF cycle planning is underway and the fund queue is full. Both run on the energy of whoever picked them up, with no single plan the exec team can see.", owner:"Studios lead", due:"None set", tag:"watch", tagtxt:"No visible plan", miss:true},
+   cos:{touch:"worked this week", state:"Cycle plan drafted with dates and owners. Both programs are the company's best proof that the tools change how stories get made, and they now read that way to the exec team.", owner:"Studios lead", due:"Cycle plan by Aug 1", tag:"ok", tagtxt:"On track"}},
+  {fn:"Finance", t:"FY27 compute commitments against the revenue model",
+   today:{touch:"12 days since last touch", idle:true, state:"Unowned since the ops lead left. Renewal negotiations start in September, and right now the plan is to notice that in September.", owner:"None", due:"None", tag:"blocked", tagtxt:"Unowned for 12 days", miss:true},
+   cos:{touch:"worked today", state:"I took it. A current model before the September negotiations is the difference between setting terms and accepting them, and I have built exactly this kind of operating model before.", owner:"Me, as of this week", due:"Model current by Aug 20", tag:"watch", tagtxt:"Picked up"}},
+  {fn:"Talent", t:"Research recruiting, next five hires",
+   today:{touch:"7 days since last touch", idle:true, state:"Stalled after the last two closes. The referral channels that produced them have no standing owner, and two target candidates are in other processes.", owner:"Nobody standing", due:"None", tag:"blocked", tagtxt:"Stalled", miss:true},
+   cos:{touch:"worked today", state:"Picked up as a standing lane: referral channels get a weekly pass, the two active candidates have next steps, and the calendar is rebuilt.", owner:"Me + research lead", due:"Calendar rebuilt by Mon", tag:"watch", tagtxt:"Standing lane"}},
+  {fn:"Leadership", t:"The single source of truth itself",
+   today:{touch:"never worked", idle:true, state:"Does not exist. GTM, research, and finance each keep their own list, and the exec team's picture of the top priorities depends on who was in which meeting.", owner:"None", due:"None", tag:"blocked", tagtxt:"Three lists, no truth", miss:true},
+   cos:{touch:"worked today", state:"This board. One list, reviewed with the executive team weekly, so visibility never depends on who was in which meeting.", owner:"Me, permanently", due:"Standing", tag:"ok", tagtxt:"CoS-run"}}
 ];
-document.getElementById("board").innerHTML = BOARD.map(x=>{
-  const touch = x.touch===0 ? "worked today" : x.touch===1 ? "worked yesterday" : x.touch+" days since last touch";
-  return `<div class="agent${x.idle?" idle":""}">
-    <div class="atop"><span class="fpill">${x.fn}</span>
-    <span class="touch${x.idle?" warn":""}">${touch}</span></div>
-    <h3>${x.t}</h3>
-    <div class="astate">${x.state}</div>
-    <div class="meta">
-      <div><div class="mk">Owner</div><div class="mv"><b>${x.owner}</b></div></div>
-      <div><div class="mk">Timeline</div><div class="mv">${x.due}</div></div>
-    </div>
-    <div class="abadge"><span class="tag ${x.tag}">${x.tagtxt}</span></div>
-  </div>`;
-}).join("");
 
 /* ===== relationships ===== */
 const RELS = [
-  {n:"Studio chief, the second studio partnership", cad:"Monthly", last:"6 days ago", prom:"Per-seat pricing that works for their 300-artist VFX vendor", next:"Dinner Jul 21, agenda drafted"},
-  {n:"Head of production, network partner", cad:"Every 6 weeks", last:"3 weeks ago", prom:"Case-study approval on the pilot episode", next:"Draft going out this week"},
-  {n:"CTO, Gen-4.5 enterprise design partner", cad:"Biweekly", last:"2 days ago", prom:"Timeline for fine-tuning on their footage library", next:"Call Thursday, answer in hand"},
-  {n:"Founder, Robotics SDK design partner", cad:"Monthly", last:"12 days ago", prom:"Sim-to-real eval numbers before their board meeting", next:"Unblock research first, then reply with a date"},
-  {n:"Hundred Film Fund director, AIFF alum", cad:"Quarterly", last:"2 weeks ago", prom:"Early access to the next model for her funded film", next:"Added to the beta cohort, confirm this week"},
-  {n:"Board member", cad:"Monthly", last:"8 days ago", prom:"He offered a compute-financing introduction", next:"Staged, waiting on the Co-CEO's go"}
+  {n:"Studio chief, the second studio partnership",
+   today:{cad:"When something is needed", last:"6 days ago", prom:"Made at dinner, lives in memory", next:"None scheduled"},
+   cos:{cad:"Monthly", last:"6 days ago", prom:"Per-seat pricing that works for their 300-artist VFX vendor", next:"Dinner Jul 21, agenda drafted"}},
+  {n:"Head of production, network partner",
+   today:{cad:"None", last:"3 weeks ago", prom:"Case study waiting on a quote approval nobody chased", next:"None scheduled"},
+   cos:{cad:"Every 6 weeks", last:"3 weeks ago", prom:"Case-study approval on the pilot episode", next:"Draft going out this week"}},
+  {n:"CTO, Gen-4.5 enterprise design partner",
+   today:{cad:"Ad hoc", last:"2 days ago", prom:"Fine-tuning timeline, promised verbally", next:"On the calendar, no agenda"},
+   cos:{cad:"Biweekly", last:"2 days ago", prom:"Timeline for fine-tuning on their footage library", next:"Call Thursday, answer in hand"}},
+  {n:"Founder, Robotics SDK design partner",
+   today:{cad:"None", last:"12 days ago", prom:"Eval numbers, now overdue", next:"Being avoided"},
+   cos:{cad:"Monthly", last:"12 days ago", prom:"Sim-to-real eval numbers before their board meeting", next:"New date sent the day it slipped"}},
+  {n:"Hundred Film Fund director, AIFF alum",
+   today:{cad:"None", last:"2 weeks ago", prom:"Early access mentioned, not logged anywhere", next:"None scheduled"},
+   cos:{cad:"Quarterly", last:"2 weeks ago", prom:"Early access to the next model for her funded film", next:"Added to the beta cohort, confirm this week"}},
+  {n:"Board member",
+   today:{cad:"Board meetings", last:"8 days ago", prom:"An intro offered and not taken", next:"Next board meeting"},
+   cos:{cad:"Monthly", last:"8 days ago", prom:"He offered a compute-financing introduction", next:"Staged, waiting on the Co-CEO's go"}}
 ];
-document.getElementById("relrows").innerHTML = RELS.map(r=>`
-  <tr>
-    <td><span class="name">${r.n}</span></td>
-    <td>${r.cad}</td>
-    <td>${r.last}</td>
-    <td>${r.prom}</td>
-    <td>${r.next}</td>
-  </tr>`).join("");
 
 /* ===== asks ===== */
 const ASKS = [
-  {src:"Studio chief, Tuesday dinner", ask:"Can pricing work for a 300-artist VFX vendor roster before their greenlight meeting", own:"GTM lead", due:"Friday", cls:"soon", st:"In draft", dot:"var(--amber)"},
-  {src:"Enterprise CTO, Thursday call", ask:"A committed timeline for fine-tuning on their footage library", own:"Product lead", due:"Next Wed", cls:"", st:"Scoped, on track", dot:"var(--green)"},
-  {src:"Robotics partner, Monday call", ask:"Sim-to-real eval numbers before their board meeting", own:"Research", due:"Jul 18", cls:"late", st:"Blocked behind the release", dot:"var(--red)"},
-  {src:"Board member, coffee", ask:"Take the compute-financing introduction he offered", own:"Co-CEO, staged by me", due:"This week", cls:"soon", st:"Email drafted, needs a go", dot:"var(--amber)"}
+  {src:"Studio chief, Tuesday dinner", ask:"Can pricing work for a 300-artist VFX vendor roster before their greenlight meeting",
+   today:{own:"Nobody", due:"Never set", cls:"late", st:"Mentioned at dinner, not written down", dot:"var(--red)"},
+   cos:{own:"GTM lead", due:"Friday", cls:"soon", st:"In draft", dot:"var(--amber)"}},
+  {src:"Enterprise CTO, Thursday call", ask:"A committed timeline for fine-tuning on their footage library",
+   today:{own:"Unassigned", due:"Never set", cls:"late", st:"Promised verbally, no date attached", dot:"var(--red)"},
+   cos:{own:"Product lead", due:"Next Wed", cls:"", st:"Scoped, on track", dot:"var(--green)"}},
+  {src:"Robotics partner, Monday call", ask:"Sim-to-real eval numbers before their board meeting",
+   today:{own:"Research, informally", due:"Overdue", cls:"late", st:"Resurfaced as an apology after 12 days", dot:"var(--red)"},
+   cos:{own:"Research", due:"Jul 18", cls:"late", st:"Blocked behind the release, partner told", dot:"var(--red)"}},
+  {src:"Board member, coffee", ask:"Take the compute-financing introduction he offered",
+   today:{own:"Nobody", due:"Never set", cls:"", st:"Aging in an inbox", dot:"var(--amber)"},
+   cos:{own:"Co-CEO, staged by me", due:"This week", cls:"soon", st:"Email drafted, needs a go", dot:"var(--amber)"}}
 ];
-document.getElementById("askrows").innerHTML = ASKS.map(a=>`
-  <tr>
-    <td><span class="name" style="font-size:13px">${a.src}</span></td>
-    <td>${a.ask}</td>
-    <td>${a.own}</td>
-    <td class="due ${a.cls}">${a.due}</td>
-    <td><span class="status-dot" style="background:${a.dot}"></span>${a.st}</td>
-  </tr>`).join("");
 
-/* ===== needs the co-ceo ===== */
-const ATTN = [
+/* ===== attn + note ===== */
+const ATTN_TODAY = [
+  {sev:"var(--red)", t:"The GWM-1 call happens without a read-out", d:"The quality-bar decision gets made in the meeting, by whoever argues best, and revisited when the numbers surface later.", own:"How it surfaces: in the meeting"},
+  {sev:"var(--red)", t:"The studio redlines age until the studio calls", d:"Nine days becomes three weeks. The greenlight window closes and the postmortem asks why nobody was watching.", own:"How it surfaces: when it is too late"},
+  {sev:"var(--amber)", t:"Compute planning starts when negotiations do", d:"September arrives, the model is stale, and the negotiation runs on the vendor's numbers instead of Runway's.", own:"How it surfaces: in September"},
+  {sev:"var(--amber)", t:"The board member's offer expires quietly", d:"The intro was real when it was offered. Offers like that have a shelf life, and this one is on day eight.", own:"How it surfaces: it does not"}
+];
+const ATTN_COS = [
   {sev:"var(--red)", t:"GWM-1 release is a quality-bar call", d:"Four of six benchmarks clear. Holding until physical consistency passes is my recommendation, but the bar belongs to you and the research lead.", own:"Decision: hold or ship · read-out attached"},
   {sev:"var(--red)", t:"Second studio partnership is stuck in their legal", d:"Nine days on the redlines with the greenlight window closing August 15. I have their associate GC on Thursday. If that does not move it, this becomes a chief-to-chief call.", own:"Decision: escalate after Thursday, or wait"},
   {sev:"var(--amber)", t:"FY27 compute commitments need an owner", d:"Negotiations start in September. I can own the model, or we re-scope the ops search to cover it. Ten-minute call either way.", own:"Decision: I take it, or we hire for it"},
   {sev:"var(--amber)", t:"The robotics partner was promised evals 12 days ago", d:"Research is heads-down on the release. Either we formally move the date with the partner or pull one researcher for two days. Both are fine, silence is not.", own:"Decision: slip the date or staff it"}
 ];
-document.getElementById("attnlist").innerHTML = ATTN.map(a=>`
-  <div class="item"><span class="sev" style="background:${a.sev}"></span>
-    <div class="ibody"><div class="it">${a.t}</div><div class="id">${a.d}</div><div class="own">${a.own}</div></div>
-  </div>`).join("");
+const NOTE_TODAY = `
+  <p>No note goes out. The week ends, and what moved, what stalled, and what was promised lives across Slack, calendars, and memory.</p>
+  <p>The Co-CEO rebuilds the picture himself on Sunday night, which is exactly the kind of expensive real-world trial and error that Runway exists to eliminate.</p>`;
+const NOTE_COS = `
+  <p>Seven of nine initiatives moved this week. Gen-4.5 enterprise pricing is in testing with both design partners, and the Robotics SDK program signed its sixth design partner. <b>Two went quiet:</b> the second studio partnership has sat in the studio's legal review for nine days with the greenlight window closing August 15, and the FY27 compute commitments had no owner, so I took them.</p>
+  <p>What I did about each: the studio's associate GC is on my calendar Thursday to walk the redlines, and the compute model will be current by August 20, ahead of the September negotiations.</p>
+  <p><b>Needs you next week:</b> ten minutes on the GWM-1 quality bar before the release call, and the compute financing introduction your board member offered, which is staged and waiting on your go.</p>`;
+
+/* ===== fit table (static, not toggled) ===== */
+const FIT = [
+  ["<b>4+ years across banking, finance, or strategy &amp; operations</b>", "Three years trading index derivatives at RBC, a summer in Amazon's FP&amp;A org, a Wharton MBA, and startup RevOps at Playground since."],
+  ["<b>Translate high-level goals into action plans with scope, owners, and timelines</b>", "The board above is how I already work. At Playground I turned a hiring plan into the operating model underneath it."],
+  ["<b>Maintain a single source of truth so the executive team has visibility</b>", "At RBC I replaced more than 250 manual spreadsheets with real-time tools the desk and risk teams ran on every day."],
+  ["<b>Identify bottlenecks and ensure consistent follow-through</b>", "At Amazon I found and automated more than 150 manual finance workflows in a single summer."],
+  ["<b>Build new systems with a focus on quality, scale, and automation</b>", "I write code every day and have shipped about ten apps of my own, with real billing, auth, and users. I built this page in an afternoon."],
+  ["<b>High technical aptitude for complex technologies and systems</b>", "At Halluminate I build the environments that train and evaluate AI agents, so reading model evals is part of my current job, not a stretch."],
+  ["<b>Hold your own with a studio chief, a CTO, and a research lead in the same week</b>", "My weeks already run founder to GTM lead to research engineer, and my background covers each room: markets, operations, and code."],
+  ["<b>A strong bias towards action, no task too small</b>", "No task is below me. I built this page instead of writing a cover letter."],
+  ["<b>New York based preferred</b>", "I live in New York."]
+];
+document.getElementById("fitrows").innerHTML = FIT.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
+
+/* ===== render everything from COS state ===== */
+const LEADS = {
+  board: {
+    today:"How the top priorities look with no single owner of the list. Some cards are healthy. The red ones went quiet without anyone deciding to drop them, and nobody is paid to notice.",
+    cos:"One list the whole executive team works from, spanning the fronts Runway is actually fighting on: the Gen-4.5 enterprise motion, the studio partnerships that followed Lionsgate, GWM-1 and the Robotics SDK, the AI Film Festival and the Hundred Film Fund. Every card has a scope, an owner, a timeline, and a count of days since anyone touched it."
+  },
+  rel: {
+    today:"The Co-CEO's relationships as they run by default: real warmth, no system. Promises live in memory, cadences are whenever something is needed, and next touches mostly do not exist.",
+    cos:"The same relationships with a cadence, a record of what was promised, and a next touch already on the calendar. A studio chief, a design partner CTO, and a research lab lead in the same week, each conversation picking up exactly where it left off."
+  },
+  ask: {
+    today:"What happens to the asks inside the Co-CEO's conversations when nobody's job is to catch them. They were all real, and most of them are already gone.",
+    cos:"The same conversations with me in the room or in the debrief. Each ask leaves with an owner and a date, and the follow-up does not depend on anyone's memory, including his."
+  },
+  note: {
+    today:"What the Co-CEO gets at the end of a week today.",
+    cos:"Everything above, compressed into one note every Friday: what moved, what went quiet, and the few decisions that need the Co-CEO next week. The rest I just handle."
+  }
+};
+
+function render(){
+  /* sim stats */
+  document.getElementById("simgrid").innerHTML = SIM.map(s=>`
+    <div class="simcell">
+      <div class="sk">${s.k}</div>
+      <div class="sv ${COS ? "good" : "bad"}">${COS ? s.cos : s.now}</div>
+      <div class="sn">${COS ? s.cNote : s.nNote}</div>
+    </div>`).join("");
+  document.getElementById("simfoot").textContent = COS
+    ? "Simulated first quarter. The numbers are illustrative, but the mechanism under each one is real and sits on this page."
+    : "Illustrative baseline for a company at this stage. Toggle to run the simulation. The whole page follows.";
+
+  /* board */
+  document.getElementById("board").innerHTML = BOARD.map(x=>{
+    const v = COS ? x.cos : x.today;
+    return `<div class="agent${v.idle?" idle":""}">
+      <div class="atop"><span class="fpill">${x.fn}</span>
+      <span class="touch${v.idle?" warn":""}">${v.touch}</span></div>
+      <h3>${x.t}</h3>
+      <div class="astate">${v.state}</div>
+      <div class="meta">
+        <div><div class="mk">Owner</div><div class="mv${(!COS && v.miss)?" missing":""}"><b>${v.owner}</b></div></div>
+        <div><div class="mk">Timeline</div><div class="mv${(!COS && v.miss)?" missing":""}">${v.due}</div></div>
+      </div>
+      <div class="abadge"><span class="tag ${v.tag}">${v.tagtxt}</span></div>
+    </div>`;
+  }).join("");
+
+  /* relationships */
+  document.getElementById("relrows").innerHTML = RELS.map(r=>{
+    const v = COS ? r.cos : r.today;
+    return `<tr>
+      <td><span class="name">${r.n}</span></td>
+      <td>${v.cad}</td>
+      <td>${v.last}</td>
+      <td>${v.prom}</td>
+      <td>${v.next}</td>
+    </tr>`;
+  }).join("");
+
+  /* asks */
+  document.getElementById("askrows").innerHTML = ASKS.map(a=>{
+    const v = COS ? a.cos : a.today;
+    return `<tr>
+      <td><span class="name" style="font-size:13px">${a.src}</span></td>
+      <td>${a.ask}</td>
+      <td>${v.own}</td>
+      <td class="due ${v.cls}">${v.due}</td>
+      <td><span class="status-dot" style="background:${v.dot}"></span>${v.st}</td>
+    </tr>`;
+  }).join("");
+
+  /* attn + note */
+  document.getElementById("attnhead").textContent = COS ? "Needs the Co-CEO next week" : "How problems surface today";
+  document.getElementById("attnlist").innerHTML = (COS ? ATTN_COS : ATTN_TODAY).map(a=>`
+    <div class="item"><span class="sev" style="background:${a.sev}"></span>
+      <div class="ibody"><div class="it">${a.t}</div><div class="id">${a.d}</div><div class="own">${a.own}</div></div>
+    </div>`).join("");
+  document.getElementById("notestamp").textContent = COS ? "Drafted from the live board · Friday, end of day" : "Friday, end of day";
+  document.getElementById("notebody").innerHTML = COS ? NOTE_COS : NOTE_TODAY;
+  document.getElementById("notesigned").textContent = COS ? "Prepared by the office of the Co-CEO" : "";
+
+  /* leads */
+  document.getElementById("boardlead").textContent = COS ? LEADS.board.cos : LEADS.board.today;
+  document.getElementById("rellead").textContent = COS ? LEADS.rel.cos : LEADS.rel.today;
+  document.getElementById("asklead").textContent = COS ? LEADS.ask.cos : LEADS.ask.today;
+  document.getElementById("notelead").textContent = COS ? LEADS.note.cos : LEADS.note.today;
+
+  /* controls */
+  document.getElementById("btn-now").classList.toggle("on", !COS);
+  document.getElementById("btn-cos").classList.toggle("on", COS);
+  const pill = document.getElementById("simpill");
+  pill.classList.toggle("cos", COS);
+  document.getElementById("pilltxt").textContent = COS ? "Simulation: with Sophie" : "Simulation: as it runs today";
+}
+
+function setState(v){ COS = v; render(); }
+document.getElementById("btn-now").addEventListener("click", ()=>setState(false));
+document.getElementById("btn-cos").addEventListener("click", ()=>setState(true));
+document.getElementById("simpill").addEventListener("click", ()=>setState(!COS));
+
+/* pill visibility: show once the simbox scrolls out of view, hide near the fit section (not toggled) */
+const simbox = document.querySelector(".simbox");
+window.addEventListener("scroll", ()=>{
+  const past = simbox.getBoundingClientRect().bottom < 0;
+  document.getElementById("simpill").classList.toggle("show", past);
+}, {passive:true});
+
+render();
 </script>
 </body>
 </html>

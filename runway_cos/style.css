@@ -119,6 +119,25 @@ tbody td .name{color:var(--txt);font-weight:600;font-size:14px}
 .note p b{color:var(--txt);font-weight:600}
 .note .signed{font-size:12.5px;color:var(--dim);margin-top:14px;font-style:italic}
 
+/* ===================== floating sim pill ===================== */
+.simpill{position:fixed;bottom:18px;right:18px;z-index:20;display:none;align-items:center;gap:9px;
+  background:#1b1b1f;border:1px solid #3a3a40;border-radius:24px;padding:9px 16px;cursor:pointer;user-select:none;
+  font-size:12.5px;font-weight:600;color:var(--muted);box-shadow:0 8px 26px rgba(0,0,0,.5);transition:.15s}
+.simpill:hover{color:var(--txt);border-color:#4a4a52}
+.simpill .pd{width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.simpill.cos .pd{background:var(--green)}
+.simpill .swap{color:var(--dim);font-size:11px}
+.simpill.show{display:inline-flex}
+
+/* ===================== fit table ===================== */
+.fit td:first-child{color:var(--dim);width:42%}
+.fit td:first-child b{color:var(--muted);font-weight:600}
+.fit td:last-child{color:var(--muted)}
+.fit td:last-child b{color:var(--txt);font-weight:600}
+
+/* missing/degraded values in as-is state */
+.mv.missing{color:var(--red);font-weight:600}
+
 /* ===================== footer ===================== */
 footer{border-top:1px solid var(--line);padding:30px 0 64px;color:var(--dim);font-size:13px}
 footer p{margin:6px 0;max-width:800px}
