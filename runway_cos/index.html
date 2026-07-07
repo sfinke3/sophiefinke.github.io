@@ -27,14 +27,14 @@
     <div class="sec-head">
       <div class="kicker">Run it in simulation first</div>
       <h2>The hire, simulated</h2>
-      <p class="lead">Runway would not ship a model without evals, and a Co-CEO should not make a hire without a before and after. These are the numbers I would move in the first quarter, simulated here so you can see the claim before it costs you anything real.</p>
+      <p class="lead">Runway would not ship a model without evals, and a Co-CEO should not make a hire without a before and after. These are the five numbers I would move in my first quarter. Each one maps to a section further down this page, because the number is only the output. The section is the work.</p>
     </div>
     <div class="simbox">
       <div class="simhead">
         <span class="st">State of the Co-CEO's office</span>
         <span class="simtoggle">
           <button id="btn-now" class="on">As it runs today</button>
-          <button id="btn-cos">With a Chief of Staff</button>
+          <button id="btn-cos">With Sophie as Chief of Staff</button>
         </span>
       </div>
       <div class="simgrid" id="simgrid"></div>
@@ -49,9 +49,8 @@
     <div class="sec-head">
       <div class="kicker">The single source of truth</div>
       <h2>Every top-priority initiative, with a scope, an owner, and a timeline</h2>
-      <p class="lead">One list the whole executive team works from. Each card carries the current state, the owner, the date, and how long it has sat untouched. The red cards are the reason this page exists. Nobody decided to drop them, they went quiet, and finding them on a Tuesday is a lot cheaper than finding them at the board meeting.</p>
+      <p class="lead">One list the whole executive team works from, spanning the fronts Runway is actually fighting on: the Gen-4.5 enterprise motion, the studio partnerships that followed Lionsgate, GWM-1 and the Robotics SDK, the AI Film Festival and the Hundred Film Fund. Each card carries the state, the owner, the date, and how long it has sat untouched. The red cards are the reason this page exists. Nobody decided to drop them, they went quiet, and finding them on a Tuesday is a lot cheaper than finding them at the board meeting.</p>
     </div>
-    <div class="filters" id="fnfilters"><span class="flabel">Function</span></div>
     <div class="agents" id="board"></div>
   </div>
 </section>
@@ -67,12 +66,12 @@
     <div class="table-scroll">
       <table>
         <thead><tr>
-          <th>Relationship</th><th>Type</th><th>Cadence</th><th>Last touch</th><th>Open promise</th><th>Next touch</th>
+          <th>Relationship</th><th>Cadence</th><th>Last touch</th><th>Open promise</th><th>Next touch</th>
         </tr></thead>
         <tbody id="relrows"></tbody>
       </table>
     </div>
-    <p class="hint">Roles and organizations are illustrative composites. Runway's studio partnerships are public; the individuals here are not real.</p>
+    <p class="hint">Runway's studio partnerships and film programs are public. The individuals and details here are illustrative composites.</p>
   </div>
 </section>
 
@@ -111,8 +110,8 @@
       <div class="note">
         <h3>Weekly note</h3>
         <div class="stamp">Drafted from the live board · Friday, end of day</div>
-        <p>Eleven of fourteen initiatives moved this week. Gen-4.5 enterprise pricing is in testing with both design partners, and inference cost is down 9 points against the 30 percent target. <b>Three went quiet:</b> the second studio pilot has sat in the studio's legal review for nine days and the greenlight window closes August 15, the FY27 compute commitments have had no owner since the ops lead left, and research recruiting stalled after the last two closes.</p>
-        <p>What I did about each: I have the studio's associate GC on Thursday to walk the redlines, a proposal below for how the compute model gets owned, and the recruiting calendar rebuilt for Monday.</p>
+        <p>Seven of nine initiatives moved this week. Gen-4.5 enterprise pricing is in testing with both design partners, and the Robotics SDK program signed its sixth design partner. <b>Two went quiet:</b> the second studio partnership has sat in the studio's legal review for nine days with the greenlight window closing August 15, and the FY27 compute commitments have had no owner since the ops lead left.</p>
+        <p>What I did about each: I have the studio's associate GC on Thursday to walk the redlines, and a proposal below for how the compute model gets owned.</p>
         <p><b>Needs you next week:</b> ten minutes on the GWM-1 quality bar before the release call, and the compute financing introduction your board member offered, which is staged and waiting on your go.</p>
         <div class="signed">Prepared by the office of the Co-CEO</div>
       </div>
@@ -124,7 +123,7 @@
   <div class="wrap">
     <div class="kicker">About</div>
     <p><b style="color:var(--muted)">Sophie Finke.</b> I built this while researching the Chief of Staff role at Runway, as a concrete answer to the job description rather than a description of one. It is a rough working prototype.</p>
-    <p>Every number, initiative, relationship, and ask on this page is <b style="color:var(--muted)">illustrative</b>, since I have no access to Runway's internal information. Product names and studio partnerships are drawn from public reporting, and the structure and framing are mine. More of my work is at <a href="https://sophiefinke.com" target="_blank" rel="noopener">sophiefinke.com</a>.</p>
+    <p>Every number, initiative, relationship, and ask on this page is <b style="color:var(--muted)">illustrative</b>, since I have no access to Runway's internal information. Gen-4.5, GWM-1, the Robotics SDK, Runway Studios, the AI Film Festival, the Hundred Film Fund, and the Lionsgate and AMC Networks partnerships are public. The structure and framing are mine. More of my work is at <a href="https://sophiefinke.com" target="_blank" rel="noopener">sophiefinke.com</a>.</p>
   </div>
 </footer>
 
@@ -133,11 +132,11 @@
 
 /* ===== simulation toggle ===== */
 const SIM = [
-  {k:"Initiatives with a named owner and a date", now:"9 of 14", cos:"14 of 14", nNote:"5 exist only in someone's head", cNote:"the board below", nBad:true},
-  {k:"Asks from the Co-CEO's conversations closed inside a week", now:"44%", cos:"92%", nNote:"the rest resurface as apologies", cNote:"tracked from the moment they are said", nBad:true},
-  {k:"Oldest decision waiting on the Co-CEO", now:"9 days", cos:"1 day", nNote:"nobody framed it for a yes or no", cNote:"framed, staged, ready to decide", nBad:true},
-  {k:"Versions of the priority list in circulation", now:"3", cos:"1", nNote:"GTM, research, and finance each keep one", cNote:"a single source of truth", nBad:true},
-  {k:"Co-CEO hours per week on coordination", now:"11", cos:"4", nNote:"chasing status instead of setting direction", cNote:"hours returned to product and partners", nBad:true}
+  {k:"Initiatives with a named owner and a date", now:"6 of 9", cos:"9 of 9", nNote:"3 exist only in someone's head", cNote:"I build and run the board below", nBad:true},
+  {k:"Asks from the Co-CEO's conversations closed inside a week", now:"44%", cos:"92%", nNote:"the rest resurface as apologies", cNote:"I catch them in the room, they leave with an owner and a date", nBad:true},
+  {k:"Oldest decision waiting on the Co-CEO", now:"9 days", cos:"1 day", nNote:"nobody framed it for a yes or no", cNote:"I frame every decision as a yes or no with a deadline", nBad:true},
+  {k:"Versions of the priority list in circulation", now:"3", cos:"1", nNote:"GTM, research, and finance each keep one", cNote:"one list, and keeping it current is my job", nBad:true},
+  {k:"Co-CEO hours per week on coordination", now:"11", cos:"4", nNote:"chasing status instead of setting direction", cNote:"I take the prep, the follow-ups, and the chasing", nBad:true}
 ];
 const simgrid = document.getElementById("simgrid");
 const simfoot = document.getElementById("simfoot");
@@ -149,7 +148,7 @@ function renderSim(withCos){
       <div class="sn">${withCos ? s.cNote : s.nNote}</div>
     </div>`).join("");
   simfoot.textContent = withCos
-    ? "Simulated first quarter. The numbers are illustrative, and the simulation assumes the Chief of Staff is me."
+    ? "Simulated first quarter. The numbers are illustrative, but the mechanism under each one is real and sits on this page."
     : "Illustrative baseline for a company at this stage. Toggle to run the simulation.";
 }
 const btnNow = document.getElementById("btn-now"), btnCos = document.getElementById("btn-cos");
@@ -158,87 +157,62 @@ btnCos.addEventListener("click", ()=>{ btnCos.classList.add("on"); btnNow.classL
 renderSim(false);
 
 /* ===== initiative board ===== */
-const FN = ["GTM","Partnerships","Product","Research","Engineering","Finance","Talent","Leadership"];
 const BOARD = [
-  {fn:"GTM", t:"Enterprise tier for the Gen-4.5 API", touch:1,
+  {fn:"GTM", t:"Enterprise pricing for the Gen-4.5 API", touch:1,
    state:"Two design partners are testing seat-plus-usage pricing. Early read is that per-seat alone breaks for large VFX teams, usage caps fix it.",
    owner:"GTM lead", due:"Pricing v3 by Jul 24", tag:"ok", tagtxt:"On track"},
-  {fn:"Partnerships", t:"Second studio production pilot", touch:9, idle:true,
-   state:"The first pilot proved the pipeline. The second studio's legal team has held the redlines for nine days, and their greenlight window closes August 15.",
+  {fn:"Partnerships", t:"Second studio partnership after Lionsgate", touch:9, idle:true,
+   state:"The Lionsgate work proved a custom model can live inside a studio pipeline. The second studio's legal team has held the redlines for nine days, and their greenlight window closes August 15.",
    owner:"Partnerships + me", due:"Signature before Aug 15", tag:"blocked", tagtxt:"Blocked in their legal"},
-  {fn:"Product", t:"Real-time conversational agents beta", touch:2,
-   state:"Forty-creator cohort is live. Weekly feedback loop is running and the top request is timeline control, which is already on the roadmap.",
-   owner:"Product lead", due:"Cohort report Jul 31", tag:"ok", tagtxt:"On track"},
-  {fn:"Research", t:"GWM-1 eval suite before the next release", touch:2,
+  {fn:"Research", t:"GWM-1 release quality bar", touch:2,
    state:"Four of six internal benchmarks clear the bar. Physical-consistency and long-horizon evals are still under, and the release call is next week.",
    owner:"Research lead", due:"Release call next week", tag:"watch", tagtxt:"Quality-bar call needed"},
-  {fn:"Engineering", t:"Inference cost per generation down 30%", touch:1,
-   state:"Two optimizations shipped, cost is down 9 points so far. The remaining work is scheduled against the serving roadmap.",
-   owner:"Infra lead", due:"Target by end of Q3", tag:"ok", tagtxt:"On track"},
+  {fn:"Partnerships", t:"Robotics SDK design-partner program", touch:4,
+   state:"Six partners signed since the SDK opened. The next milestone is sim-to-real eval numbers, which are waiting on a research team that is heads-down on the release.",
+   owner:"Partnerships lead", due:"Evals by Jul 18", tag:"watch", tagtxt:"Waiting on research"},
+  {fn:"Product", t:"Real-time conversational agents beta", touch:2,
+   state:"Forty-creator cohort is live and the weekly feedback loop is running. Top request is timeline control, already on the roadmap.",
+   owner:"Product lead", due:"Cohort report Jul 31", tag:"ok", tagtxt:"On track"},
+  {fn:"Studios", t:"AI Film Festival and Hundred Film Fund cycle", touch:3,
+   state:"Next AIFF cycle planning is underway and the fund has a full review queue. Both are the company's best proof that the tools change how stories get made.",
+   owner:"Studios lead", due:"Cycle plan by Aug 1", tag:"ok", tagtxt:"On track"},
   {fn:"Finance", t:"FY27 compute commitments against the revenue model", touch:12, idle:true,
    state:"Unowned since the ops lead left. Renewal negotiations start in September and walking in without a current model gives away the leverage.",
    owner:"None", due:"Owner needed now", tag:"blocked", tagtxt:"Unowned for 12 days"},
-  {fn:"Partnerships", t:"Robotics SDK design-partner program", touch:4,
-   state:"Six partners signed. The next milestone is sim-to-real eval numbers, which are waiting on a research team that is heads-down on the release.",
-   owner:"Partnerships lead", due:"Evals by Jul 18", tag:"watch", tagtxt:"Waiting on research"},
-  {fn:"GTM", t:"Case-study engine for enterprise deals", touch:3,
-   state:"The pilot-episode case study is drafted and waiting on the network's approval of one quote. Three open deals have asked for exactly this material.",
-   owner:"Marketing", due:"Approval this week", tag:"ok", tagtxt:"On track"},
   {fn:"Talent", t:"Research recruiting, next five hires", touch:7, idle:true,
    state:"Stalled after the last two closes. The referral channels that produced them have no standing owner, and two target candidates are in other processes.",
    owner:"Me, as of this week", due:"Calendar rebuilt by Mon", tag:"watch", tagtxt:"Picked up as a standing lane"},
-  {fn:"Product", t:"Enterprise security and procurement pack", touch:5,
-   state:"Three enterprise deals are waiting on updated security documentation. The material exists but is scattered across old deal threads.",
-   owner:"Me + security eng", due:"Pack shipped Jul 17", tag:"watch", tagtxt:"Consolidating now"},
-  {fn:"Finance", t:"Quarterly investor and board update", touch:2,
-   state:"Drafted from live metrics. Missing the updated enterprise pipeline cut and one usage chart, both landing this week.",
-   owner:"Me, Co-CEO signs", due:"Send before board meeting", tag:"ok", tagtxt:"On track"},
   {fn:"Leadership", t:"The single source of truth itself", touch:0,
    state:"This board. One list, reviewed with the executive team weekly, so visibility never depends on who was in which meeting.",
    owner:"Me, permanently", due:"Standing", tag:"ok", tagtxt:"CoS-run"}
 ];
-const board = document.getElementById("board");
-function renderBoard(filter){
-  board.innerHTML = BOARD.filter(x=>!filter||x.fn===filter).map(x=>{
-    const touch = x.touch===0 ? "worked today" : x.touch===1 ? "worked yesterday" : x.touch+" days since last touch";
-    return `<div class="agent${x.idle?" idle":""}">
-      <div class="atop"><span class="fpill">${x.fn}</span>
-      <span class="touch${x.idle?" warn":""}">${touch}</span></div>
-      <h3>${x.t}</h3>
-      <div class="astate">${x.state}</div>
-      <div class="meta">
-        <div><div class="mk">Owner</div><div class="mv"><b>${x.owner}</b></div></div>
-        <div><div class="mk">Timeline</div><div class="mv">${x.due}</div></div>
-      </div>
-      <div class="abadge"><span class="tag ${x.tag}">${x.tagtxt}</span></div>
-    </div>`;
-  }).join("");
-}
-renderBoard(null);
-const filt = document.getElementById("fnfilters");
-const chips = [["",""], ...FN.map(f=>[f,f])];
-filt.insertAdjacentHTML("beforeend", chips.map(([k,l])=>`<span class="chip${k===""?" active":""}" data-fn="${k}">${l||"All"}</span>`).join(""));
-filt.addEventListener("click", e=>{
-  const c = e.target.closest(".chip"); if(!c) return;
-  filt.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
-  c.classList.add("active");
-  renderBoard(c.dataset.fn || null);
-});
+document.getElementById("board").innerHTML = BOARD.map(x=>{
+  const touch = x.touch===0 ? "worked today" : x.touch===1 ? "worked yesterday" : x.touch+" days since last touch";
+  return `<div class="agent${x.idle?" idle":""}">
+    <div class="atop"><span class="fpill">${x.fn}</span>
+    <span class="touch${x.idle?" warn":""}">${touch}</span></div>
+    <h3>${x.t}</h3>
+    <div class="astate">${x.state}</div>
+    <div class="meta">
+      <div><div class="mk">Owner</div><div class="mv"><b>${x.owner}</b></div></div>
+      <div><div class="mk">Timeline</div><div class="mv">${x.due}</div></div>
+    </div>
+    <div class="abadge"><span class="tag ${x.tag}">${x.tagtxt}</span></div>
+  </div>`;
+}).join("");
 
 /* ===== relationships ===== */
 const RELS = [
-  {n:"Studio chief, major film studio", type:"Studio", cad:"Monthly", last:"6 days ago", prom:"Per-seat pricing that works for their 300-artist VFX vendor", next:"Dinner Jul 21, agenda drafted"},
-  {n:"Head of production, network partner", type:"Studio", cad:"Every 6 weeks", last:"3 weeks ago", prom:"Case-study approval on the pilot episode", next:"Draft going out this week"},
-  {n:"CTO, enterprise design partner", type:"Enterprise", cad:"Biweekly", last:"2 days ago", prom:"Timeline for fine-tuning on their footage library", next:"Call Thursday, answer in hand"},
-  {n:"Founder, robotics design partner", type:"Robotics", cad:"Monthly", last:"12 days ago", prom:"Sim-to-real eval numbers before their board meeting", next:"Unblock research first, then reply with a date"},
-  {n:"Lab director, university collaboration", type:"Research", cad:"Quarterly", last:"5 weeks ago", prom:"Joint paper timeline and authorship", next:"Confirm author list by Friday"},
-  {n:"Board member", type:"Investor", cad:"Monthly", last:"8 days ago", prom:"He offered a compute-financing introduction", next:"Staged, waiting on the Co-CEO's go"},
-  {n:"Filmmaker, Runway Studios alum", type:"Creative", cad:"Quarterly", last:"2 weeks ago", prom:"Early access to the next model", next:"Added to the beta cohort, confirm this week"}
+  {n:"Studio chief, the second studio partnership", cad:"Monthly", last:"6 days ago", prom:"Per-seat pricing that works for their 300-artist VFX vendor", next:"Dinner Jul 21, agenda drafted"},
+  {n:"Head of production, network partner", cad:"Every 6 weeks", last:"3 weeks ago", prom:"Case-study approval on the pilot episode", next:"Draft going out this week"},
+  {n:"CTO, Gen-4.5 enterprise design partner", cad:"Biweekly", last:"2 days ago", prom:"Timeline for fine-tuning on their footage library", next:"Call Thursday, answer in hand"},
+  {n:"Founder, Robotics SDK design partner", cad:"Monthly", last:"12 days ago", prom:"Sim-to-real eval numbers before their board meeting", next:"Unblock research first, then reply with a date"},
+  {n:"Hundred Film Fund director, AIFF alum", cad:"Quarterly", last:"2 weeks ago", prom:"Early access to the next model for her funded film", next:"Added to the beta cohort, confirm this week"},
+  {n:"Board member", cad:"Monthly", last:"8 days ago", prom:"He offered a compute-financing introduction", next:"Staged, waiting on the Co-CEO's go"}
 ];
 document.getElementById("relrows").innerHTML = RELS.map(r=>`
   <tr>
     <td><span class="name">${r.n}</span></td>
-    <td><span class="pill">${r.type}</span></td>
     <td>${r.cad}</td>
     <td>${r.last}</td>
     <td>${r.prom}</td>
@@ -250,7 +224,6 @@ const ASKS = [
   {src:"Studio chief, Tuesday dinner", ask:"Can pricing work for a 300-artist VFX vendor roster before their greenlight meeting", own:"GTM lead", due:"Friday", cls:"soon", st:"In draft", dot:"var(--amber)"},
   {src:"Enterprise CTO, Thursday call", ask:"A committed timeline for fine-tuning on their footage library", own:"Product lead", due:"Next Wed", cls:"", st:"Scoped, on track", dot:"var(--green)"},
   {src:"Robotics partner, Monday call", ask:"Sim-to-real eval numbers before their board meeting", own:"Research", due:"Jul 18", cls:"late", st:"Blocked behind the release", dot:"var(--red)"},
-  {src:"Network exec, last week", ask:"Approve the case-study quote so marketing can publish", own:"Marketing", due:"Monday", cls:"", st:"Done, shipping this week", dot:"var(--green)"},
   {src:"Board member, coffee", ask:"Take the compute-financing introduction he offered", own:"Co-CEO, staged by me", due:"This week", cls:"soon", st:"Email drafted, needs a go", dot:"var(--amber)"}
 ];
 document.getElementById("askrows").innerHTML = ASKS.map(a=>`
@@ -265,7 +238,7 @@ document.getElementById("askrows").innerHTML = ASKS.map(a=>`
 /* ===== needs the co-ceo ===== */
 const ATTN = [
   {sev:"var(--red)", t:"GWM-1 release is a quality-bar call", d:"Four of six benchmarks clear. Holding until physical consistency passes is my recommendation, but the bar belongs to you and the research lead.", own:"Decision: hold or ship · read-out attached"},
-  {sev:"var(--red)", t:"Second studio pilot is stuck in their legal", d:"Nine days on the redlines with the greenlight window closing August 15. I have their associate GC on Thursday. If that does not move it, this becomes a chief-to-chief call.", own:"Decision: escalate after Thursday, or wait"},
+  {sev:"var(--red)", t:"Second studio partnership is stuck in their legal", d:"Nine days on the redlines with the greenlight window closing August 15. I have their associate GC on Thursday. If that does not move it, this becomes a chief-to-chief call.", own:"Decision: escalate after Thursday, or wait"},
   {sev:"var(--amber)", t:"FY27 compute commitments need an owner", d:"Negotiations start in September. I can own the model, or we re-scope the ops search to cover it. Ten-minute call either way.", own:"Decision: I take it, or we hire for it"},
   {sev:"var(--amber)", t:"The robotics partner was promised evals 12 days ago", d:"Research is heads-down on the release. Either we formally move the date with the partner or pull one researcher for two days. Both are fine, silence is not.", own:"Decision: slip the date or staff it"}
 ];
