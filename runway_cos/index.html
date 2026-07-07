@@ -142,7 +142,14 @@
   </div>
 </footer>
 
-<span class="simpill" id="simpill"><span class="pd"></span><span id="pilltxt"></span><span class="swap">⇄ switch</span></span>
+<div class="simbar" id="simbar">
+  <span class="sb-dot"></span>
+  <span class="sb-label" id="sbtxt"></span>
+  <span class="simtoggle">
+    <button id="sb-now">As it runs today</button>
+    <button id="sb-cos">With Sophie as Chief of Staff</button>
+  </span>
+</div>
 
 <script>
 /* All values illustrative, designed to read like a real Co-CEO's office rather than pulled from Runway.
@@ -354,21 +361,25 @@ function render(){
   /* controls */
   document.getElementById("btn-now").classList.toggle("on", !COS);
   document.getElementById("btn-cos").classList.toggle("on", COS);
-  const pill = document.getElementById("simpill");
-  pill.classList.toggle("cos", COS);
-  document.getElementById("pilltxt").textContent = COS ? "Simulation: with Sophie" : "Simulation: as it runs today";
+  document.getElementById("sb-now").classList.toggle("on", !COS);
+  document.getElementById("sb-cos").classList.toggle("on", COS);
+  const bar = document.getElementById("simbar");
+  bar.classList.toggle("cos", COS);
+  bar.classList.toggle("now", !COS);
+  document.getElementById("sbtxt").textContent = COS ? "Simulation running: with Sophie as Chief of Staff" : "Simulation off: the office as it runs today";
 }
 
 function setState(v){ COS = v; render(); }
 document.getElementById("btn-now").addEventListener("click", ()=>setState(false));
 document.getElementById("btn-cos").addEventListener("click", ()=>setState(true));
-document.getElementById("simpill").addEventListener("click", ()=>setState(!COS));
+document.getElementById("sb-now").addEventListener("click", ()=>setState(false));
+document.getElementById("sb-cos").addEventListener("click", ()=>setState(true));
 
-/* pill visibility: show once the simbox scrolls out of view, hide near the fit section (not toggled) */
+/* bar visibility: appears once the simbox scrolls out of view */
 const simbox = document.querySelector(".simbox");
 window.addEventListener("scroll", ()=>{
   const past = simbox.getBoundingClientRect().bottom < 0;
-  document.getElementById("simpill").classList.toggle("show", past);
+  document.getElementById("simbar").classList.toggle("show", past);
 }, {passive:true});
 
 render();
