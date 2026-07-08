@@ -24,7 +24,7 @@
       <a class="mod" href="#ledger">
         <div class="mn">2 · Follow the loop</div>
         <h3>The decision ledger</h3>
-        <p>Every decision tracked until it is done, not just made.</p>
+        <p>Every decision tracked until it is done.</p>
       </a>
       <a class="mod" href="#tower">
         <div class="mn">3 · Move the sliders</div>
@@ -34,7 +34,7 @@
       <a class="mod" href="#market">
         <div class="mn">4 · Check the math</div>
         <h3>The merchant math</h3>
-        <p>Why Pay by Bank wins on economics and lives on conversion.</p>
+        <p>What a merchant saves, and why conversion decides it.</p>
       </a>
       <a class="mod" href="#qbr">
         <div class="mn">5 · Read the output</div>
@@ -88,18 +88,18 @@
 
         <div class="outcard attn" id="oc3">
           <h3>Decision queue for leadership</h3>
-          <div class="ostamp">Each one framed as a choice, not a status</div>
+          <div class="ostamp">Every item is a yes or no</div>
           <div id="decisions"></div>
         </div>
 
         <div class="outcard" id="oc4">
           <h3>Nudges sent, so a human did not have to</h3>
-          <div class="ostamp">Four owners, four specific asks, and one the agent added on its own</div>
+          <div class="ostamp">Four specific asks, and one the agent added on its own</div>
           <div id="nudges"></div>
         </div>
 
       </div>
-      <div class="runfoot" id="runfoot"><b>No status meeting produced this page.</b> The data is staged for this demo, but every step is buildable with today's tools, and I have shipped this pattern before: an inbox-triage app on the Claude API, scraping and enrichment pipelines in production at Playground.</div>
+      <div class="runfoot" id="runfoot"><b>No status meeting produced this page.</b> The data is staged, but I have shipped every piece of this pattern before: an inbox-triage app on the Claude API, and scraping and enrichment pipelines in production at Playground.</div>
     </div>
   </div>
 </section>
@@ -110,7 +110,7 @@
     <div class="sec-head">
       <div class="kicker">JD line 2 · Driving follow-through on key decisions and resolving blockers</div>
       <h2>The decision ledger</h2>
-      <p class="lead">Decisions are where PMOs quietly fail: made in a meeting, mentioned in a doc, forgotten in a week. Every decision from the Monday run lands here and stays until it is done.</p>
+      <p class="lead">Every decision from the Monday run lands here and stays until it is done.</p>
     </div>
     <div class="table-scroll">
       <table>
@@ -118,7 +118,7 @@
         <tbody id="ledgerrows"></tbody>
       </table>
     </div>
-    <p class="hint">The stalled row is the point. A decision that stops moving gets a nudge, then an escalation, and it never silently disappears.</p>
+    <p class="hint">The stalled row is the point: it got a nudge this morning and escalates Thursday if nothing moves.</p>
   </div>
 </section>
 
@@ -128,7 +128,7 @@
     <div class="sec-head">
       <div class="kicker">JD line 3 · The H2 2026 hiring program, coordinated across Recruiting, Finance, and P&amp;T</div>
       <h2>The hiring control tower</h2>
-      <p class="lead">Move the assumptions Recruiting and Finance actually argue about, and watch the plan react. The math runs live on this page, and I built this exact kind of model at Playground.</p>
+      <p class="lead">Move the assumptions Recruiting and Finance argue about, and watch the plan react. The math runs live on this page, and I built this same kind of model at Playground.</p>
     </div>
     <div class="tower">
       <div class="controls">
@@ -160,7 +160,7 @@
           <span class="leg"><span class="sw" style="background:#2a3630"></span>Plan</span>
         </div>
       </div>
-      <p class="hint">Assumptions kept deliberately simple and visible: each recruiter closes about two offers a month, July ramps at half capacity, and slippage pushes starts to the right. A real version plugs into Greenhouse and the comp model, and the assumptions become live numbers instead of sliders.</p>
+      <p class="hint">The assumptions: each recruiter closes about two offers a month, July ramps at half capacity, and slippage pushes starts to the right. A real version plugs into Greenhouse and the comp model, and the sliders become live numbers.</p>
     </div>
   </div>
 </section>
@@ -171,7 +171,7 @@
     <div class="sec-head">
       <div class="kicker">JD line 4 · Commercially sharp, with a keen sense of where Trustly sits in the market</div>
       <h2>The merchant math</h2>
-      <p class="lead">Trustly's pitch to a merchant in one screen: cards cost roughly 2.4% all-in, Pay by Bank costs a fraction of that, and the fee savings buy room to fight the only battle that matters, conversion at checkout. Move the levers a merchant would move.</p>
+      <p class="lead">Trustly's pitch to a merchant in one screen: cards cost roughly 2.4% all-in, Pay by Bank costs a fraction of that, and the fight is conversion at checkout. Move the levers a merchant would move.</p>
     </div>
     <div class="tower">
       <div class="controls">
@@ -192,9 +192,9 @@
         <div class="tcell"><div class="tk">Processing fees saved per year</div><div class="tv good" id="m-save"></div><div class="tn">at ~150bps saved on shifted volume</div></div>
         <div class="tcell"><div class="tk">Revenue effect of the conversion gap</div><div class="tv" id="m-rev"></div><div class="tn" id="m-revn"></div></div>
         <div class="tcell"><div class="tk">Net merchant impact</div><div class="tv" id="m-net"></div><div class="tn">savings plus conversion effect</div></div>
-        <div class="tcell"><div class="tk">Value of +1% conversion on this flow</div><div class="tv" id="m-lift"></div><div class="tn">why the product obsession is checkout UX</div></div>
+        <div class="tcell"><div class="tk">Value of +1% conversion on this flow</div><div class="tv" id="m-lift"></div><div class="tn">what a point of checkout UX is worth</div></div>
       </div>
-      <p class="hint">Assumptions visible on purpose: blended card cost ~2.4%, Pay by Bank ~0.9%, so the fee gap is ~150bps. The takeaway is the strategy in one sentence: Pay by Bank can afford a conversion gap of up to that fee gap and still win, and every basis point of checkout friction removed is pure margin for the merchant. That is where Trustly sits in the market, and why the P&amp;T roadmap is the business.</p>
+      <p class="hint">The assumptions: blended card cost ~2.4%, Pay by Bank ~0.9%, a gap of about 150bps. Pay by Bank can run a conversion gap up to that fee gap and the merchant still wins, so every point of checkout friction removed is margin. That is why the P&amp;T roadmap is the business.</p>
     </div>
   </div>
 </section>
@@ -205,11 +205,11 @@
     <div class="sec-head">
       <div class="kicker">JD line 5 · Crisp executive materials and the quarterly business review</div>
       <h2>The QBR, drafted before anyone asks for it</h2>
-      <p class="lead">If the modules above exist, the QBR stops being a two-week scramble for slides. The humans spend their time on the recommendation, not the retrieval.</p>
+      <p class="lead">If the modules above exist, the QBR stops being a two-week scramble for slides. It assembles itself, and a human edits it once.</p>
     </div>
     <div class="note">
       <h3>Q3 business review · one-page draft</h3>
-      <div class="stamp">Assembled from the two modules above · narrative edited by a human, once</div>
+      <div class="stamp">Q3 draft · assembled from the modules above</div>
       <p><b>Programs:</b> five of six Q3 program milestones hit. The returning-user checkout flow is the quarter's standout, live to 50% of traffic with conversion up meaningfully where deployed. Bank coverage closed the Q3 target late but closed it. The failover test finally ran after we protected two engineers from the release rotation for a sprint, which is a resourcing pattern worth keeping.</p>
       <p><b>Hiring:</b> 22 starts against a Q3 plan of 24, with the gap concentrated in staff-level engineering. Offer accept rate held at 76%. The two aged offers from September both closed after comp was escalated inside 48 hours, and that faster escalation path is now standing policy.</p>
       <p><b>Carried risks:</b> production data access for model validation remains the slowest dependency in P&amp;T, three programs touched it this quarter. A scoped-access framework is drafted and sits with security.</p>
@@ -225,7 +225,7 @@
     <div class="sec-head">
       <div class="kicker">The rest of the posting</div>
       <h2>The role, line by line</h2>
-      <p class="lead">The modules above are the job's core responsibilities, built. This is the rest of the posting, answered directly.</p>
+      <p class="lead">The modules above are the responsibilities. This is the rest of the posting.</p>
     </div>
     <div class="table-scroll fit">
       <table>
@@ -266,7 +266,7 @@ const RISKS = [
 const DECISIONS = [
   {sev:"var(--red)", t:"Risk engine data access: scoped production access now, or wait for the full security review", d:"Both paths are costed. Scoped access unblocks model validation this week with an agreed audit trail. Waiting protects the process and slips the program roughly three weeks.", own:"Framed for the CTO · 10 minutes"},
   {sev:"var(--red)", t:"Staff engineer offer: approve out-of-band comp before Friday", d:"The candidate's competing deadline is real. Recruiting recommends matching, Finance impact is inside the H2 envelope because two other starts slipped.", own:"Framed for CPO + Finance · yes or no"},
-  {sev:"var(--amber)", t:"Reliability: protect two engineers from the release rotation for two weeks, or formally slip the failover test", d:"The test has slipped twice for the same reason. Either answer is fine, the silent third option of hoping is the only bad one.", own:"Framed for the CTO · either works"}
+  {sev:"var(--amber)", t:"Reliability: protect two engineers from the release rotation for two weeks, or formally slip the failover test", d:"The test has slipped twice for the same reason. Either answer works, it just needs one.", own:"Framed for the CTO"}
 ];
 const NUDGES = [
   {to:"@data-lead", m:"The security review request for model validation has no update in 8 days. Reply with a date and I will chase the rest of the chain."},
@@ -429,13 +429,13 @@ recomputeMarket();
 
 /* ===== fit table ===== */
 const FIT = [
-  ["<b>10+ years across strategy, operations, or program management</b>", "I will be upfront that I am earlier in my career than that. What I offer instead is on this page: the operating rhythm, the materials, and the tooling, already built. Behind it are three years trading index derivatives at RBC, a summer in Amazon's FP&amp;A org, a Wharton MBA, and startup BizOps since."],
+  ["<b>10+ years across strategy, operations, or program management</b>", "I will be upfront that I am earlier in my career than that. What I offer instead is this page. Behind it are three years trading index derivatives at RBC, a summer in Amazon's FP&amp;A org, a Wharton MBA, and startup BizOps since."],
   ["<b>Exceptionally organized, tight operating rhythms, nothing falls through the cracks</b>", "At RBC I ran the desk's daily rhythm and built the real-time liquidity tracker that four teams across the firm adopted."],
   ["<b>Synthesizing complex inputs into clear recommendations</b>", "At Playground I was handed a broad project, improve the outbound sales lists, and came back with a web scraper, an AI enrichment pipeline, and a ranked list sales reps could act on."],
   ["<b>PM tooling fluency, lightweight structures that add value without bureaucracy</b>", "My default is to build the tool. Type A started as a spreadsheet where I tracked my own projects and applications and is now a paid product, at RBC I replaced manual spreadsheets with real-time tooling, and this page is the same instinct pointed at a PMO."],
   ["<b>Influence without authority</b>", "The tools I built at RBC, such as real-time LCR tracking and daily trading updates, spread to four teams because they made people's weeks easier, not because anyone was told to use them."],
   ["<b>Fintech or payments experience a strong plus</b>", "Three years on RBC's index derivatives desk, and my current work at Halluminate is building the environments that evaluate AI agents on real financial workflows."],
-  ["<b>An AI-native organization</b>", "I have shipped about ten apps of my own, several on the Claude API, and building with AI is my default way of working, not a skill I am adding. I built this page that way."],
+  ["<b>An AI-native organization</b>", "I have shipped about ten apps of my own, several on the Claude API, and building with AI is my default way of working. I built this page that way."],
   ["<b>Based in New York, in office Tuesday through Thursday</b>", "I live in New York."]
 ];
 document.getElementById("fitrows").innerHTML = FIT.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
