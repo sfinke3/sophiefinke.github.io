@@ -51,7 +51,7 @@
     <div class="sec-head">
       <div class="kicker">JD · Triage the CEO's inbox, calendar, and attention. Decide what hits his desk and what does not</div>
       <h2>The morning triage</h2>
-      <p class="lead">Overnight, the inbox filled up. Most of it should never reach the CEO, and the three things that should need to arrive framed, not forwarded. Press the button. I have shipped this exact pattern before: Sortiva, my AI inbox-triage app, runs on the Claude API with paying users.</p>
+      <p class="lead">Overnight, the inbox filled up. Most of it should never reach the CEO, and the three things that should need to arrive framed, not forwarded. This runs at 6:45 every morning without being asked. Press the button to watch one. I have shipped this pattern before: Sortiva, my AI inbox-triage app.</p>
     </div>
     <div class="runbox">
       <div class="runhead">
@@ -76,7 +76,7 @@
             <tbody id="routedrows"></tbody>
           </table>
         </div>
-        <div class="runfoot"><b>50 items in, 3 out.</b> The CEO's first hour goes to the bank partnership and the VP Engineering counter, not to the queue.</div>
+        <div class="runfoot"><b>50 items in, 3 out, and it ran before anyone woke up.</b> The CEO's first hour goes to the bank partnership and the VP Engineering counter, not to the queue.</div>
       </div>
     </div>
   </div>
@@ -88,7 +88,16 @@
     <div class="sec-head">
       <div class="kicker">JD · Drive 2 to 4 high-priority strategic initiatives the CEO owns but cannot personally execute</div>
       <h2>The initiatives</h2>
-      <p class="lead">The posting names its own examples: a new pricing motion, a key partnership, a leadership hire. Here are those three, run the way I would run them, each with an owner, a date, and a count of days since anyone touched it.</p>
+      <p class="lead">The posting names its own examples: a new pricing motion, a key partnership, a leadership hire. Here are those three, each with an owner, a date, and a count of days since anyone touched it. Nobody files updates on these cards. Each one watches the systems its work already lives in.</p>
+    </div>
+    <div class="connectors">
+      <span class="clab">Wired into</span>
+      <span class="src-pill"><span class="dot"></span>Gmail · deal threads</span>
+      <span class="src-pill"><span class="dot"></span>Notion · deal docs</span>
+      <span class="src-pill"><span class="dot"></span>Greenhouse · searches</span>
+      <span class="src-pill"><span class="dot"></span>The platform · facility data</span>
+      <span class="src-pill"><span class="dot"></span>NetSuite · billing</span>
+      <span class="refreshed">Auto-refreshed · last sync 3 min ago</span>
     </div>
     <div class="agents" id="initcards"></div>
   </div>
@@ -170,7 +179,7 @@
     </div>
     <div class="memo">
       <div class="m-subj">Decision memo: per-loan-file pricing for verification and calc-agent work</div>
-      <div class="m-meta">From the 94-minute pricing meeting, Tuesday · one page · decision requested by Friday</div>
+      <div class="m-meta">Drafted from the meeting transcript and the pricing model, edited by a human once · one page · decision requested by Friday</div>
       <h5>Situation</h5>
       <p>Flat platform fees leave money on the table with the largest facilities and price out the smallest originators. Two term sheets stalled on this in the last quarter.</p>
       <h5>Options discussed</h5>
@@ -206,7 +215,7 @@ const TRSTEPS = [
 const DESK = [
   {sev:"var(--red)", t:"The bank partner's MD proposed revised advance-rate tiers", d:"The response shapes the term sheet. Their proposal, our counter, and the revenue math on both are attached. Recommendation: counter at the mid-tier, hold the eligibility definition.", own:"Framed · needs 20 minutes before the 11am call"},
   {sev:"var(--red)", t:"VP Engineering finalist received a counter-offer", d:"Deadline is tomorrow. Comp options inside the band are laid out, references summarized, the offer letter is drafted for whichever you pick.", own:"Framed · yes or no on the match today"},
-  {sev:"var(--amber)", t:"The Chief of Staff candidate built this page", d:"Instead of a second cover letter. Recommendation: hire Sophie Finke.", own:"Framed · interview slot is the only input needed"}
+  {sev:"var(--amber)", t:"The Chief of Staff candidate built this page", d:"Recommendation: hire Sophie Finke.", own:"Framed · interview slot is the only input needed"}
 ];
 const ROUTED = [
   {a:"Investor asking for a quarterly update call", b:"Scheduled for the 24th, one-page brief drafted and attached"},
