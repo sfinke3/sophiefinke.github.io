@@ -74,6 +74,59 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .tcell .tv.good{color:var(--green)} .tcell .tv.warn{color:var(--amber)} .tcell .tv.bad{color:var(--red)}
 .tcell .tn{font-size:11.5px;color:var(--dim);margin-top:3px}
 
+/* meeting translator */
+.runbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.runhead{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.runhead .rt{font-size:15px;font-weight:650;color:var(--txt)}
+.runbtn{appearance:none;border:none;background:var(--accent);color:#151004;font-size:14px;font-weight:700;
+  padding:11px 22px;border-radius:8px;cursor:pointer;font-family:inherit;transition:.15s}
+.runbtn:hover{filter:brightness(1.08)}
+.runbtn:disabled{opacity:.45;cursor:default}
+.rawnotes{background:var(--panel2);border:1px dashed var(--line);border-radius:10px;padding:16px 18px;
+  font-size:12.5px;color:var(--dim);line-height:1.7;font-style:italic}
+.rawnotes b{color:var(--muted);font-weight:600;font-style:normal}
+.steps{display:grid;gap:8px;margin:16px 0 4px}
+.step{display:flex;align-items:center;gap:11px;font-size:13.5px;color:var(--dim);opacity:0;transform:translateY(3px);transition:.25s}
+.step.show{opacity:1;transform:none}
+.step .ico{width:17px;height:17px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.step .spin{width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+.step .chk{display:none;color:var(--accent);font-weight:700;font-size:13px}
+.step.done{color:var(--muted)}
+.step.done .spin{display:none}
+.step.done .chk{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mtout{display:none;margin-top:18px}
+.mtout.show{display:block;animation:fadein .4s}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.table-scroll{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:4px 14px 8px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{text-align:left;color:var(--dim);font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:12px 10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+tbody tr:last-child td{border-bottom:none}
+tbody td .name{color:var(--txt);font-weight:600;font-size:13px}
+.pill{display:inline-block;font-size:10.5px;padding:3px 8px;border-radius:5px;background:var(--chip);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.runfoot{font-size:12.5px;color:var(--dim);margin-top:14px}
+.runfoot b{color:var(--muted)}
+
+/* board pack */
+.qbrgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+.qbrbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.qbrbox h4{margin:0 0 6px;font-size:13px;font-weight:650;color:var(--txt)}
+.pitem{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.pitem:first-of-type{border-top:none}
+.pitem .pn{color:var(--txt);font-weight:600}
+.sev-dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.bars{display:flex;align-items:flex-end;gap:10px;height:96px}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.bar{width:100%;max-width:44px;background:var(--accent);border-radius:4px 4px 0 0;min-height:2px}
+.bar.plan{background:#332a18}
+.bcol .bl{font-size:11px;color:var(--dim)}
+.bcol .bv{font-size:11.5px;color:var(--muted);font-weight:600}
+.legend{display:flex;gap:16px;margin-top:12px}
+.leg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
+.leg .sw{width:10px;height:10px;border-radius:3px}
+@media(max-width:900px){.qbrgrid{grid-template-columns:1fr}.table-scroll{overflow-x:auto}table{min-width:680px}}
+
 /* friday note */
 .twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
 .attn{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}

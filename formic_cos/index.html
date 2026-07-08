@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chief of Staff · Formic · Sophie Finke</title>
 <meta name="description" content="A working artifact for the Chief of Staff role at Formic: the CEO's leverage board, the RaaS math, and the Friday note. Data is illustrative." />
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css?v=2" />
 </head>
 <body>
 
@@ -19,15 +19,25 @@
       <a class="mod" href="#board">
         <div class="mn">1 · The leverage board</div>
         <h3>Every initiative, owned and dated</h3>
-        <p>Discussions become action items with owners and timelines.</p>
+        <p>One list, with days-idle counted.</p>
+      </a>
+      <a class="mod" href="#meeting">
+        <div class="mn">2 · Press the button</div>
+        <h3>The meeting, translated</h3>
+        <p>Raw notes become action items with owners and dates.</p>
       </a>
       <a class="mod" href="#raas">
-        <div class="mn">2 · The RaaS math</div>
+        <div class="mn">3 · The RaaS math</div>
         <h3>The pitch a factory hears</h3>
         <p>Live math on why robots-as-opex wins. Move the sliders.</p>
       </a>
+      <a class="mod" href="#pack">
+        <div class="mn">4 · The board pack</div>
+        <h3>Investor materials, drafted</h3>
+        <p>The one-pager a RaaS board actually reads.</p>
+      </a>
       <a class="mod" href="#note">
-        <div class="mn">3 · The Friday note</div>
+        <div class="mn">5 · The Friday note</div>
         <h3>What reaches the CEO</h3>
         <p>Three decisions that need him. Everything else, handled.</p>
       </a>
@@ -47,7 +57,35 @@
   </div>
 </section>
 
-<!-- MODULE 2: RAAS MATH -->
+<!-- MODULE 2: MEETING TRANSLATOR -->
+<section id="meeting">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · Translate discussions into clear action items, owners, timelines, and accountability</div>
+      <h2>The meeting, translated</h2>
+      <p class="lead">This is the core loop of the job, so here it is as a tool. Below are raw notes from a leadership sync, the way meetings actually end. Press the button.</p>
+    </div>
+    <div class="runbox">
+      <div class="runhead">
+        <span class="rt">Tuesday leadership sync · raw notes</span>
+        <button class="runbtn" id="mtbtn">Turn it into action items</button>
+      </div>
+      <div class="rawnotes">"...ops flagged the install crew is double-booked the week of Aug 4 ... someone should really own the fleet financing renewal before October ... <b>CEO:</b> we need the uptime case study for the vertical push, that closes reference factory three ... marketing asked again about the Pack Expo booth, no owner ... agreed: pricing pilot at plus one dollar an hour for new verticals starting September ... revisit crew hiring at the next sync..."</div>
+      <div class="steps" id="mtsteps"></div>
+      <div class="mtout" id="mtout">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Action item</th><th>Owner</th><th>Due</th><th>Where it lives now</th></tr></thead>
+            <tbody id="mtrows"></tbody>
+          </table>
+        </div>
+        <div class="runfoot"><b>Six sentences of meeting became five owned action items and one framed decision.</b> Nudges are queued for Thursday on anything that has not moved. Nothing in that meeting depends on anyone's memory anymore, including the CEO's.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 3: RAAS MATH -->
 <section id="raas">
   <div class="wrap">
     <div class="sec-head">
@@ -81,7 +119,61 @@
   </div>
 </section>
 
-<!-- MODULE 3: FRIDAY NOTE -->
+<!-- MODULE 4: BOARD PACK -->
+<section id="pack">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · Prepare materials for executive, board, and investor discussions</div>
+      <h2>The board pack, drafted before anyone asks</h2>
+      <p class="lead">The one-pager a RaaS board reads: fleet, utilization, unit economics, and the two asks. Assembled from live numbers, edited by a human once.</p>
+    </div>
+    <div class="note" style="padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+        <h3 style="font-size:16px">Q3 board pack · one-page draft</h3>
+        <div class="stamp" style="margin:0">Board meets Aug 6</div>
+      </div>
+      <p style="margin-bottom:16px">The quarter in two lines: deployments accelerated and utilization held, so the growth constraint is now install capacity, not demand. The two asks below are both about removing that ceiling.</p>
+      <div class="towergrid" style="margin-bottom:14px">
+        <div class="tcell"><div class="tk">Cells deployed, total fleet</div><div class="tv good">212</div><div class="tn">+18 this quarter</div></div>
+        <div class="tcell"><div class="tk">Fleet utilization</div><div class="tv good">84%</div><div class="tn">target 85%, holding as fleet grows</div></div>
+        <div class="tcell"><div class="tk">ARR per deployed cell</div><div class="tv good">$51k</div><div class="tn">up on multi-shift adoption</div></div>
+        <div class="tcell"><div class="tk">Install backlog</div><div class="tv warn">31 cells</div><div class="tn">median 38 days to production</div></div>
+      </div>
+      <div class="qbrgrid">
+        <div class="qbrbox">
+          <h4>New cells deployed by month</h4>
+          <div class="bars" style="margin-top:10px">
+            <div class="bcol"><div class="bv">4</div><div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:44%"></span><span class="bar plan" style="height:66%"></span></div><div class="bl">Feb</div></div>
+            <div class="bcol"><div class="bv">5</div><div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:55%"></span><span class="bar plan" style="height:66%"></span></div><div class="bl">Mar</div></div>
+            <div class="bcol"><div class="bv">6</div><div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:66%"></span><span class="bar plan" style="height:66%"></span></div><div class="bl">Apr</div></div>
+            <div class="bcol"><div class="bv">6</div><div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:66%"></span><span class="bar plan" style="height:66%"></span></div><div class="bl">May</div></div>
+            <div class="bcol"><div class="bv">7</div><div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:77%"></span><span class="bar plan" style="height:66%"></span></div><div class="bl">Jun</div></div>
+            <div class="bcol"><div class="bv">8</div><div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:88%"></span><span class="bar plan" style="height:66%"></span></div><div class="bl">Jul</div></div>
+          </div>
+          <div class="legend">
+            <span class="leg"><span class="sw" style="background:var(--accent)"></span>Deployed</span>
+            <span class="leg"><span class="sw" style="background:#332a18"></span>Plan</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="qbrbox">
+            <h4>Carried risks</h4>
+            <div class="pitem"><span class="sev-dot" style="background:var(--red);margin-top:5px"></span><span><span class="pn">Install capacity</span> · backlog grows if deployments keep accelerating</span></div>
+            <div class="pitem"><span class="sev-dot" style="background:var(--amber);margin-top:5px"></span><span><span class="pn">Fleet financing</span> · facility renews October, owner just assigned</span></div>
+          </div>
+          <div class="qbrbox">
+            <h4>Asks</h4>
+            <div class="pitem"><span class="sev-dot" style="background:var(--amber);margin-top:5px"></span><span>Approve two additional install crews for Q4</span></div>
+            <div class="pitem"><span class="sev-dot" style="background:var(--amber);margin-top:5px"></span><span>Board intro to a second equipment financing partner before renewal talks</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="signed">Prepared by the office of the CEO</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 5: FRIDAY NOTE -->
 <section id="note">
   <div class="wrap">
     <div class="sec-head">
@@ -156,6 +248,48 @@ document.getElementById("initiatives").innerHTML = INITIATIVES.map(x=>{
     <div class="abadge"><span class="tag ${x.tag}">${x.tagtxt}</span></div>
   </div>`;
 }).join("");
+
+/* ===== meeting translator ===== */
+const MTSTEPS = [
+  "Reading the raw notes",
+  "Extracting commitments, owners, and dates",
+  "Matching each item to where work is tracked",
+  "Queueing Thursday nudges and one framed decision"
+];
+const MTROWS = [
+  {a:"Resequence the install crews double-booked for the week of Aug 4", o:"Ops lead", d:"Wednesday", w:"Deployment schedule, conflict flagged"},
+  {a:"Fleet financing renewal needs an owner before October", o:"CEO decision, framed by me", d:"Friday", w:"Decision queue, both options costed"},
+  {a:"Draft the uptime case study that closes reference factory three", o:"Me + GTM lead", d:"Jul 18", w:"Leverage board, new card"},
+  {a:"Pack Expo booth: go or no-go, with the cost attached", o:"Marketing", d:"Jul 22", w:"Leverage board, owner assigned"},
+  {a:"Pricing pilot at +$1/hr for new verticals", o:"GTM lead", d:"Sept 1", w:"Leverage board, tied to the RaaS model"}
+];
+document.getElementById("mtrows").innerHTML = MTROWS.map(x=>`
+  <tr><td><span class="name">${x.a}</span></td><td>${x.o}</td><td>${x.d}</td><td><span class="pill">${x.w}</span></td></tr>`).join("");
+let mtRunning = false;
+document.getElementById("mtbtn").addEventListener("click", ()=>{
+  if(mtRunning) return;
+  mtRunning = true;
+  const btn = document.getElementById("mtbtn");
+  btn.disabled = true;
+  document.getElementById("mtout").classList.remove("show");
+  const stepsEl = document.getElementById("mtsteps");
+  stepsEl.innerHTML = MTSTEPS.map(s=>`
+    <div class="step"><span class="ico"><span class="spin"></span><span class="chk">✓</span></span><span>${s}…</span></div>`).join("");
+  const rows = stepsEl.querySelectorAll(".step");
+  let t = 150;
+  MTSTEPS.forEach((s,i)=>{
+    setTimeout(()=>rows[i].classList.add("show"), t);
+    t += 520;
+    setTimeout(()=>rows[i].classList.add("done"), t);
+    t += 90;
+  });
+  setTimeout(()=>{
+    document.getElementById("mtout").classList.add("show");
+    btn.disabled = false;
+    btn.textContent = "Run it again";
+    mtRunning = false;
+  }, t + 200);
+});
 
 /* ===== raas math ===== */
 function fmt$(n){
