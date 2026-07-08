@@ -255,8 +255,12 @@
       </div>
       <div class="qbrgrid">
         <div class="qbrbox">
-          <h4>Assets on platform as you sign</h4>
+          <h4>Assets on platform · the ramp so far, and the bars you add</h4>
           <div class="bars grow" id="growbars"></div>
+          <div class="legend">
+            <span class="leg"><span class="sw" style="background:#1d2940"></span>Platform history (illustrative ramp to the reported $50B)</span>
+            <span class="leg"><span class="sw" style="background:var(--accent)"></span>Today + your signings</span>
+          </div>
         </div>
         <div class="qbrbox">
           <h4>The road to 1% of the market</h4>
@@ -413,15 +417,15 @@ document.getElementById("comprows").innerHTML = COMPS.map(x=>`
   <tr${x.brand?' class="brandrow"':''}><td><span class="name">${x.c}</span></td><td>${x.w}</td><td>${x.d}</td><td>${x.e}</td></tr>`).join("");
 
 /* ===== module 7: growth model ===== */
-const BASE_ORIG = 45;
+const BASE_ORIG = 45, BASE_ASSETS = 50;   /* $50B on platform today, company reported */
+const HIST = [{v:12,l:"Q3'24"},{v:17,l:"Q4'24"},{v:22,l:"Q1'25"},{v:28,l:"Q2'25"},{v:34,l:"Q3'25"},{v:40,l:"Q4'25"},{v:45,l:"Q1'26"},{v:BASE_ASSETS,l:"today"}];
 let signed = 0;
-let history = [];
 function fmtB(n){ return n >= 1000 ? "$" + (n/1000).toFixed(2) + "T" : "$" + Math.round(n) + "B"; }
 function growState(){
   const avg = +document.getElementById("s-avg").value / 10;   /* $B per originator */
   const take = +document.getElementById("s-take").value;       /* bps */
   const orig = BASE_ORIG + signed;
-  const assets = orig * avg;                                   /* $B */
+  const assets = BASE_ASSETS + signed * avg;                   /* $B */
   const rev = assets * 1e9 * take / 10000 / 1e6;               /* $M */
   const pen = assets / 6100 * 100;                             /* % of $6.1T */
   return {avg, take, orig, assets, rev, pen};
@@ -437,15 +441,18 @@ function renderGrow(){
   document.getElementById("g-pen").textContent = s.pen.toFixed(2) + "%";
   document.getElementById("signnote").textContent = s.orig + " originators on the platform" + (signed ? ", " + signed + " of them yours" : " today");
 
-  /* growth bars: trajectory of assets as you sign */
-  const series = [BASE_ORIG * s.avg, ...history.map(n => (BASE_ORIG + n) * s.avg)];
+  /* trajectory: muted history bars, accent bars for today + your signings */
+  const series = [
+    ...HIST.map(h => ({v:h.v, l:h.l, yours:false})),
+    ...Array.from({length:signed}, (_,i) => ({v:BASE_ASSETS + (i+1)*s.avg, l:"+"+(i+1), yours:true}))
+  ];
   const shown = series.slice(-12);
-  const mx = Math.max(...shown) * 1.1;
-  document.getElementById("growbars").innerHTML = shown.map((v,i)=>`
+  const mx = Math.max(...shown.map(p=>p.v)) * 1.1;
+  document.getElementById("growbars").innerHTML = shown.map((p,i)=>`
     <div class="bcol">
-      <div class="bv">${Math.round(v)}</div>
-      <div style="display:flex;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:${Math.max(3,(v/mx)*100)}%"></span></div>
-      <div class="bl">${series.length > 12 && i === 0 ? "…" : (i === 0 && signed === 0 ? "today" : "")}</div>
+      <div class="bv">${Math.round(p.v)}</div>
+      <div style="display:flex;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar${p.yours || p.l==="today" ? "" : " plan"}" style="height:${Math.max(3,(p.v/mx)*100)}%"></span></div>
+      <div class="bl">${series.length > 12 && i === 0 ? "…" : p.l}</div>
     </div>`).join("");
 
   /* penetration to 1% ($61B) */
@@ -458,7 +465,6 @@ function renderGrow(){
 }
 document.getElementById("signbtn").addEventListener("click", ()=>{
   signed += 1;
-  history.push(signed);
   renderGrow();
 });
 ["s-avg","s-take"].forEach(id=>document.getElementById(id).addEventListener("input", renderGrow));
