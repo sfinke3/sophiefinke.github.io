@@ -187,3 +187,15 @@ footer .kicker{font-size:12px;letter-spacing:.11em;text-transform:uppercase;colo
 .memo p{font-size:13.5px;color:var(--muted);margin:0 0 8px}
 .memo p b{color:var(--txt);font-weight:650}
 .memo .m-rec{background:rgba(91,141,239,.07);border:1px solid rgba(91,141,239,.3);border-radius:8px;padding:12px 15px;margin-top:6px}
+
+/* market map */
+tr.brandrow td{background:rgba(91,141,239,.06)}
+tr.brandrow td .name{color:var(--accent)}
+/* growth model */
+.pen-wrap{margin-top:6px}
+.pen-row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:7px}
+.pen-track{height:10px;background:#1d2940;border-radius:6px;overflow:hidden}
+.pen-fill{height:100%;border-radius:6px;background:var(--accent);transition:width .35s}
+.growrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.bars.grow{height:110px}
+.bars.grow .bar{transition:height .3s}

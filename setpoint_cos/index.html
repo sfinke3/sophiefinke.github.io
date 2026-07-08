@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chief of Staff · Setpoint · Sophie Finke</title>
 <meta name="description" content="A working artifact for the Chief of Staff role at Setpoint: inbox triage, the CEO's strategic initiatives, the WBR dashboard, the warehouse math, and the one-page memo. Data is illustrative." />
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css?v=2" />
 </head>
 <body>
 
@@ -40,6 +40,11 @@
         <div class="mn">5 · The memo</div>
         <h3>90 minutes, one page</h3>
         <p>A meeting becomes a decision that is obvious.</p>
+      </a>
+      <a class="mod" href="#market">
+        <div class="mn">6 · The market</div>
+        <h3>Competitors, TAM, and growth</h3>
+        <p>The homework, plus a model where signing customers moves the charts.</p>
       </a>
     </div>
   </div>
@@ -194,11 +199,83 @@
   </div>
 </section>
 
+<!-- MODULE 6: MARKET MAP -->
+<section id="market">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · The narrative we tell employees, candidates, and the market</div>
+      <h2>The market map</h2>
+      <p class="lead">The homework, done. Asset-based finance is a $6.1 trillion market that KKR expects to reach $9.2 trillion by 2029, and the infrastructure under it still runs on spreadsheets, email, and trust by phone call. Setpoint's $50B a year is the beachhead, not the ceiling.</p>
+    </div>
+    <div class="towergrid" style="margin-bottom:16px">
+      <div class="tcell"><div class="tk">Global private ABF market today</div><div class="tv good">$6.1T</div><div class="tn">KKR estimate</div></div>
+      <div class="tcell"><div class="tk">Projected by 2029</div><div class="tv good">$9.2T</div><div class="tn">larger than syndicated loans, HY, and direct lending combined</div></div>
+      <div class="tcell"><div class="tk">Financed assets on Setpoint annually</div><div class="tv good">$50B+</div><div class="tn">company reported</div></div>
+      <div class="tcell"><div class="tk">Market penetrated</div><div class="tv warn">&lt;1%</div><div class="tn">the runway is the pitch</div></div>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Category</th><th>Who</th><th>What they do</th><th>Where Setpoint wins</th></tr></thead>
+        <tbody id="comprows"></tbody>
+      </table>
+    </div>
+    <p class="hint">Market sizing from KKR's published ABF research. Competitor reads from public materials: company sites, CB Insights, and press. The assessments are mine, and I would pressure-test them in week one.</p>
+  </div>
+</section>
+
+<!-- MODULE 7: GROWTH MODEL -->
+<section id="growth">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">The same dashboards, pointed at the market</div>
+      <h2>Sign customers, watch the machine</h2>
+      <p class="lead">Every originator signed brings a book of financed assets, and platform revenue scales with the assets, not the seats. Sign a few and watch the charts move.</p>
+    </div>
+    <div class="tower">
+      <div class="growrow">
+        <button class="runbtn" id="signbtn">+ Sign an originator</button>
+        <span style="font-size:12.5px;color:var(--dim)" id="signnote">45 originators on the platform today</span>
+      </div>
+      <div class="controls">
+        <div class="ctrl">
+          <div class="cl"><span>Avg financed assets per originator</span><b id="v-avg">$1.1B</b></div>
+          <input type="range" id="s-avg" min="3" max="25" value="11" step="1">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Platform take on assets</span><b id="v-take">7 bps</b></div>
+          <input type="range" id="s-take" min="4" max="12" value="7" step="1">
+        </div>
+        <div class="ctrl" style="align-self:center;font-size:12px;color:var(--dim)">Assumptions are sliders on purpose. In the real version they come from the facility platform and billing.</div>
+      </div>
+      <div class="towergrid" style="margin-bottom:16px">
+        <div class="tcell"><div class="tk">Originators on platform</div><div class="tv good" id="g-orig"></div><div class="tn" id="g-orign"></div></div>
+        <div class="tcell"><div class="tk">Financed assets powered</div><div class="tv good" id="g-assets"></div><div class="tn">annualized</div></div>
+        <div class="tcell"><div class="tk">Implied platform revenue</div><div class="tv good" id="g-rev"></div><div class="tn">assets × take rate</div></div>
+        <div class="tcell"><div class="tk">Share of the $6.1T ABF market</div><div class="tv warn" id="g-pen"></div><div class="tn">room to run</div></div>
+      </div>
+      <div class="qbrgrid">
+        <div class="qbrbox">
+          <h4>Assets on platform as you sign</h4>
+          <div class="bars grow" id="growbars"></div>
+        </div>
+        <div class="qbrbox">
+          <h4>The road to 1% of the market</h4>
+          <div class="pen-wrap">
+            <div class="pen-row"><span>Progress to $61B on platform</span><span id="pen-pct"></span></div>
+            <div class="pen-track"><div class="pen-fill" id="pen-fill"></div></div>
+          </div>
+          <p style="font-size:12.5px;color:var(--muted);margin:14px 0 0" id="pen-note"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="kicker">About</div>
     <p><b style="color:var(--muted)">Sophie Finke.</b> I built this while researching the Chief of Staff role at Setpoint, as a concrete answer to the job description rather than a description of one. It is a rough working prototype.</p>
-    <p>Every number, initiative, and name on this page is <b style="color:var(--muted)">illustrative</b>, since I have no access to Setpoint's internal information. The warehouse math runs live in your browser with the formula stated. More of my work is at <a href="https://sophiefinke.com" target="_blank" rel="noopener">sophiefinke.com</a>.</p>
+    <p>Every number, initiative, and name on this page is <b style="color:var(--muted)">illustrative</b>, since I have no access to Setpoint's internal information, with three exceptions drawn from public sources: KKR's ABF market sizing ($6.1T today, $9.2T by 2029), Setpoint's reported $50B+ in annually financed assets, and the competitor descriptions. The warehouse math and growth model run live in your browser. More of my work is at <a href="https://sophiefinke.com" target="_blank" rel="noopener">sophiefinke.com</a>.</p>
   </div>
 </footer>
 
@@ -322,6 +399,70 @@ function recompute(){
 }
 ["s-pool","s-elig","s-adv"].forEach(id=>document.getElementById(id).addEventListener("input", recompute));
 recompute();
+
+/* ===== module 6: market map ===== */
+const COMPS = [
+  {c:"The real incumbent", w:"Excel, email, and PDFs", d:"How most of the $6.1T still runs: manual borrowing bases, monthly certs, trust maintained by phone call.", e:"This is not a competitor to beat, it is the market to convert."},
+  {c:"Trustee &amp; agent incumbents", w:"US Bank, Computershare, Wilmington Trust", d:"Hold calculation and paying agent roles on paper, run them on spreadsheets, cutoff times, and headcount.", e:"Setpoint holds the same agent roles with continuous software instead of business days."},
+  {c:"Diligence firms", w:"SitusAMC, Clayton", d:"Human-hours document review, priced per file, point-in-time samples.", e:"S&amp;P-approved diligence, automated and running on every file instead of a sample."},
+  {c:"Borrower-side debt software", w:"Finley, Cascade", d:"The closest software peers. Covenant tracking and lender reporting for the borrower; Finley reports around $3B under management.", e:"Setpoint sits between both sides as the neutral agent, with $50B+ flowing through, and brings capital too."},
+  {c:"Data &amp; analytics", w:"dv01, Cardo AI", d:"Loan-level data, performance analytics, risk pricing for investors.", e:"Analytics reads the transaction. Setpoint runs it."},
+  {c:"Setpoint", w:"The capital markets OS", d:"Verification, continuous calc and paying agent, compliance reporting, and purpose-built capital in one platform.", e:"The only one holding the trust seat on the transaction itself, with Citi and Wells Fargo on the cap table.", brand:true}
+];
+document.getElementById("comprows").innerHTML = COMPS.map(x=>`
+  <tr${x.brand?' class="brandrow"':''}><td><span class="name">${x.c}</span></td><td>${x.w}</td><td>${x.d}</td><td>${x.e}</td></tr>`).join("");
+
+/* ===== module 7: growth model ===== */
+const BASE_ORIG = 45;
+let signed = 0;
+let history = [];
+function fmtB(n){ return n >= 1000 ? "$" + (n/1000).toFixed(2) + "T" : "$" + Math.round(n) + "B"; }
+function growState(){
+  const avg = +document.getElementById("s-avg").value / 10;   /* $B per originator */
+  const take = +document.getElementById("s-take").value;       /* bps */
+  const orig = BASE_ORIG + signed;
+  const assets = orig * avg;                                   /* $B */
+  const rev = assets * 1e9 * take / 10000 / 1e6;               /* $M */
+  const pen = assets / 6100 * 100;                             /* % of $6.1T */
+  return {avg, take, orig, assets, rev, pen};
+}
+function renderGrow(){
+  const s = growState();
+  document.getElementById("v-avg").textContent = "$" + s.avg.toFixed(1) + "B";
+  document.getElementById("v-take").textContent = s.take + " bps";
+  document.getElementById("g-orig").textContent = s.orig;
+  document.getElementById("g-orign").textContent = signed === 0 ? "as of today" : "+" + signed + " signed by you just now";
+  document.getElementById("g-assets").textContent = fmtB(s.assets);
+  document.getElementById("g-rev").textContent = "$" + Math.round(s.rev) + "M";
+  document.getElementById("g-pen").textContent = s.pen.toFixed(2) + "%";
+  document.getElementById("signnote").textContent = s.orig + " originators on the platform" + (signed ? ", " + signed + " of them yours" : " today");
+
+  /* growth bars: trajectory of assets as you sign */
+  const series = [BASE_ORIG * s.avg, ...history.map(n => (BASE_ORIG + n) * s.avg)];
+  const shown = series.slice(-12);
+  const mx = Math.max(...shown) * 1.1;
+  document.getElementById("growbars").innerHTML = shown.map((v,i)=>`
+    <div class="bcol">
+      <div class="bv">${Math.round(v)}</div>
+      <div style="display:flex;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:${Math.max(3,(v/mx)*100)}%"></span></div>
+      <div class="bl">${series.length > 12 && i === 0 ? "…" : (i === 0 && signed === 0 ? "today" : "")}</div>
+    </div>`).join("");
+
+  /* penetration to 1% ($61B) */
+  const pct = Math.min(100, s.assets / 61 * 100);
+  document.getElementById("pen-fill").style.width = pct + "%";
+  document.getElementById("pen-pct").textContent = Math.round(pct) + "%";
+  document.getElementById("pen-note").textContent = pct >= 100
+    ? "Past 1% of the market. At these assumptions that is $" + Math.round(61 * s.take / 10000 * 1e3) + "M+ of platform revenue, and the market is still growing toward $9.2T."
+    : "1% of a $6.1T market is $61B of financed assets. Signing " + Math.max(1, Math.ceil((61 - s.assets) / s.avg)) + " more originators at these assumptions gets there.";
+}
+document.getElementById("signbtn").addEventListener("click", ()=>{
+  signed += 1;
+  history.push(signed);
+  renderGrow();
+});
+["s-avg","s-take"].forEach(id=>document.getElementById(id).addEventListener("input", renderGrow));
+renderGrow();
 </script>
 </body>
 </html>
