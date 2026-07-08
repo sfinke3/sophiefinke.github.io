@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chief of Staff &amp; Head of PMO · Trustly · Sophie Finke</title>
 <meta name="description" content="A working artifact for the Chief of Staff & Head of PMO role at Trustly: an AI-native PMO that assembles its own reporting, a live control tower for the H2 2026 hiring program, and the posting answered line by line. Data is illustrative." />
-<link rel="stylesheet" href="style.css?v=3" />
+<link rel="stylesheet" href="style.css?v=4" />
 </head>
 <body>
 
@@ -21,15 +21,25 @@
         <h3>The Monday run</h3>
         <p>An agent assembles the week: brief, risks, decisions, nudges.</p>
       </a>
+      <a class="mod" href="#ledger">
+        <div class="mn">2 · Follow the loop</div>
+        <h3>The decision ledger</h3>
+        <p>Every decision tracked until it is done, not just made.</p>
+      </a>
       <a class="mod" href="#tower">
-        <div class="mn">2 · Move the sliders</div>
+        <div class="mn">3 · Move the sliders</div>
         <h3>The hiring control tower</h3>
         <p>The H2 2026 hiring plan as live math you can steer.</p>
       </a>
+      <a class="mod" href="#market">
+        <div class="mn">4 · Check the math</div>
+        <h3>The merchant math</h3>
+        <p>Why Pay by Bank wins on economics and lives on conversion.</p>
+      </a>
       <a class="mod" href="#qbr">
-        <div class="mn">3 · Read the output</div>
+        <div class="mn">5 · Read the output</div>
         <h3>The QBR that drafts itself</h3>
-        <p>Executive materials assembled from the two modules above.</p>
+        <p>Executive materials assembled from the modules above.</p>
       </a>
     </div>
   </div>
@@ -94,11 +104,29 @@
   </div>
 </section>
 
-<!-- MODULE 2: CONTROL TOWER -->
+<!-- MODULE 2: DECISION LEDGER -->
+<section id="ledger">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD line 2 · Driving follow-through on key decisions and resolving blockers</div>
+      <h2>The decision ledger</h2>
+      <p class="lead">Decisions are where PMOs quietly fail: made in a meeting, mentioned in a doc, forgotten in a week. Every decision from the Monday run lands here and stays until it is done.</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Decision</th><th>Decided</th><th>Owner</th><th>Follow-through</th><th>Next checkpoint</th></tr></thead>
+        <tbody id="ledgerrows"></tbody>
+      </table>
+    </div>
+    <p class="hint">The stalled row is the point. A decision that stops moving gets a nudge, then an escalation, and it never silently disappears.</p>
+  </div>
+</section>
+
+<!-- MODULE 3: CONTROL TOWER -->
 <section id="tower">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">JD line 2 · The H2 2026 hiring program, coordinated across Recruiting, Finance, and P&amp;T</div>
+      <div class="kicker">JD line 3 · The H2 2026 hiring program, coordinated across Recruiting, Finance, and P&amp;T</div>
       <h2>The hiring control tower</h2>
       <p class="lead">Move the assumptions Recruiting and Finance actually argue about, and watch the plan react. The math runs live on this page, and I built this exact kind of model at Playground.</p>
     </div>
@@ -137,13 +165,47 @@
   </div>
 </section>
 
-<!-- MODULE 3: QBR -->
+<!-- MODULE 4: MERCHANT MATH -->
+<section id="market">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD line 4 · Commercially sharp, with a keen sense of where Trustly sits in the market</div>
+      <h2>The merchant math</h2>
+      <p class="lead">Trustly's pitch to a merchant in one screen: cards cost roughly 2.4% all-in, Pay by Bank costs a fraction of that, and the fee savings buy room to fight the only battle that matters, conversion at checkout. Move the levers a merchant would move.</p>
+    </div>
+    <div class="tower">
+      <div class="controls">
+        <div class="ctrl">
+          <div class="cl"><span>Merchant's annual online volume</span><b id="v-vol">$150M</b></div>
+          <input type="range" id="s-vol" min="25" max="500" value="150" step="5">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Volume shifted to Pay by Bank</span><b id="v-shift">20%</b></div>
+          <input type="range" id="s-shift" min="5" max="60" value="20" step="1">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Checkout conversion vs cards</span><b id="v-conv">even</b></div>
+          <input type="range" id="s-conv" min="-2" max="2" value="0" step="0.25">
+        </div>
+      </div>
+      <div class="towergrid">
+        <div class="tcell"><div class="tk">Processing fees saved per year</div><div class="tv good" id="m-save"></div><div class="tn">at ~150bps saved on shifted volume</div></div>
+        <div class="tcell"><div class="tk">Revenue effect of the conversion gap</div><div class="tv" id="m-rev"></div><div class="tn" id="m-revn"></div></div>
+        <div class="tcell"><div class="tk">Net merchant impact</div><div class="tv" id="m-net"></div><div class="tn">savings plus conversion effect</div></div>
+        <div class="tcell"><div class="tk">Value of +1% conversion on this flow</div><div class="tv" id="m-lift"></div><div class="tn">why the product obsession is checkout UX</div></div>
+      </div>
+      <p class="hint">Assumptions visible on purpose: blended card cost ~2.4%, Pay by Bank ~0.9%, so the fee gap is ~150bps. The takeaway is the strategy in one sentence: Pay by Bank can afford a conversion gap of up to that fee gap and still win, and every basis point of checkout friction removed is pure margin for the merchant. That is where Trustly sits in the market, and why the P&amp;T roadmap is the business.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 5: QBR -->
 <section id="qbr">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">JD line 3 · Crisp executive materials and the quarterly business review</div>
+      <div class="kicker">JD line 5 · Crisp executive materials and the quarterly business review</div>
       <h2>The QBR, drafted before anyone asks for it</h2>
-      <p class="lead">If the two modules above exist, the QBR stops being a two-week scramble for slides. The humans spend their time on the recommendation, not the retrieval.</p>
+      <p class="lead">If the modules above exist, the QBR stops being a two-week scramble for slides. The humans spend their time on the recommendation, not the retrieval.</p>
     </div>
     <div class="note">
       <h3>Q3 business review · one-page draft</h3>
@@ -317,6 +379,53 @@ function recompute(){
 }
 ["s-accept","s-rec","s-slip"].forEach(id=>document.getElementById(id).addEventListener("input", recompute));
 recompute();
+
+/* ===== module 2: decision ledger ===== */
+const LEDGER = [
+  {d:"Grant scoped production data access for model validation", w:"Monday", o:"CTO", st:"motion", stx:"Audit trail agreed, access lands Wednesday", nx:"Thursday check"},
+  {d:"Match comp on the staff engineer offer", w:"Tuesday", o:"CPO + Finance", st:"done", stx:"Offer signed in 36 hours", nx:"Closed"},
+  {d:"Protect two engineers from the release rotation for two weeks", w:"Last Thursday", o:"CTO", st:"done", stx:"Failover test now scheduled", nx:"Test runs Friday"},
+  {d:"Escalate the bank sandbox delay to the vendor's exec sponsor", w:"6 days ago", o:"Partnerships", st:"stall", stx:"Stalled 6 days, escalation email drafted but unsent", nx:"Nudged today, escalates Thursday"},
+  {d:"Add one incremental recruiter through year-end", w:"At the QBR", o:"Finance", st:"motion", stx:"Req opened, sourcing started", nx:"Monday check"}
+];
+const STCHIP = {done:["st-done","Done"], motion:["st-motion","In motion"], stall:["st-stall","Stalled"]};
+document.getElementById("ledgerrows").innerHTML = LEDGER.map(x=>`
+  <tr><td><span class="name">${x.d}</span></td><td>${x.w}</td><td>${x.o}</td>
+  <td><span class="stchip ${STCHIP[x.st][0]}">${STCHIP[x.st][1]}</span> ${x.stx}</td><td>${x.nx}</td></tr>`).join("");
+
+/* ===== module 4: merchant math (live) ===== */
+const CARD_COST = 0.024, PBB_COST = 0.009;
+function fmt$(n){
+  const a = Math.abs(n);
+  const s = n < 0 ? "-" : n > 0 ? "+" : "";
+  if(a >= 1e6) return s + "$" + (a/1e6).toFixed(1) + "M";
+  return s + "$" + Math.round(a/1e3) + "k";
+}
+function recomputeMarket(){
+  const vol = +document.getElementById("s-vol").value * 1e6;
+  const shift = +document.getElementById("s-shift").value / 100;
+  const conv = +document.getElementById("s-conv").value / 100;
+  document.getElementById("v-vol").textContent = "$" + (vol/1e6) + "M";
+  document.getElementById("v-shift").textContent = Math.round(shift*100) + "%";
+  document.getElementById("v-conv").textContent = conv === 0 ? "even" : (conv > 0 ? "+" : "") + (conv*100).toFixed(2).replace(/\.?0+$/,"") + "%";
+
+  const save = vol * shift * (CARD_COST - PBB_COST);
+  const rev = vol * shift * conv;
+  const net = save + rev;
+  const lift = vol * shift * 0.01;
+
+  document.getElementById("m-save").textContent = fmt$(save).replace("+","");
+  const revEl = document.getElementById("m-rev");
+  revEl.textContent = rev === 0 ? "neutral" : fmt$(rev);
+  revEl.className = "tv " + (rev > 0 ? "good" : rev < 0 ? "bad" : "");
+  document.getElementById("m-revn").textContent = rev < 0 ? "conversion gap eats into the savings" : rev > 0 ? "converting better than cards compounds it" : "same conversion as the card flow";
+  const netEl = document.getElementById("m-net");
+  netEl.textContent = fmt$(net);
+  netEl.className = "tv " + (net > 0 ? "good" : "bad");
+  document.getElementById("m-lift").textContent = fmt$(lift).replace("+","");
+}
+["s-vol","s-shift","s-conv"].forEach(id=>document.getElementById(id).addEventListener("input", recomputeMarket));
+recomputeMarket();
 
 /* ===== fit table ===== */
 const FIT = [
