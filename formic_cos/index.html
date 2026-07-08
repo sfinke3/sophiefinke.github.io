@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chief of Staff · Formic · Sophie Finke</title>
+<meta name="description" content="A working artifact for the Chief of Staff role at Formic: the CEO's leverage board, the RaaS math, and the Friday note. Data is illustrative." />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Built for the Chief of Staff role at Formic</div>
+    <h1>Automation as a service, for the CEO's office</h1>
+    <p class="sub">Formic removes the cost, complexity, and risk from factory automation. A Chief of Staff does the same job for a CEO's week. Instead of a cover letter, here is the working version. <span class="illus">All figures illustrative</span></p>
+
+    <div class="mods">
+      <a class="mod" href="#board">
+        <div class="mn">1 · The leverage board</div>
+        <h3>Every initiative, owned and dated</h3>
+        <p>Discussions become action items with owners and timelines.</p>
+      </a>
+      <a class="mod" href="#raas">
+        <div class="mn">2 · The RaaS math</div>
+        <h3>The pitch a factory hears</h3>
+        <p>Live math on why robots-as-opex wins. Move the sliders.</p>
+      </a>
+      <a class="mod" href="#note">
+        <div class="mn">3 · The Friday note</div>
+        <h3>What reaches the CEO</h3>
+        <p>Three decisions that need him. Everything else, handled.</p>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- MODULE 1: LEVERAGE BOARD -->
+<section style="padding-top:36px" id="board">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · Clear action items, owners, timelines, and accountability</div>
+      <h2>The leverage board</h2>
+      <p class="lead">One list of the initiatives that matter, each with an owner, a date, and a count of days since anyone touched it. The red card is why the board exists.</p>
+    </div>
+    <div class="agents" id="initiatives"></div>
+  </div>
+</section>
+
+<!-- MODULE 2: RAAS MATH -->
+<section id="raas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD bonus · Familiarity with SaaS, robotics, and manufacturing business models</div>
+      <h2>The RaaS math</h2>
+      <p class="lead">Formic's pitch to a plant manager, as live math. One station, staffed versus automated. Move the levers a factory would move.</p>
+    </div>
+    <div class="tower">
+      <div class="controls">
+        <div class="ctrl">
+          <div class="cl"><span>Loaded hourly wage for the line</span><b id="v-wage">$24/hr</b></div>
+          <input type="range" id="s-wage" min="16" max="38" value="24" step="1">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Shifts running per day</span><b id="v-shifts">2</b></div>
+          <input type="range" id="s-shifts" min="1" max="3" value="2" step="1">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Formic rate per robot hour</span><b id="v-rate">$12/hr</b></div>
+          <input type="range" id="s-rate" min="8" max="18" value="12" step="1">
+        </div>
+      </div>
+      <div class="towergrid">
+        <div class="tcell"><div class="tk">Annual cost to staff the station</div><div class="tv" id="r-staff"></div><div class="tn" id="r-staffn"></div></div>
+        <div class="tcell"><div class="tk">Formic, same station, same hours</div><div class="tv" id="r-formic"></div><div class="tn">no downtime for turnover or absence</div></div>
+        <div class="tcell"><div class="tk">Savings per station per year</div><div class="tv good" id="r-save"></div><div class="tn" id="r-saven"></div></div>
+        <div class="tcell"><div class="tk">Upfront capital required</div><div class="tv good">$0</div><div class="tn">that is the product</div></div>
+      </div>
+      <p class="hint">The assumptions: 2,080 hours per shift per year, wages fully loaded. The savings matter, but the removed risk is the sale: no capex approval, no integration project, no robotics engineer on payroll. A factory that could never buy automation can rent it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 3: FRIDAY NOTE -->
+<section id="note">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · The CEO's time is protected and focused on the highest-leverage work</div>
+      <h2>The Friday note</h2>
+      <p class="lead">Everything above compresses into one note. Three decisions that need the CEO, and a list of what did not have to reach him at all.</p>
+    </div>
+    <div class="twocol">
+      <div class="attn">
+        <h3>Needs you this week</h3>
+        <div id="attnlist"></div>
+      </div>
+      <div class="note">
+        <h3>Handled, so it never hit your desk</h3>
+        <div class="stamp">Friday, end of day</div>
+        <ul class="handled">
+          <li><span class="ck">✓</span><span>Q3 board deck drafted from the live numbers, in your inbox for one pass</span></li>
+          <li><span class="ck">✓</span><span>Install crew double-booking for the Ohio deployment caught and resequenced</span></li>
+          <li><span class="ck">✓</span><span>Investor intro from the Lux partner scheduled with a one-page brief attached</span></li>
+          <li><span class="ck">✓</span><span>Utilization report automated, the ops team stopped assembling it by hand</span></li>
+          <li><span class="ck">✓</span><span>Six customer follow-ups from your Tuesday plant visits, all sent with owners</span></li>
+        </ul>
+        <div class="signed">Prepared by the office of the CEO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="kicker">About</div>
+    <p><b style="color:var(--muted)">Sophie Finke.</b> I built this while researching the Chief of Staff role at Formic, as a concrete answer to the job description rather than a description of one. It is a rough working prototype.</p>
+    <p>Every number, initiative, and name on this page is <b style="color:var(--muted)">illustrative</b>, since I have no access to Formic's internal information. The RaaS math runs live in your browser with the assumptions stated. More of my work is at <a href="https://sophiefinke.com" target="_blank" rel="noopener">sophiefinke.com</a>.</p>
+  </div>
+</footer>
+
+<script>
+/* All values illustrative, designed to read like a real RaaS scale-up rather than pulled from Formic. */
+
+/* ===== leverage board ===== */
+const INITIATIVES = [
+  {fn:"Deployments", t:"Cut install-to-production time below 30 days", touch:1,
+   state:"Median is 38 days. The bottleneck is site prep before the crew arrives, fixable with a standard pre-install checklist for the customer.",
+   owner:"Ops lead", due:"Checklist live by Jul 25", tag:"ok", tagtxt:"On track"},
+  {fn:"GTM", t:"Three reference factories in the Midwest push", touch:2,
+   state:"Two signed, the third wants to see uptime data from a plant in their vertical first. The case study exists, it is just not written.",
+   owner:"GTM lead + me", due:"Case study out this week", tag:"ok", tagtxt:"On track"},
+  {fn:"Finance", t:"Fleet financing facility renewal", touch:11, idle:true,
+   state:"The facility that funds new robot builds renews in October. Unowned since the finance lead went on leave, and walking in late gives away the terms.",
+   owner:"None", due:"Owner needed now", tag:"blocked", tagtxt:"Unowned for 11 days"},
+  {fn:"Product", t:"Utilization telemetry on every deployed cell", touch:3,
+   state:"Rollout at 70%. The remaining cells are older installs that need a site visit, which is being batched with service calls to save trips.",
+   owner:"Product lead", due:"Full fleet by Aug 15", tag:"watch", tagtxt:"Batching visits"},
+  {fn:"Customers", t:"At-risk account: line down at the packaging customer", touch:0,
+   state:"Cell fault traced to a feeder jam, crew on site today. The customer's real worry is whether this counts against the uptime guarantee, answer drafted.",
+   owner:"CS lead", due:"Resolution call Friday", tag:"watch", tagtxt:"Being worked today"},
+  {fn:"Board", t:"Q3 board deck", touch:1,
+   state:"Drafted from the live numbers: deployments, utilization, revenue per cell, pipeline. Waiting on one narrative pass from the CEO, nothing else.",
+   owner:"Me, CEO signs", due:"Board meets Aug 6", tag:"ok", tagtxt:"CoS-run"}
+];
+document.getElementById("initiatives").innerHTML = INITIATIVES.map(x=>{
+  const touch = x.touch===0 ? "worked today" : x.touch===1 ? "worked yesterday" : x.touch+" days since last touch";
+  return `<div class="agent${x.idle?" idle":""}">
+    <div class="atop"><span class="fpill">${x.fn}</span>
+    <span class="touch${x.idle?" warn":""}">${touch}</span></div>
+    <h3>${x.t}</h3>
+    <div class="astate">${x.state}</div>
+    <div class="meta">
+      <div><div class="mk">Owner</div><div class="mv"><b>${x.owner}</b></div></div>
+      <div><div class="mk">Timeline</div><div class="mv">${x.due}</div></div>
+    </div>
+    <div class="abadge"><span class="tag ${x.tag}">${x.tagtxt}</span></div>
+  </div>`;
+}).join("");
+
+/* ===== raas math ===== */
+function fmt$(n){
+  const a = Math.abs(n);
+  if(a >= 1e6) return "$" + (a/1e6).toFixed(2) + "M";
+  return "$" + Math.round(a/1e3) + "k";
+}
+function recompute(){
+  const wage = +document.getElementById("s-wage").value;
+  const shifts = +document.getElementById("s-shifts").value;
+  const rate = +document.getElementById("s-rate").value;
+  document.getElementById("v-wage").textContent = "$" + wage + "/hr";
+  document.getElementById("v-shifts").textContent = shifts;
+  document.getElementById("v-rate").textContent = "$" + rate + "/hr";
+  const hours = 2080 * shifts;
+  const staff = wage * hours;
+  const formic = rate * hours;
+  const save = staff - formic;
+  document.getElementById("r-staff").textContent = fmt$(staff);
+  document.getElementById("r-staffn").textContent = shifts === 3 ? "around the clock, if you can hire it" : shifts + (shifts===1?" shift":" shifts") + ", if the roles stay filled";
+  document.getElementById("r-formic").textContent = fmt$(formic);
+  document.getElementById("r-save").textContent = fmt$(save);
+  document.getElementById("r-saven").textContent = "about " + Math.round(save/staff*100) + "% off the labor line";
+}
+["s-wage","s-shifts","s-rate"].forEach(id=>document.getElementById(id).addEventListener("input", recompute));
+recompute();
+
+/* ===== needs the ceo ===== */
+const ATTN = [
+  {sev:"var(--red)", t:"The fleet financing facility needs an owner today", d:"Renewal talks should start in August, not October. I can own the model and run the process, or we wait for the finance lead to return and start late. Ten minutes to decide.", own:"Decision: who owns it"},
+  {sev:"var(--amber)", t:"Midwest reference factory three wants a call with you", d:"Thirty minutes with their plant director closes it, and their logo unlocks the vertical. Briefed and scheduled for Tuesday if you say go.", own:"Decision: take the call"},
+  {sev:"var(--amber)", t:"Ten minutes on the Chief of Staff hire", d:"The candidate built this page instead of writing a cover letter. Recommendation: hire Sophie Finke.", own:"Decision: interview slot"}
+];
+document.getElementById("attnlist").innerHTML = ATTN.map(a=>`
+  <div class="item"><span class="sev" style="background:${a.sev}"></span>
+    <div class="ibody"><div class="it">${a.t}</div><div class="id">${a.d}</div><div class="own">${a.own}</div></div>
+  </div>`).join("");
+</script>
+</body>
+</html>
