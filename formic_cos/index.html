@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chief of Staff · Formic · Sophie Finke</title>
 <meta name="description" content="A working artifact for the Chief of Staff role at Formic: the CEO's leverage board, the RaaS math, and the Friday note. Data is illustrative." />
-<link rel="stylesheet" href="style.css?v=2" />
+<link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
 
@@ -13,7 +13,7 @@
   <div class="wrap">
     <div class="eyebrow">Built for the Chief of Staff role at Formic</div>
     <h1>Automation as a service, for the CEO's office</h1>
-    <p class="sub">Formic removes the cost, complexity, and risk from factory automation. A Chief of Staff does the same job for a CEO's week. Instead of a cover letter, here is the working version. <span class="illus">All figures illustrative</span></p>
+    <p class="sub">Formic removes the cost, complexity, and risk from factory automation. A Chief of Staff does the same job for a CEO's week. Nothing below gets typed in by hand: it assembles itself from where the work already lives, the inbox, Slack, the calendar, Notion, and the fleet's own telemetry. Instead of a cover letter, here is the working version. <span class="illus">All figures illustrative</span></p>
 
     <div class="mods">
       <a class="mod" href="#board">
@@ -51,7 +51,17 @@
     <div class="sec-head">
       <div class="kicker">JD · Clear action items, owners, timelines, and accountability</div>
       <h2>The leverage board</h2>
-      <p class="lead">One list of the initiatives that matter, each with an owner, a date, and a count of days since anyone touched it. The red card is why the board exists.</p>
+      <p class="lead">One list of the initiatives that matter, each with an owner, a date, and a count of days since anyone touched it. Nobody files status updates. Each card watches the systems where its work actually happens, and the red card is why the board exists.</p>
+    </div>
+    <div class="connectors">
+      <span class="clab">Wired into</span>
+      <span class="src-pill"><span class="dot"></span>Gmail · exec inbox</span>
+      <span class="src-pill"><span class="dot"></span>Slack · team channels</span>
+      <span class="src-pill"><span class="dot"></span>Calendar · CEO time</span>
+      <span class="src-pill"><span class="dot"></span>Notion · docs &amp; plans</span>
+      <span class="src-pill"><span class="dot"></span>Fleet telemetry · deployed cells</span>
+      <span class="src-pill"><span class="dot"></span>NetSuite · finance</span>
+      <span class="refreshed">Auto-refreshed · last sync 4 min ago</span>
     </div>
     <div class="agents" id="initiatives"></div>
   </div>
@@ -69,6 +79,12 @@
       <div class="runhead">
         <span class="rt">Tuesday leadership sync · raw notes</span>
         <button class="runbtn" id="mtbtn">Turn it into action items</button>
+      </div>
+      <div class="connectors" style="margin-bottom:14px">
+        <span class="clab">Captured from</span>
+        <span class="src-pill"><span class="dot"></span>Calendar · Tuesday 9:00 leadership sync</span>
+        <span class="src-pill"><span class="dot"></span>Meeting transcript · auto-recorded</span>
+        <span class="src-pill"><span class="dot"></span>Slack · the thread that followed</span>
       </div>
       <div class="rawnotes">"...ops flagged the install crew is double-booked the week of Aug 4 ... someone should really own the fleet financing renewal before October ... <b>CEO:</b> we need the uptime case study for the vertical push, that closes reference factory three ... marketing asked again about the Pack Expo booth, no owner ... agreed: pricing pilot at plus one dollar an hour for new verticals starting September ... revisit crew hiring at the next sync..."</div>
       <div class="steps" id="mtsteps"></div>
@@ -130,7 +146,7 @@
     <div class="note" style="padding:24px">
       <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px">
         <h3 style="font-size:16px">Q3 board pack · one-page draft</h3>
-        <div class="stamp" style="margin:0">Board meets Aug 6</div>
+        <div class="stamp" style="margin:0">Assembled from fleet telemetry, the install schedule, and NetSuite · Board meets Aug 6</div>
       </div>
       <p style="margin-bottom:16px">The quarter in two lines: deployments accelerated and utilization held, so the growth constraint is now install capacity, not demand. The two asks below are both about removing that ceiling.</p>
       <div class="towergrid" style="margin-bottom:14px">
@@ -188,7 +204,7 @@
       </div>
       <div class="note">
         <h3>Handled, so it never hit your desk</h3>
-        <div class="stamp">Friday, end of day</div>
+        <div class="stamp">Friday, end of day · compiled from the inbox, Slack, and the board above</div>
         <ul class="handled">
           <li><span class="ck">✓</span><span>Q3 board deck drafted from the live numbers, in your inbox for one pass</span></li>
           <li><span class="ck">✓</span><span>Install crew double-booking for the Ohio deployment caught and resequenced</span></li>
@@ -217,22 +233,28 @@
 const INITIATIVES = [
   {fn:"Deployments", t:"Cut install-to-production time below 30 days", touch:1,
    state:"Median is 38 days. The bottleneck is site prep before the crew arrives, fixable with a standard pre-install checklist for the customer.",
-   owner:"Ops lead", due:"Checklist live by Jul 25", tag:"ok", tagtxt:"On track"},
+   owner:"Ops lead", due:"Checklist live by Jul 25", tag:"ok", tagtxt:"On track",
+   src:"install schedule + Slack #deployments"},
   {fn:"GTM", t:"Three reference factories in the Midwest push", touch:2,
    state:"Two signed, the third wants to see uptime data from a plant in their vertical first. The case study exists, it is just not written.",
-   owner:"GTM lead + me", due:"Case study out this week", tag:"ok", tagtxt:"On track"},
+   owner:"GTM lead + me", due:"Case study out this week", tag:"ok", tagtxt:"On track",
+   src:"CRM + the email thread with their plant director"},
   {fn:"Finance", t:"Fleet financing facility renewal", touch:11, idle:true,
    state:"The facility that funds new robot builds renews in October. Unowned since the finance lead went on leave, and walking in late gives away the terms.",
-   owner:"None", due:"Owner needed now", tag:"blocked", tagtxt:"Unowned for 11 days"},
+   owner:"None", due:"Owner needed now", tag:"blocked", tagtxt:"Unowned for 11 days",
+   src:"NetSuite + the facility docs in Notion, idle timer on both"},
   {fn:"Product", t:"Utilization telemetry on every deployed cell", touch:3,
    state:"Rollout at 70%. The remaining cells are older installs that need a site visit, which is being batched with service calls to save trips.",
-   owner:"Product lead", due:"Full fleet by Aug 15", tag:"watch", tagtxt:"Batching visits"},
+   owner:"Product lead", due:"Full fleet by Aug 15", tag:"watch", tagtxt:"Batching visits",
+   src:"fleet telemetry + service calendar"},
   {fn:"Customers", t:"At-risk account: line down at the packaging customer", touch:0,
    state:"Cell fault traced to a feeder jam, crew on site today. The customer's real worry is whether this counts against the uptime guarantee, answer drafted.",
-   owner:"CS lead", due:"Resolution call Friday", tag:"watch", tagtxt:"Being worked today"},
+   owner:"CS lead", due:"Resolution call Friday", tag:"watch", tagtxt:"Being worked today",
+   src:"uptime telemetry + support inbox"},
   {fn:"Board", t:"Q3 board deck", touch:1,
    state:"Drafted from the live numbers: deployments, utilization, revenue per cell, pipeline. Waiting on one narrative pass from the CEO, nothing else.",
-   owner:"Me, CEO signs", due:"Board meets Aug 6", tag:"ok", tagtxt:"CoS-run"}
+   owner:"Me, CEO signs", due:"Board meets Aug 6", tag:"ok", tagtxt:"CoS-run",
+   src:"every source on this page"}
 ];
 document.getElementById("initiatives").innerHTML = INITIATIVES.map(x=>{
   const touch = x.touch===0 ? "worked today" : x.touch===1 ? "worked yesterday" : x.touch+" days since last touch";
@@ -246,6 +268,7 @@ document.getElementById("initiatives").innerHTML = INITIATIVES.map(x=>{
       <div><div class="mk">Timeline</div><div class="mv">${x.due}</div></div>
     </div>
     <div class="abadge"><span class="tag ${x.tag}">${x.tagtxt}</span></div>
+    <div class="srcline"><b>Auto-fed by</b> ${x.src}</div>
   </div>`;
 }).join("");
 
