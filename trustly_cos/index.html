@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chief of Staff &amp; Head of PMO · Trustly · Sophie Finke</title>
 <meta name="description" content="A working artifact for the Chief of Staff & Head of PMO role at Trustly: an AI-native PMO that assembles its own reporting, a live control tower for the H2 2026 hiring program, and the posting answered line by line. Data is illustrative." />
-<link rel="stylesheet" href="style.css?v=4" />
+<link rel="stylesheet" href="style.css?v=5" />
 </head>
 <body>
 
@@ -22,9 +22,9 @@
         <p>An agent assembles the week: brief, risks, decisions, nudges.</p>
       </a>
       <a class="mod" href="#ledger">
-        <div class="mn">2 · Follow the loop</div>
+        <div class="mn">2 · Run the sweep</div>
         <h3>The decision ledger</h3>
-        <p>Every decision tracked until it is done.</p>
+        <p>An agent checks every open decision each morning.</p>
       </a>
       <a class="mod" href="#tower">
         <div class="mn">3 · Move the sliders</div>
@@ -110,15 +110,21 @@
     <div class="sec-head">
       <div class="kicker">JD line 2 · Driving follow-through on key decisions and resolving blockers</div>
       <h2>The decision ledger</h2>
-      <p class="lead">Every decision from the Monday run lands here and stays until it is done.</p>
+      <p class="lead">Every decision from the Monday run lands here. Each morning an agent sweeps the ledger: it verifies what moved, nudges what stalled, and escalates what stayed stalled. Run this morning's sweep.</p>
     </div>
-    <div class="table-scroll">
-      <table>
-        <thead><tr><th>Decision</th><th>Decided</th><th>Owner</th><th>Follow-through</th><th>Next checkpoint</th></tr></thead>
-        <tbody id="ledgerrows"></tbody>
-      </table>
+    <div class="runbox" style="padding:20px 22px">
+      <div class="runhead" style="margin-bottom:10px">
+        <span class="rt">Open decisions · 5</span>
+        <button class="runbtn" id="sweepbtn">Run this morning's sweep</button>
+      </div>
+      <div class="table-scroll" style="background:transparent;border:none;padding:0">
+        <table>
+          <thead><tr><th>Decision</th><th>Owner</th><th>Follow-through</th><th>This morning's sweep</th></tr></thead>
+          <tbody id="ledgerrows"></tbody>
+        </table>
+      </div>
+      <div class="runfoot">The sweep runs every morning without being asked. Humans get handed the exceptions, not the chasing.</div>
     </div>
-    <p class="hint">The stalled row is the point: it got a nudge this morning and escalates Thursday if nothing moves.</p>
   </div>
 </section>
 
@@ -207,13 +213,46 @@
       <h2>The QBR, drafted before anyone asks for it</h2>
       <p class="lead">If the modules above exist, the QBR stops being a two-week scramble for slides. It assembles itself, and a human edits it once.</p>
     </div>
-    <div class="note">
-      <h3>Q3 business review · one-page draft</h3>
-      <div class="stamp">Q3 draft · assembled from the modules above</div>
-      <p><b>Programs:</b> five of six Q3 program milestones hit. The returning-user checkout flow is the quarter's standout, live to 50% of traffic with conversion up meaningfully where deployed. Bank coverage closed the Q3 target late but closed it. The failover test finally ran after we protected two engineers from the release rotation for a sprint, which is a resourcing pattern worth keeping.</p>
-      <p><b>Hiring:</b> 22 starts against a Q3 plan of 24, with the gap concentrated in staff-level engineering. Offer accept rate held at 76%. The two aged offers from September both closed after comp was escalated inside 48 hours, and that faster escalation path is now standing policy.</p>
-      <p><b>Carried risks:</b> production data access for model validation remains the slowest dependency in P&amp;T, three programs touched it this quarter. A scoped-access framework is drafted and sits with security.</p>
-      <p><b>Asks for Q4:</b> a decision on the scoped-access framework, and one incremental recruiter through year-end to de-risk the Q4 hiring tail.</p>
+    <div class="note" style="padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+        <h3 style="font-size:16px">Q3 business review · P&amp;T</h3>
+        <div class="stamp" style="margin:0">Assembled from the modules above</div>
+      </div>
+      <p style="margin-bottom:16px">The quarter in two lines: the returning-user checkout flow is the standout, live to 50% of traffic with conversion up where deployed. The drag was production data access, which touched three programs and is the first Q4 ask below.</p>
+
+      <div class="towergrid" style="margin-bottom:14px">
+        <div class="tcell"><div class="tk">Q3 program milestones hit</div><div class="tv good">5 of 6</div><div class="tn">risk engine v2 carried into Q4</div></div>
+        <div class="tcell"><div class="tk">Q3 starts vs plan</div><div class="tv warn">22 of 24</div><div class="tn">gap is staff-level engineering</div></div>
+        <div class="tcell"><div class="tk">Offer accept rate</div><div class="tv good">76%</div><div class="tn">comp escalation now inside 48h</div></div>
+        <div class="tcell"><div class="tk">Decisions closed on time</div><div class="tv good">11 of 12</div><div class="tn">one escalated, none lost</div></div>
+      </div>
+
+      <div class="qbrgrid">
+        <div class="qbrbox">
+          <h4>Programs</h4>
+          <div class="pitem"><span class="sev-dot" style="background:var(--green);margin-top:5px"></span><span><span class="pn">Pay by Bank conversion</span> · live to 50% of traffic, conversion up where deployed</span></div>
+          <div class="pitem"><span class="sev-dot" style="background:var(--green);margin-top:5px"></span><span><span class="pn">Bank coverage</span> · Q3 integration target closed</span></div>
+          <div class="pitem"><span class="sev-dot" style="background:var(--green);margin-top:5px"></span><span><span class="pn">Reliability</span> · failover test ran after resourcing fix</span></div>
+          <div class="pitem"><span class="sev-dot" style="background:var(--green);margin-top:5px"></span><span><span class="pn">Real-time agents beta</span> · cohort report shipped, timeline control on roadmap</span></div>
+          <div class="pitem"><span class="sev-dot" style="background:var(--amber);margin-top:5px"></span><span><span class="pn">H2 hiring</span> · 22 of 24 starts, staff engineering behind</span></div>
+          <div class="pitem"><span class="sev-dot" style="background:var(--red);margin-top:5px"></span><span><span class="pn">Risk engine v2</span> · still gated on data access, framework drafted</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="qbrbox">
+            <h4>Q3 starts vs plan</h4>
+            <div class="bars" style="height:80px;margin-top:10px">
+              <div class="bcol"><div class="bv">6</div><div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:66%"></span><span class="bar plan" style="height:88%"></span></div><div class="bl">Jul</div></div>
+              <div class="bcol"><div class="bv">8</div><div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:88%"></span><span class="bar plan" style="height:88%"></span></div><div class="bl">Aug</div></div>
+              <div class="bcol"><div class="bv">8</div><div style="display:flex;gap:3px;align-items:flex-end;width:100%;height:100%;justify-content:center"><span class="bar" style="height:88%"></span><span class="bar plan" style="height:88%"></span></div><div class="bl">Sep</div></div>
+            </div>
+          </div>
+          <div class="qbrbox">
+            <h4>Asks for Q4</h4>
+            <div class="pitem"><span class="sev-dot" style="background:var(--red);margin-top:5px"></span><span>Decide the scoped data-access framework, drafted and with security now</span></div>
+            <div class="pitem"><span class="sev-dot" style="background:var(--amber);margin-top:5px"></span><span>One incremental recruiter through year-end, req costed inside the envelope</span></div>
+          </div>
+        </div>
+      </div>
       <div class="signed">Prepared by the office of P&amp;T leadership</div>
     </div>
   </div>
@@ -380,18 +419,48 @@ function recompute(){
 ["s-accept","s-rec","s-slip"].forEach(id=>document.getElementById(id).addEventListener("input", recompute));
 recompute();
 
-/* ===== module 2: decision ledger ===== */
+/* ===== module 2: decision ledger + morning sweep ===== */
 const LEDGER = [
-  {d:"Grant scoped production data access for model validation", w:"Monday", o:"CTO", st:"motion", stx:"Audit trail agreed, access lands Wednesday", nx:"Thursday check"},
-  {d:"Match comp on the staff engineer offer", w:"Tuesday", o:"CPO + Finance", st:"done", stx:"Offer signed in 36 hours", nx:"Closed"},
-  {d:"Protect two engineers from the release rotation for two weeks", w:"Last Thursday", o:"CTO", st:"done", stx:"Failover test now scheduled", nx:"Test runs Friday"},
-  {d:"Escalate the bank sandbox delay to the vendor's exec sponsor", w:"6 days ago", o:"Partnerships", st:"stall", stx:"Stalled 6 days, escalation email drafted but unsent", nx:"Nudged today, escalates Thursday"},
-  {d:"Add one incremental recruiter through year-end", w:"At the QBR", o:"Finance", st:"motion", stx:"Req opened, sourcing started", nx:"Monday check"}
+  {d:"Grant scoped production data access for model validation", o:"CTO", st:"motion", stx:"Audit trail agreed, access lands Wednesday",
+   sw:{c:"st-done", l:"Verified", t:"Checked Jira: the access request is approved and lands Wednesday. No action needed."}},
+  {d:"Match comp on the staff engineer offer", o:"CPO + Finance", st:"done", stx:"Offer signed in 36 hours",
+   sw:{c:"st-done", l:"Closed", t:"Confirmed the signature in Greenhouse. Row closes tonight."}},
+  {d:"Protect two engineers from the release rotation for two weeks", o:"CTO", st:"done", stx:"Failover test now scheduled",
+   sw:{c:"st-done", l:"Verified", t:"Test is on Friday's calendar. Reminder queued for Thursday."}},
+  {d:"Escalate the bank sandbox delay to the vendor's exec sponsor", o:"Partnerships", st:"stall", stx:"Stalled 6 days, escalation email drafted but unsent",
+   sw:{c:"st-stall", l:"Escalation armed", t:"No movement in 6 days. Nudge sent 9:02am. If nothing moves by Thursday, the drafted escalation goes to the CTO."}},
+  {d:"Add one incremental recruiter through year-end", o:"Finance", st:"motion", stx:"Req opened, sourcing started",
+   sw:{c:"st-motion", l:"Watching", t:"Req is live with four candidates sourced. Next check Monday."}}
 ];
 const STCHIP = {done:["st-done","Done"], motion:["st-motion","In motion"], stall:["st-stall","Stalled"]};
-document.getElementById("ledgerrows").innerHTML = LEDGER.map(x=>`
-  <tr><td><span class="name">${x.d}</span></td><td>${x.w}</td><td>${x.o}</td>
-  <td><span class="stchip ${STCHIP[x.st][0]}">${STCHIP[x.st][1]}</span> ${x.stx}</td><td>${x.nx}</td></tr>`).join("");
+function renderLedger(swept){
+  document.getElementById("ledgerrows").innerHTML = LEDGER.map((x,i)=>`
+    <tr id="lr${i}"><td><span class="name">${x.d}</span></td><td>${x.o}</td>
+    <td><span class="stchip ${STCHIP[x.st][0]}">${STCHIP[x.st][1]}</span> ${x.stx}</td>
+    <td class="sweepcell" id="sc${i}">${swept ? "" : "<span style='color:var(--dim)'>not yet run</span>"}</td></tr>`).join("");
+}
+renderLedger(false);
+let sweeping = false;
+document.getElementById("sweepbtn").addEventListener("click", ()=>{
+  if(sweeping) return;
+  sweeping = true;
+  const btn = document.getElementById("sweepbtn");
+  btn.disabled = true;
+  renderLedger(true);
+  LEDGER.forEach((x,i)=>{
+    setTimeout(()=>{
+      const row = document.getElementById("lr"+i);
+      row.classList.add("scanning");
+      document.getElementById("sc"+i).innerHTML = `<span class="spin" style="display:inline-block;width:11px;height:11px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite"></span>`;
+    }, i*620);
+    setTimeout(()=>{
+      const row = document.getElementById("lr"+i);
+      row.classList.remove("scanning");
+      document.getElementById("sc"+i).innerHTML = `<span class="stchip ${x.sw.c}">${x.sw.l}</span> ${x.sw.t}`;
+    }, i*620 + 520);
+  });
+  setTimeout(()=>{ btn.disabled = false; btn.textContent = "Run it again"; sweeping = false; }, LEDGER.length*620 + 600);
+});
 
 /* ===== module 4: merchant math (live) ===== */
 const CARD_COST = 0.024, PBB_COST = 0.009;

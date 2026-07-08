@@ -99,6 +99,8 @@ tbody td .name{color:var(--txt);font-weight:600;font-size:13.5px}
 .st-done{color:var(--green);border-color:rgba(58,208,122,.4);background:rgba(58,208,122,.07)}
 .st-motion{color:var(--amber);border-color:rgba(223,169,88,.4);background:rgba(223,169,88,.07)}
 .st-stall{color:var(--red);border-color:rgba(217,107,116,.4);background:rgba(217,107,116,.07)}
+tr.scanning td{background:rgba(58,208,122,.05)}
+.sweepcell{min-width:220px}
 
 /* ===================== attn ===================== */
 .attn .item{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
@@ -140,6 +142,15 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .note p{font-size:13.5px;color:var(--muted);margin:0 0 11px}
 .note p b{color:var(--txt);font-weight:600}
 .note .signed{font-size:12.5px;color:var(--dim);margin-top:14px;font-style:italic}
+
+/* ===================== qbr one-pager ===================== */
+.qbrgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+.qbrbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.qbrbox h4{margin:0 0 6px;font-size:13px;font-weight:650;color:var(--txt)}
+.pitem{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.pitem:first-of-type{border-top:none}
+.pitem .pn{color:var(--txt);font-weight:600}
+@media(max-width:900px){.qbrgrid{grid-template-columns:1fr}}
 
 /* ===================== fit table ===================== */
 .fit td:first-child{color:var(--dim);width:42%}
