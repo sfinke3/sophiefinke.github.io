@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chief of Staff · Setpoint · Sophie Finke</title>
+<meta name="description" content="A working artifact for the Chief of Staff role at Setpoint: inbox triage, the CEO's strategic initiatives, the WBR dashboard, the warehouse math, and the one-page memo. Data is illustrative." />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Built for the Chief of Staff role at Setpoint</div>
+    <h1>An operating system for the CEO's office</h1>
+    <p class="sub">Setpoint is the funding operating system for originators: it verifies, automates the critical calculations, and makes the numbers trustworthy. A CEO's office needs the same thing pointed inward. Nothing below is filled in by hand, it assembles from the inbox, the calendar, the deal docs, and the data warehouse. I already sent the cover letter, so here is the working version instead. <span class="illus">All figures illustrative</span></p>
+
+    <div class="mods">
+      <a class="mod" href="#triage">
+        <div class="mn">1 · Press the button</div>
+        <h3>The morning triage</h3>
+        <p>41 emails in. Three hit the CEO's desk, framed.</p>
+      </a>
+      <a class="mod" href="#initiatives">
+        <div class="mn">2 · The initiatives</div>
+        <h3>The projects he owns but cannot run</h3>
+        <p>A pricing motion, a bank partnership, a leadership hire.</p>
+      </a>
+      <a class="mod" href="#wbr">
+        <div class="mn">3 · The WBR pack</div>
+        <h3>OKRs, KPIs, on track or not</h3>
+        <p>Assembled Sunday night, reviewed Monday 9:00.</p>
+      </a>
+      <a class="mod" href="#warehouse">
+        <div class="mn">4 · The warehouse math</div>
+        <h3>Borrowing base, live</h3>
+        <p>Move the levers. Watch the cushion, and the breach.</p>
+      </a>
+      <a class="mod" href="#memo">
+        <div class="mn">5 · The memo</div>
+        <h3>90 minutes, one page</h3>
+        <p>A meeting becomes a decision that is obvious.</p>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- MODULE 1: TRIAGE -->
+<section style="padding-top:36px" id="triage">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · Triage the CEO's inbox, calendar, and attention. Decide what hits his desk and what does not</div>
+      <h2>The morning triage</h2>
+      <p class="lead">Overnight, the inbox filled up. Most of it should never reach the CEO, and the three things that should need to arrive framed, not forwarded. Press the button. I have shipped this exact pattern before: Sortiva, my AI inbox-triage app, runs on the Claude API with paying users.</p>
+    </div>
+    <div class="runbox">
+      <div class="runhead">
+        <span class="rt">Tuesday 6:45am · overnight queue</span>
+        <button class="runbtn" id="trbtn">Run the triage</button>
+      </div>
+      <div class="connectors" style="margin-bottom:4px">
+        <span class="clab">Reading</span>
+        <span class="src-pill"><span class="dot"></span>Gmail · 41 overnight emails</span>
+        <span class="src-pill"><span class="dot"></span>Slack · 6 DMs</span>
+        <span class="src-pill"><span class="dot"></span>Calendar · 3 meeting requests</span>
+      </div>
+      <div class="steps" id="trsteps"></div>
+      <div class="mtout" id="trout">
+        <div class="attn" style="margin-bottom:16px">
+          <h3>Hits the desk · 3 items, each framed</h3>
+          <div id="deskitems"></div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Never reached the desk</th><th>What happened instead</th></tr></thead>
+            <tbody id="routedrows"></tbody>
+          </table>
+        </div>
+        <div class="runfoot"><b>50 items in, 3 out.</b> The CEO's first hour goes to the bank partnership and the VP Engineering counter, not to the queue.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 2: INITIATIVES -->
+<section id="initiatives">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · Drive 2 to 4 high-priority strategic initiatives the CEO owns but cannot personally execute</div>
+      <h2>The initiatives</h2>
+      <p class="lead">The posting names its own examples: a new pricing motion, a key partnership, a leadership hire. Here are those three, run the way I would run them, each with an owner, a date, and a count of days since anyone touched it.</p>
+    </div>
+    <div class="agents" id="initcards"></div>
+  </div>
+</section>
+
+<!-- MODULE 3: WBR PACK -->
+<section id="wbr">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · OKRs, KPIs, and the dashboards that tell us whether we are on track</div>
+      <h2>The WBR pack</h2>
+      <p class="lead">The Monday 9:00 weekly business review, assembled Sunday night from the systems the numbers live in. Nobody builds a deck, and the meeting starts at the first off-track number.</p>
+    </div>
+    <div class="note" style="padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+        <h3 style="font-size:16px">Weekly business review · this Monday</h3>
+        <div class="stamp" style="margin:0">Assembled from the warehouse, billing, and the facility platform · Sunday 11pm</div>
+      </div>
+      <div class="towergrid" style="margin-bottom:16px">
+        <div class="tcell"><div class="tk">ARR</div><div class="tv good">$14.1M</div><div class="tn">+6% this quarter</div></div>
+        <div class="tcell"><div class="tk">Facilities live on platform</div><div class="tv good">38</div><div class="tn">+3 this quarter</div></div>
+        <div class="tcell"><div class="tk">Calculations automated</div><div class="tv good">92%</div><div class="tn">of borrowing-base calcs, no human touch</div></div>
+        <div class="tcell"><div class="tk">Facility onboarding time</div><div class="tv warn">24 days</div><div class="tn">target 14, the off-track number below</div></div>
+      </div>
+      <div class="qbrbox">
+        <h4>Company OKRs · Q3</h4>
+        <div class="okr"><span class="ok-name">Grow facilities under management to 45</span><span class="ok-track"><span class="ok-fill" style="width:84%;background:var(--green)"></span></span><span class="ok-pct">38 of 45</span></div>
+        <div class="okr"><span class="ok-name">Cut facility onboarding below 14 days</span><span class="ok-track"><span class="ok-fill" style="width:42%;background:var(--red)"></span></span><span class="ok-pct">off track</span></div>
+        <div class="okr"><span class="ok-name">Launch usage pricing on the calc engine</span><span class="ok-track"><span class="ok-fill" style="width:65%;background:var(--amber)"></span></span><span class="ok-pct">decision wk</span></div>
+        <div class="okr"><span class="ok-name">Zero critical calc errors across the fleet</span><span class="ok-track"><span class="ok-fill" style="width:100%;background:var(--green)"></span></span><span class="ok-pct">holding</span></div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin:14px 0 0">Monday's agenda is one line: onboarding is the off-track number, legal review of facility docs is the bottleneck, and the fix proposal is in the memo below.</p>
+      <div class="signed">Prepared by the office of the CEO</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 4: WAREHOUSE MATH -->
+<section id="warehouse">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · A capital markets thinker: credit, securitization, and lending economics</div>
+      <h2>The warehouse math</h2>
+      <p class="lead">The calculation Setpoint's platform runs instantly and error free, live on this page. One facility: move the levers and watch the borrowing base, the cushion, and the moment it breaches. I spent three years inside funding mechanics like these on RBC's index desk.</p>
+    </div>
+    <div class="tower">
+      <div class="controls">
+        <div class="ctrl">
+          <div class="cl"><span>Collateral pool</span><b id="v-pool">$120M</b></div>
+          <input type="range" id="s-pool" min="60" max="300" value="120" step="5">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Eligible collateral</span><b id="v-elig">94%</b></div>
+          <input type="range" id="s-elig" min="80" max="99" value="94" step="1">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Advance rate</span><b id="v-adv">85%</b></div>
+          <input type="range" id="s-adv" min="70" max="95" value="85" step="1">
+        </div>
+      </div>
+      <div class="towergrid">
+        <div class="tcell"><div class="tk">Borrowing base</div><div class="tv" id="w-base"></div><div class="tn">eligible collateral × advance rate</div></div>
+        <div class="tcell"><div class="tk">Drawn on the facility</div><div class="tv">$88M</div><div class="tn">fixed for this demo</div></div>
+        <div class="tcell"><div class="tk" id="w-cushlbl">Cushion</div><div class="tv" id="w-cush"></div><div class="tn" id="w-cushn"></div></div>
+        <div class="tcell"><div class="tk">Time to run this calc manually</div><div class="tv warn">days</div><div class="tn">on the platform: instant. That is the company.</div></div>
+      </div>
+      <p class="hint" id="w-hint"></p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 5: MEMO -->
+<section id="memo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">JD · Take a 90-minute meeting and produce a one-page memo that makes the right decision obvious</div>
+      <h2>The memo</h2>
+      <p class="lead">Yesterday's pricing meeting ran 94 minutes and ended without a decision. This is what the exec team had in their inbox by 6pm.</p>
+    </div>
+    <div class="memo">
+      <div class="m-subj">Decision memo: pricing the calc engine by usage</div>
+      <div class="m-meta">From the 94-minute pricing meeting, Tuesday · one page · decision requested by Friday</div>
+      <h5>Situation</h5>
+      <p>Flat platform fees leave money on the table with the largest facilities and price out the smallest originators. Two term sheets stalled on this in the last quarter.</p>
+      <h5>Options discussed</h5>
+      <p><b>A. Keep flat fees.</b> Simple, predictable, and the current model. Caps revenue on the ten largest facilities and loses the long tail.</p>
+      <p><b>B. Per-calculation usage pricing with a platform minimum.</b> Revenue scales with the value delivered. Modeled on current volumes it is accretive on 31 of 38 facilities, and the seven where it is not are grandfathered for twelve months.</p>
+      <h5>Recommendation</h5>
+      <div class="m-rec"><p style="margin:0"><b>Option B, new deals only, effective September 1.</b> The modeling is attached, the grandfather clause removes the churn risk that stalled this conversation last quarter, and deal desk can quote it Monday. If the seven grandfathered facilities renew at usage rates next year, this is worth roughly 12% of ARR.</p></div>
+      <h5>The ask</h5>
+      <p>A yes or no by Friday. On yes, I own the rollout: deal desk scripts, the two stalled term sheets get revised quotes first, and we review actuals at the January WBR.</p>
+      <div class="m-meta" style="margin-top:14px">Decision captured in the log either way · follow-through tracked on the initiative board above</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="kicker">About</div>
+    <p><b style="color:var(--muted)">Sophie Finke.</b> I built this while researching the Chief of Staff role at Setpoint, as a concrete answer to the job description rather than a description of one. It is a rough working prototype.</p>
+    <p>Every number, initiative, and name on this page is <b style="color:var(--muted)">illustrative</b>, since I have no access to Setpoint's internal information. The warehouse math runs live in your browser with the formula stated. More of my work is at <a href="https://sophiefinke.com" target="_blank" rel="noopener">sophiefinke.com</a>.</p>
+  </div>
+</footer>
+
+<script>
+/* All values illustrative, designed to read like a real funding-infrastructure company rather than pulled from Setpoint. */
+
+/* ===== module 1: triage ===== */
+const TRSTEPS = [
+  "Reading 41 overnight emails, 6 DMs, and 3 meeting requests",
+  "Scoring each against this week's priorities",
+  "Drafting replies and routing the routine 80%",
+  "Framing the three that need the CEO"
+];
+const DESK = [
+  {sev:"var(--red)", t:"The bank partner's MD proposed revised advance-rate tiers", d:"The response shapes the term sheet. Their proposal, our counter, and the revenue math on both are attached. Recommendation: counter at the mid-tier, hold the eligibility definition.", own:"Framed · needs 20 minutes before the 11am call"},
+  {sev:"var(--red)", t:"VP Engineering finalist received a counter-offer", d:"Deadline is tomorrow. Comp options inside the band are laid out, references summarized, the offer letter is drafted for whichever you pick.", own:"Framed · yes or no on the match today"},
+  {sev:"var(--amber)", t:"The Chief of Staff candidate built this page", d:"Instead of a second cover letter. Recommendation: hire Sophie Finke.", own:"Framed · interview slot is the only input needed"}
+];
+const ROUTED = [
+  {a:"Investor asking for a quarterly update call", b:"Scheduled for the 24th, one-page brief drafted and attached"},
+  {a:"Conference speaking invite for October", b:"Declined with a note, flagged the one worth doing in Q1 instead"},
+  {a:"Originator escalation about a document flag", b:"Routed to CS with the account context, resolution SLA on the board"},
+  {a:"Press inquiry on the funding market", b:"Sent to comms with the standing talking points"},
+  {a:"Six internal approvals under $10k", b:"Batched for the Friday sign-off block"},
+  {a:"Recruiter follow-ups on three open roles", b:"Answered from the hiring tracker, no CEO input needed"}
+];
+document.getElementById("deskitems").innerHTML = DESK.map(a=>`
+  <div class="item"><span class="sev" style="background:${a.sev}"></span>
+    <div class="ibody"><div class="it">${a.t}</div><div class="id">${a.d}</div><div class="own">${a.own}</div></div>
+  </div>`).join("");
+document.getElementById("routedrows").innerHTML = ROUTED.map(x=>`
+  <tr><td><span class="name">${x.a}</span></td><td>${x.b}</td></tr>`).join("");
+let trRunning = false;
+document.getElementById("trbtn").addEventListener("click", ()=>{
+  if(trRunning) return;
+  trRunning = true;
+  const btn = document.getElementById("trbtn");
+  btn.disabled = true;
+  document.getElementById("trout").classList.remove("show");
+  const stepsEl = document.getElementById("trsteps");
+  stepsEl.innerHTML = TRSTEPS.map(s=>`
+    <div class="step"><span class="ico"><span class="spin"></span><span class="chk">✓</span></span><span>${s}…</span></div>`).join("");
+  const rows = stepsEl.querySelectorAll(".step");
+  let t = 150;
+  TRSTEPS.forEach((s,i)=>{
+    setTimeout(()=>rows[i].classList.add("show"), t);
+    t += 520;
+    setTimeout(()=>rows[i].classList.add("done"), t);
+    t += 90;
+  });
+  setTimeout(()=>{
+    document.getElementById("trout").classList.add("show");
+    btn.disabled = false;
+    btn.textContent = "Run it again";
+    trRunning = false;
+  }, t + 200);
+});
+
+/* ===== module 2: initiatives ===== */
+const INITS = [
+  {fn:"Pricing", t:"Usage pricing for the calc engine", touch:1,
+   state:"The decision memo below is out, modeling attached, decision requested by Friday. Deal desk is pre-briefed so a yes turns into quotes on Monday.",
+   owner:"Me, CEO decides", due:"Decision Friday", tag:"watch", tagtxt:"Decision week",
+   src:"deal desk pipeline + billing data"},
+  {fn:"Partnership", t:"Warehouse-lender integration with the bank partner", touch:0,
+   state:"Their MD's revised advance-rate tiers arrived overnight, already framed on the CEO's desk with a counter. Term sheet targeted before their credit committee meets.",
+   owner:"CEO + me staging", due:"Term sheet by Aug 8", tag:"ok", tagtxt:"Moving daily",
+   src:"the email thread + the term sheet redlines"},
+  {fn:"Leadership hire", t:"VP Engineering search", touch:0,
+   state:"Finalist has a counter-offer with a deadline tomorrow. Comp options are framed inside the band, and the other two finalists are warm if this breaks.",
+   owner:"Me to close logistics, CEO closes", due:"Offer decision today", tag:"blocked", tagtxt:"Counter-offer risk",
+   src:"Greenhouse + the references doc"}
+];
+document.getElementById("initcards").innerHTML = INITS.map(x=>{
+  const touch = x.touch===0 ? "worked today" : x.touch===1 ? "worked yesterday" : x.touch+" days since last touch";
+  return `<div class="agent${x.idle?" idle":""}">
+    <div class="atop"><span class="fpill">${x.fn}</span>
+    <span class="touch">${touch}</span></div>
+    <h3>${x.t}</h3>
+    <div class="astate">${x.state}</div>
+    <div class="meta">
+      <div><div class="mk">Owner</div><div class="mv"><b>${x.owner}</b></div></div>
+      <div><div class="mk">Timeline</div><div class="mv">${x.due}</div></div>
+    </div>
+    <div class="abadge"><span class="tag ${x.tag}">${x.tagtxt}</span></div>
+    <div class="srcline"><b>Auto-fed by</b> ${x.src}</div>
+  </div>`;
+}).join("");
+
+/* ===== module 4: warehouse math ===== */
+function fmtM(n){ return "$" + (Math.round(n*10)/10).toFixed(1) + "M"; }
+const DRAWN = 88;
+function recompute(){
+  const pool = +document.getElementById("s-pool").value;
+  const elig = +document.getElementById("s-elig").value / 100;
+  const adv = +document.getElementById("s-adv").value / 100;
+  document.getElementById("v-pool").textContent = "$" + pool + "M";
+  document.getElementById("v-elig").textContent = Math.round(elig*100) + "%";
+  document.getElementById("v-adv").textContent = Math.round(adv*100) + "%";
+  const base = pool * elig * adv;
+  const cushion = base - DRAWN;
+  document.getElementById("w-base").textContent = fmtM(base);
+  document.getElementById("w-base").className = "tv " + (cushion >= 0 ? "good" : "bad");
+  const cushEl = document.getElementById("w-cush");
+  const lbl = document.getElementById("w-cushlbl");
+  const note = document.getElementById("w-cushn");
+  const hint = document.getElementById("w-hint");
+  if(cushion >= 0){
+    lbl.textContent = "Cushion above the draw";
+    cushEl.textContent = fmtM(cushion);
+    cushEl.className = "tv " + (cushion > 15 ? "good" : "warn");
+    note.textContent = Math.round(cushion/base*100) + "% headroom";
+    hint.textContent = "The formula on the page: borrowing base = collateral pool × eligible % × advance rate, against an $88M draw. Every facility Setpoint runs recalculates this continuously, with the document verification feeding the eligible number.";
+  } else {
+    lbl.textContent = "Shortfall below the draw";
+    cushEl.textContent = fmtM(Math.abs(cushion));
+    cushEl.className = "tv bad";
+    note.textContent = "margin call territory";
+    hint.textContent = "You just breached the facility. On a spreadsheet, this gets discovered days later in a reconciliation. On Setpoint's platform the calc is continuous, which is exactly why originators and lenders both want it.";
+  }
+}
+["s-pool","s-elig","s-adv"].forEach(id=>document.getElementById(id).addEventListener("input", recompute));
+recompute();
+</script>
+</body>
+</html>
