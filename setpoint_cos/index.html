@@ -13,7 +13,7 @@
   <div class="wrap">
     <div class="eyebrow">Built for the Chief of Staff role at Setpoint</div>
     <h1>An operating system for the CEO's office</h1>
-    <p class="sub">Setpoint is the funding operating system for originators: it verifies, automates the critical calculations, and makes the numbers trustworthy. A CEO's office needs the same thing pointed inward. Nothing below is filled in by hand, it assembles from the inbox, the calendar, the deal docs, and the data warehouse. I already sent the cover letter, so here is the working version instead. <span class="illus">All figures illustrative</span></p>
+    <p class="sub">Setpoint is the capital markets operating system: it verifies the collateral, runs the borrowing-base and compliance calculations, and sits as calculation agent on the warehouse facilities and securitizations behind $50B a year in financed assets, so both sides of a credit relationship trust the same numbers. A CEO's office needs the same machine pointed inward. Nothing below is filled in by hand, it assembles from the inbox, the calendar, the deal docs, and the data warehouse. <span class="illus">All figures illustrative</span></p>
 
     <div class="mods">
       <a class="mod" href="#triage">
@@ -117,7 +117,7 @@
         <h4>Company OKRs · Q3</h4>
         <div class="okr"><span class="ok-name">Grow facilities under management to 45</span><span class="ok-track"><span class="ok-fill" style="width:84%;background:var(--green)"></span></span><span class="ok-pct">38 of 45</span></div>
         <div class="okr"><span class="ok-name">Cut facility onboarding below 14 days</span><span class="ok-track"><span class="ok-fill" style="width:42%;background:var(--red)"></span></span><span class="ok-pct">off track</span></div>
-        <div class="okr"><span class="ok-name">Launch usage pricing on the calc engine</span><span class="ok-track"><span class="ok-fill" style="width:65%;background:var(--amber)"></span></span><span class="ok-pct">decision wk</span></div>
+        <div class="okr"><span class="ok-name">Launch per-loan-file pricing for verification and calc-agent work</span><span class="ok-track"><span class="ok-fill" style="width:65%;background:var(--amber)"></span></span><span class="ok-pct">decision wk</span></div>
         <div class="okr"><span class="ok-name">Zero critical calc errors across the fleet</span><span class="ok-track"><span class="ok-fill" style="width:100%;background:var(--green)"></span></span><span class="ok-pct">holding</span></div>
       </div>
       <p style="font-size:13px;color:var(--muted);margin:14px 0 0">Monday's agenda is one line: onboarding is the off-track number, legal review of facility docs is the bottleneck, and the fix proposal is in the memo below.</p>
@@ -169,13 +169,13 @@
       <p class="lead">Yesterday's pricing meeting ran 94 minutes and ended without a decision. This is what the exec team had in their inbox by 6pm.</p>
     </div>
     <div class="memo">
-      <div class="m-subj">Decision memo: pricing the calc engine by usage</div>
+      <div class="m-subj">Decision memo: per-loan-file pricing for verification and calc-agent work</div>
       <div class="m-meta">From the 94-minute pricing meeting, Tuesday · one page · decision requested by Friday</div>
       <h5>Situation</h5>
       <p>Flat platform fees leave money on the table with the largest facilities and price out the smallest originators. Two term sheets stalled on this in the last quarter.</p>
       <h5>Options discussed</h5>
       <p><b>A. Keep flat fees.</b> Simple, predictable, and the current model. Caps revenue on the ten largest facilities and loses the long tail.</p>
-      <p><b>B. Per-calculation usage pricing with a platform minimum.</b> Revenue scales with the value delivered. Modeled on current volumes it is accretive on 31 of 38 facilities, and the seven where it is not are grandfathered for twelve months.</p>
+      <p><b>B. Per-loan-file pricing with a facility minimum.</b> Revenue scales with the volume verified and calculated. Modeled on current volumes it is accretive on 31 of 38 facilities, and the seven where it is not are grandfathered for twelve months.</p>
       <h5>Recommendation</h5>
       <div class="m-rec"><p style="margin:0"><b>Option B, new deals only, effective September 1.</b> The modeling is attached, the grandfather clause removes the churn risk that stalled this conversation last quarter, and deal desk can quote it Monday. If the seven grandfathered facilities renew at usage rates next year, this is worth roughly 12% of ARR.</p></div>
       <h5>The ask</h5>
@@ -211,8 +211,8 @@ const DESK = [
 const ROUTED = [
   {a:"Investor asking for a quarterly update call", b:"Scheduled for the 24th, one-page brief drafted and attached"},
   {a:"Conference speaking invite for October", b:"Declined with a note, flagged the one worth doing in Q1 instead"},
-  {a:"Originator escalation about a document flag", b:"Routed to CS with the account context, resolution SLA on the board"},
-  {a:"Press inquiry on the funding market", b:"Sent to comms with the standing talking points"},
+  {a:"An originator's draw request flagged two ineligible loan files", b:"Routed to funding ops with the exception detail, resolution SLA on the board"},
+  {a:"A credit fund counterparty asked for last month's compliance cert", b:"Sent from the platform archive in four minutes"},
   {a:"Six internal approvals under $10k", b:"Batched for the Friday sign-off block"},
   {a:"Recruiter follow-ups on three open roles", b:"Answered from the hiring tracker, no CEO input needed"}
 ];
@@ -250,7 +250,7 @@ document.getElementById("trbtn").addEventListener("click", ()=>{
 
 /* ===== module 2: initiatives ===== */
 const INITS = [
-  {fn:"Pricing", t:"Usage pricing for the calc engine", touch:1,
+  {fn:"Pricing", t:"Per-loan-file pricing for verification and calc-agent work", touch:1,
    state:"The decision memo below is out, modeling attached, decision requested by Friday. Deal desk is pre-briefed so a yes turns into quotes on Monday.",
    owner:"Me, CEO decides", due:"Decision Friday", tag:"watch", tagtxt:"Decision week",
    src:"deal desk pipeline + billing data"},
@@ -302,7 +302,7 @@ function recompute(){
     cushEl.textContent = fmtM(cushion);
     cushEl.className = "tv " + (cushion > 15 ? "good" : "warn");
     note.textContent = Math.round(cushion/base*100) + "% headroom";
-    hint.textContent = "The formula on the page: borrowing base = collateral pool × eligible % × advance rate, against an $88M draw. Every facility Setpoint runs recalculates this continuously, with the document verification feeding the eligible number.";
+    hint.textContent = "The formula on the page: borrowing base = collateral pool × eligible % × advance rate, against an $88M draw. This is the calculation-agent work Setpoint does on real facilities, recalculated continuously, with the document verification feeding the eligible number.";
   } else {
     lbl.textContent = "Shortfall below the draw";
     cushEl.textContent = fmtM(Math.abs(cushion));
