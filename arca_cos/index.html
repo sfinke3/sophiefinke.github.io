@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chief of Staff · Arca · Sophie Finke</title>
+<meta name="description" content="A working artifact for the Chief of Staff role at Arca: a living model of the company. The Monday sync, the eight open threads, the Series B story, the Firm #2 integration, the acquisition-financing math, the next vertical, and the leverage the team gets back. Data is illustrative." />
+<link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Built for the Chief of Staff role at Arca</div>
+    <h1>A living model of the company</h1>
+    <p class="sub">Arca keeps a living model of each client. I pointed the same idea at running the company. <span class="illus">Illustrative</span></p>
+
+    <div class="receipts">
+      <div class="rcell"><div class="rv">$64M</div><div class="rl">Series A · GC, Index, Venrock</div></div>
+      <div class="rcell"><div class="rv">2 firms</div><div class="rl">acquired · $1B+ AUM</div></div>
+      <div class="rcell"><div class="rv">12</div><div class="rl">people, 8 engineers</div></div>
+      <div class="rcell"><div class="rv">$20T</div><div class="rl">market to rebuild</div></div>
+    </div>
+    <div class="proof">
+      <span class="pl">Built on what I've shipped</span>
+      <span class="pchip"><b>SuSense</b> · per-user learning</span>
+      <span class="pchip"><b>Sortiva</b> · inbox agent</span>
+      <span class="pchip"><b>Playground</b> · web scraper</span>
+      <span class="pchip"><b>Amazon</b> · FP&amp;A</span>
+      <span class="pchip"><b>RBC</b> · index desk</span>
+    </div>
+
+    <div class="mods">
+      <a class="mod" href="#sync">
+        <div class="mn">1 · The living model</div>
+        <h3>The Monday sync</h3>
+        <p>Eight threads. It tells you the two that moved.</p>
+      </a>
+      <a class="mod" href="#board">
+        <div class="mn">2 · The board</div>
+        <h3>Every open thread at once</h3>
+        <p>The priorities, and the work with no owner yet.</p>
+      </a>
+      <a class="mod" href="#raise">
+        <div class="mn">3 · The fundraise</div>
+        <h3>The Series B story</h3>
+        <p>The number that matters, and the gaps I found.</p>
+      </a>
+      <a class="mod" href="#integrate">
+        <div class="mn">4 · The stalled one</div>
+        <h3>Firm #2 integration</h3>
+        <p>Generalizes vs bespoke, sorted live.</p>
+      </a>
+      <a class="mod" href="#capital">
+        <div class="mn">5 · The fuel</div>
+        <h3>How we finance the next firm</h3>
+        <p>Move the levers, watch $64M go further.</p>
+      </a>
+      <a class="mod" href="#vertical">
+        <div class="mn">6 · The next vertical</div>
+        <h3>Where Arca goes after wealth</h3>
+        <p>Five candidates scored, one recommended.</p>
+      </a>
+      <a class="mod" href="#leverage">
+        <div class="mn">7 · The leverage</div>
+        <h3>Hours back to a 12-person team</h3>
+        <p>The manual work I automate first.</p>
+      </a>
+      <a class="mod" href="#about">
+        <div class="mn">8 · About</div>
+        <h3>Why I built this</h3>
+        <p>An answer to the job description, not a description of one.</p>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- MODULE 1: THE MONDAY SYNC -->
+<section style="padding-top:36px" id="sync">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><b>JD</b> · Run how the company operates day to day, and turn decisions into system</div>
+      <h2>The Monday sync</h2>
+      <p class="lead">Six of eight threads moved on their own over the weekend. It flags the two that need Rron. Same run-loop as Sortiva, my inbox agent.</p>
+    </div>
+    <div class="runbox">
+      <div class="runhead">
+        <span class="rt">Monday 7:00am · what changed since Friday</span>
+        <button class="runbtn" id="syncbtn">Run the sync</button>
+      </div>
+      <div class="connectors" style="margin-bottom:4px">
+        <span class="clab">Watching</span>
+        <span class="src-pill"><span class="dot"></span>Gmail · investor + advisor threads</span>
+        <span class="src-pill"><span class="dot"></span>The data room</span>
+        <span class="src-pill"><span class="dot"></span>Greenhouse · open roles</span>
+        <span class="src-pill"><span class="dot"></span>The platform · AUM + retention</span>
+        <span class="src-pill"><span class="dot"></span>Cap table + bank</span>
+      </div>
+      <div class="steps" id="syncsteps"></div>
+      <div class="mtout" id="syncout">
+        <div class="attn" style="margin-bottom:16px">
+          <h3>Moved since Friday · 2 threads need you, framed</h3>
+          <div id="moveditems"></div>
+        </div>
+        <div class="note">
+          <h3 style="font-size:14px">The other six · advanced, nothing needed from you</h3>
+          <ul class="handled" id="handledlist"></ul>
+          <div class="signed">Assembled by the office of the CEO · no one built this deck</div>
+        </div>
+        <div class="runfoot"><b>Six moved on their own, two need Rron.</b> His Monday is the General Catalyst cohort ask and the Head of Consumer offer, nothing else.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 2: THE BOARD -->
+<section id="board">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><b>JD</b> · The business's top priorities, and the things that don't have an owner yet</div>
+      <h2>The eight open threads</h2>
+      <p class="lead">The two buckets the posting names. Each card reads its own system for status. Four marked <b style="color:var(--accent)">deep</b> open below.</p>
+    </div>
+    <div class="connectors">
+      <span class="clab">Auto-fed by</span>
+      <span class="src-pill"><span class="dot"></span>Gmail · deal + investor threads</span>
+      <span class="src-pill"><span class="dot"></span>The data room</span>
+      <span class="src-pill"><span class="dot"></span>Greenhouse</span>
+      <span class="src-pill"><span class="dot"></span>The platform</span>
+      <span class="src-pill"><span class="dot"></span>The acquisition pipeline</span>
+      <span class="refreshed">Last sync 3 min ago</span>
+    </div>
+    <div class="board" id="boardcards"></div>
+  </div>
+</section>
+
+<!-- MODULE 3: THE FUNDRAISE -->
+<section id="raise">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><b>JD · a fundraise</b> · a top priority the CEO owns but cannot personally run</div>
+      <h2>The Series B story</h2>
+      <p class="lead">It sells on one number.</p>
+    </div>
+    <div class="grid12">
+      <div>
+        <div class="bigstat">
+          <div class="bn">114%</div>
+          <div class="bt"><b>Net revenue retention on migrated books.</b> An advisor on the platform keeps clients and assets better than before. That is the round.</div>
+        </div>
+        <div class="factrow">
+          <div class="fact"><b>Firm #2</b> makes it a signal, not an anecdote.</div>
+          <div class="fact"><b>Use of proceeds:</b> the next 4-5 firms + <a href="#capital">the facility</a>.</div>
+        </div>
+      </div>
+      <div class="qbrbox">
+        <h4>Data room · what the model found</h4>
+        <div class="table-scroll" style="background:transparent;border:none;padding:0">
+          <table>
+            <thead><tr><th>The room needs</th><th>Status</th></tr></thead>
+            <tbody id="datagaps"></tbody>
+          </table>
+        </div>
+        <p style="font-size:11.5px;color:var(--dim);margin:12px 0 0">Each gap is already a task with an owner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 4: THE INTEGRATION -->
+<section id="integrate">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><b>JD · a problem that's stalled</b> · turn it into a system that runs without you</div>
+      <h2>Firm #2 integration: generalizes vs bespoke</h2>
+      <p class="lead">Same sort as the web scraper I built for Playground: most maps to a standard schema, the rest you handle by hand.</p>
+    </div>
+    <div class="diff" style="margin-bottom:20px">
+      <div class="diffcol gen">
+        <h4>Generalizes → reuse the platform</h4>
+        <div class="dsub">Runs day one. This is what compounds.</div>
+        <div id="gencol"></div>
+      </div>
+      <div class="diffcol spoke">
+        <h4>Bespoke → handle by hand</h4>
+        <div class="dsub">Flagged now, not a month-three fire.</div>
+        <div id="spokecol"></div>
+      </div>
+    </div>
+    <div class="tower">
+      <div class="sec-head" style="margin-bottom:14px">
+        <h2 style="font-size:16px">The leverage receipt</h2>
+        <p class="lead">Sort it once, every future firm inherits the playbook. Move the slider.</p>
+      </div>
+      <div class="controls">
+        <div class="ctrl">
+          <div class="cl"><span>Share of the next firm that generalizes</span><b id="v-gen">72%</b></div>
+          <input type="range" id="s-gen" min="40" max="95" value="72" step="1">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Bespoke items to hand-handle</span><b id="v-besp">14</b></div>
+          <input type="range" id="s-besp" min="4" max="30" value="14" step="1">
+        </div>
+        <div class="ctrl" style="align-self:center;font-size:12px;color:var(--dim)">From scratch, a firm was ~90 team-days. The generalized share is what you stop paying for.</div>
+      </div>
+      <div class="towergrid">
+        <div class="tcell"><div class="tk">Integration effort per new firm</div><div class="tv" id="i-days"></div><div class="tn">team-days, down from ~90 from scratch</div></div>
+        <div class="tcell"><div class="tk">Saved vs building from scratch</div><div class="tv good" id="i-saved"></div><div class="tn" id="i-savedn"></div></div>
+        <div class="tcell"><div class="tk">Firms this year on the same team</div><div class="tv good" id="i-firms"></div><div class="tn">the four or five the JD names</div></div>
+        <div class="tcell"><div class="tk">What the bespoke list becomes</div><div class="tv warn" id="i-besp"></div><div class="tn">owned tasks, not surprises</div></div>
+      </div>
+      <p class="hint" id="i-hint"></p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 5: THE FUEL -->
+<section id="capital">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><b>JD · new ways to finance and fuel the business</b> · work with no owner yet</div>
+      <h2>How we finance the next firm</h2>
+      <p class="lead">Recurring fee revenue is financeable. A facility carries the debt, equity is the down payment. Levers from RBC's index desk and Amazon FP&A.</p>
+    </div>
+    <div class="tower">
+      <div class="controls">
+        <div class="ctrl">
+          <div class="cl"><span>Average firm AUM</span><b id="v-aum">$1.2B</b></div>
+          <input type="range" id="s-aum" min="500" max="3000" value="1200" step="100">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Blended fee on assets</span><b id="v-fee">0.75%</b></div>
+          <input type="range" id="s-fee" min="40" max="110" value="75" step="5">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Purchase multiple on EBITDA</span><b id="v-mult">8.0×</b></div>
+          <input type="range" id="s-mult" min="50" max="120" value="80" step="5">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Debt advance on the facility</span><b id="v-adv">60%</b></div>
+          <input type="range" id="s-adv" min="0" max="75" value="60" step="5">
+        </div>
+        <div class="ctrl">
+          <div class="cl"><span>Equity to deploy</span><b id="v-eq">$64M</b></div>
+          <input type="range" id="s-eq" min="20" max="120" value="64" step="4">
+        </div>
+        <div class="ctrl" style="align-self:center;font-size:12px;color:var(--dim)">EBITDA assumed at 30% of fee revenue, a standard RIA margin. Advance at 0% is the all-equity case the facility replaces.</div>
+      </div>
+      <div class="towergrid">
+        <div class="tcell"><div class="tk">Price per firm</div><div class="tv" id="c-price"></div><div class="tn">EBITDA × multiple</div></div>
+        <div class="tcell"><div class="tk">Equity needed per firm</div><div class="tv" id="c-eqfirm"></div><div class="tn">price less what the facility carries</div></div>
+        <div class="tcell"><div class="tk">Firms on $64M, all equity</div><div class="tv warn" id="c-nodebt"></div><div class="tn">the expensive way</div></div>
+        <div class="tcell"><div class="tk">Firms with the facility</div><div class="tv good" id="c-withdebt"></div><div class="tn">same equity, more firms</div></div>
+      </div>
+      <p class="hint" id="c-hint"></p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 6: THE NEXT VERTICAL -->
+<section id="vertical">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><b>JD · the next vertical worth a serious look</b> · take it from a vague question to a recommendation</div>
+      <h2>Where Arca goes after wealth</h2>
+      <p class="lead">Which product earns the client data next. Five scored, one wins.</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Adjacency</th><th>The human moment</th><th>Data does the work</th><th>Reg drag</th><th>Fit score</th></tr></thead>
+        <tbody id="vertrows"></tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <span class="cw">→ Tax.</span> Most recurring moment, data already on-platform, deepens the relationship. The catch: highest reg load of the five. Pilot the two firms' clients first.
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 7: THE LEVERAGE -->
+<section id="leverage">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><b>JD</b> · Find the manual, repetitive work eating people's time, build a better way, and teach people to do it themselves</div>
+      <h2>Hours back to a 12-person team</h2>
+      <p class="lead">I find the repetitive work, build the replacement, and hand it off. First one to ship:</p>
+    </div>
+    <div class="grid2">
+      <div class="qbrbox">
+        <h4>Advisor onboarding for an acquired book</h4>
+        <p style="font-size:13px;color:var(--muted);margin:0 0 12px">The most repetitive high-stakes job in the company, and it recurs on every acquisition.</p>
+        <div class="towergrid" style="grid-template-columns:1fr 1fr;margin-bottom:12px">
+          <div class="tcell"><div class="tk">Per book today</div><div class="tv warn">~140h</div><div class="tn">manual re-keying</div></div>
+          <div class="tcell"><div class="tk">After the agent</div><div class="tv good">~25h</div><div class="tn">human reviews, no re-key</div></div>
+        </div>
+        <p style="font-size:12.5px;color:var(--muted);margin:0"><b style="color:var(--txt)">Then I hand it over.</b> Ops runs it on firm #3 without me. One runbook, an exception queue.</p>
+      </div>
+      <div class="note">
+        <h3>What else is eating the week</h3>
+        <ul class="handled" id="leverlist"></ul>
+        <div class="signed">From calendars, ticket queues, document touches · illustrative</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE WINK -->
+<section id="hire">
+  <div class="wrap hire">
+    <div class="hk">The model surfaces the threads that need an owner. Here is the one it can't close by itself:</div>
+    <a class="hb" href="mailto:sophiefinke@gmail.com?subject=Arca%20Chief%20of%20Staff">Hire Sophie →</a>
+    <div class="hs">She already ran the job on this page.</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<footer id="about">
+  <div class="wrap">
+    <div class="kicker">About</div>
+    <p><b style="color:var(--muted)">Sophie Finke.</b> Built over a weekend for the Chief of Staff role at Arca. Every section maps to a line in the posting. The concept is Arca's own idea, a living model that acts before you ask, turned on the company.</p>
+    <p>The projects up top are real: <b style="color:var(--muted)">SuSense</b> (per-user learning health app), <b style="color:var(--muted)">Sortiva</b> (inbox agent), the <b style="color:var(--muted)">Playground</b> web scraper, Amazon FP&amp;A, RBC's index desk. Names and numbers here are <b style="color:var(--muted)">illustrative</b>; the public facts are the posting's own. Both calculators run live. More at <a href="https://sophiefinke.com" target="_blank" rel="noopener">sophiefinke.com</a>.</p>
+  </div>
+</footer>
+
+<script>
+/* All values illustrative, designed to read like a real AI-native wealth firm rather than pulled from Arca's systems. */
+
+/* ===== module 1: the Monday sync ===== */
+const SYNCSTEPS = [
+  "Reading the inbox, the data room, Greenhouse, the platform, and the cap table",
+  "Checking each of the eight threads against what changed since Friday",
+  "Advancing the routine work and drafting the next move on each",
+  "Surfacing the two that actually need Rron"
+];
+const MOVED = [
+  {sev:"var(--red)", t:"General Catalyst wants advisor-level retention cohorts", d:"Flagged as a data-room gap. PR to the data team already drafted.", own:"15 min before you reply"},
+  {sev:"var(--gold)", t:"Head of Consumer finalist has a competing offer", d:"Deadline Wednesday. Comp options and offer letter drafted.", own:"Yes or no on the match today"}
+];
+const HANDLED = [
+  {t:"Firm #2 integration", d:"CRM export sorted, runbook updated"},
+  {t:"Distribution partnership", d:"memo + intro email drafted for your yes"},
+  {t:"Consumer acquisition", d:"v0 concept parked for Thursday's review"},
+  {t:"Compliance as a system", d:"2 cert renewals auto-filed, zero touch"},
+  {t:"Acquisition financing", d:"2 lender term sheets in the model below"},
+  {t:"The next vertical", d:"tax pilot scoping advanced"}
+];
+document.getElementById("moveditems").innerHTML = MOVED.map(a=>`
+  <div class="item"><span class="sev" style="background:${a.sev}"></span>
+    <div class="ibody"><div class="it">${a.t}</div><div class="id">${a.d}</div><div class="own">${a.own}</div></div>
+  </div>`).join("");
+document.getElementById("handledlist").innerHTML = HANDLED.map(x=>`
+  <li><span class="ck">✓</span><span><b>${x.t}.</b> ${x.d}</span></li>`).join("");
+let syncRunning = false;
+document.getElementById("syncbtn").addEventListener("click", ()=>{
+  if(syncRunning) return;
+  syncRunning = true;
+  const btn = document.getElementById("syncbtn");
+  btn.disabled = true;
+  document.getElementById("syncout").classList.remove("show");
+  const stepsEl = document.getElementById("syncsteps");
+  stepsEl.innerHTML = SYNCSTEPS.map(s=>`
+    <div class="step"><span class="ico"><span class="spin"></span><span class="chk">✓</span></span><span>${s}…</span></div>`).join("");
+  const rows = stepsEl.querySelectorAll(".step");
+  let t = 150;
+  SYNCSTEPS.forEach((s,i)=>{
+    setTimeout(()=>rows[i].classList.add("show"), t);
+    t += 560;
+    setTimeout(()=>rows[i].classList.add("done"), t);
+    t += 90;
+  });
+  setTimeout(()=>{
+    document.getElementById("syncout").classList.add("show");
+    btn.disabled = false;
+    btn.textContent = "Run it again";
+    syncRunning = false;
+  }, t + 200);
+});
+
+/* ===== module 2: the board ===== */
+const THREADS = [
+  {fn:"Fundraise", bucket:"Priority", t:"The Series B round", touch:"moved", touchtxt:"moved today",
+   state:"Story drafted, retention leads. 3 data-room gaps turned into tasks.",
+   tag:"watch", tagtxt:"Story ready", deep:"#raise"},
+  {fn:"Key hire", bucket:"Priority", t:"Head of Consumer", touch:"moved", touchtxt:"moved today",
+   state:"Competing offer due Wednesday. Offer letter drafted.",
+   tag:"blocked", tagtxt:"Competing offer", deep:""},
+  {fn:"Partnership", bucket:"Priority", t:"A distribution partner", touch:2, touchtxt:"2d since touch",
+   state:"A channel to clients who'd never walk into an RIA. Memo waiting on a yes.",
+   tag:"ok", tagtxt:"Moving", deep:""},
+  {fn:"Stalled", bucket:"Priority", t:"Firm #2 integration", touch:"moved", touchtxt:"moved today",
+   state:"Sorted generalizes vs bespoke. The generalized side is the firm #3 playbook.",
+   tag:"watch", tagtxt:"Systematizing", deep:"#integrate"},
+  {fn:"Growth channel", bucket:"No owner yet", t:"Consumer acquisition", touch:4, touchtxt:"4d since touch",
+   state:"The bet that clients come on their own. v0 concept for Thursday.",
+   tag:"ok", tagtxt:"Early", deep:""},
+  {fn:"New function", bucket:"No owner yet", t:"Compliance as a system", touch:1, touchtxt:"worked yesterday",
+   state:"Can't scale on headcount. Cert renewals now auto-file, zero touch.",
+   tag:"ok", tagtxt:"Building", deep:""},
+  {fn:"Fuel", bucket:"No owner yet", t:"Acquisition financing", touch:"moved", touchtxt:"moved today",
+   state:"A facility on recurring revenue stretches the $64M. 2 term sheets in.",
+   tag:"watch", tagtxt:"Live model", deep:"#capital"},
+  {fn:"Next vertical", bucket:"No owner yet", t:"The vertical after wealth", touch:6, touchtxt:"6d since touch",
+   state:"5 adjacencies scored. Tax wins. Pilot scoping drafted.",
+   tag:"ok", tagtxt:"Recommended", deep:"#vertical"}
+];
+document.getElementById("boardcards").innerHTML = THREADS.map(x=>{
+  const tc = x.touch==="moved" ? "moved" : (typeof x.touch==="number" && x.touch>=4 ? "warn" : "");
+  const opener = x.deep ? `<a class="opener" href="${x.deep}">open ↓</a>` : "";
+  return `<div class="agent${x.deep?" deep":""}">
+    <div class="atop"><span class="fpill">${x.fn}</span><span class="touch ${tc}">${x.touchtxt}</span></div>
+    <h3>${x.t}</h3>
+    <div class="astate">${x.state}</div>
+    <div class="abadge"><span class="tag ${x.tag}">${x.tagtxt}</span>${opener}</div>
+  </div>`;
+}).join("");
+
+/* ===== module 3: data-room gaps ===== */
+const GAPS = [
+  {n:"Retention cohorts by firm", s:"have", txt:"in the room"},
+  {n:"Retention cohorts by advisor", s:"gap", txt:"gap · GC asked"},
+  {n:"Net revenue retention on migrated books", s:"have", txt:"114%, in the room"},
+  {n:"Advisor productivity: clients per advisor, pre vs post", s:"gap", txt:"gap · drafted"},
+  {n:"Unit economics per acquired firm", s:"have", txt:"in the room"},
+  {n:"Time to migrate a book, firm #1 vs firm #2", s:"gap", txt:"gap · the proof it generalizes"}
+];
+document.getElementById("datagaps").innerHTML = GAPS.map(x=>`
+  <tr><td><span class="name" style="font-size:12.5px">${x.n}</span></td>
+  <td><span class="pill ${x.s}">${x.txt}</span></td></tr>`).join("");
+
+/* ===== module 4: integration diff ===== */
+const GEN = [
+  {h:"Client onboarding flow", d:"the platform's standard intake, KYC, and account opening"},
+  {h:"Portfolio rebalancing logic", d:"the same models and drift rules across every book"},
+  {h:"Quarterly review generation", d:"auto-assembled from live positions, no advisor deck-building"},
+  {h:"The living client memory", d:"the notes and life-events engine, identical for every firm"},
+  {h:"Compliance cert filing", d:"pulled from the platform archive on the reg calendar"},
+  {h:"Billing and fee calculation", d:"once mapped to the schedule, it runs itself"}
+];
+const SPOKE = [
+  {h:"A three-tier legacy fee schedule", d:"grandfathered clients on rates that predate the acquisition"},
+  {h:"Custom CRM tags from the old system", d:"a decade of shorthand that has to be mapped, not imported"},
+  {h:"Two handshake trust arrangements", d:"relationships documented by phone call, not by contract"},
+  {h:"A local-custodian holdout", d:"one book still at a custodian the platform does not yet support"},
+  {h:"The founder advisor's review cadence", d:"clients used to monthly calls the platform defaults to quarterly"}
+];
+document.getElementById("gencol").innerHTML = GEN.map(x=>`
+  <div class="drow"><span class="di">✓</span><span><b>${x.h}.</b> ${x.d}</span></div>`).join("");
+document.getElementById("spokecol").innerHTML = SPOKE.map(x=>`
+  <div class="drow"><span class="di">•</span><span><b>${x.h}.</b> ${x.d}</span></div>`).join("");
+
+/* integration leverage calc */
+function recompInt(){
+  const gen = +document.getElementById("s-gen").value;      /* % generalizes */
+  const besp = +document.getElementById("s-besp").value;    /* bespoke items */
+  document.getElementById("v-gen").textContent = gen + "%";
+  document.getElementById("v-besp").textContent = besp;
+  const scratch = 90;                                        /* team-days from scratch */
+  const days = Math.round(scratch * (1 - gen/100) + besp * 0.9);
+  const saved = Math.max(0, scratch - days);
+  const firms = Math.max(1, Math.floor(240 / Math.max(1,days)));  /* ~240 team-days/yr available for integration */
+  document.getElementById("i-days").textContent = days + "d";
+  document.getElementById("i-days").className = "tv " + (days < 40 ? "good" : days < 60 ? "warn" : "bad");
+  document.getElementById("i-saved").textContent = saved + "d";
+  document.getElementById("i-savedn").textContent = Math.round(saved/scratch*100) + "% less than starting over";
+  document.getElementById("i-firms").textContent = firms;
+  document.getElementById("i-besp").textContent = besp + " items";
+  const hint = document.getElementById("i-hint");
+  if(gen >= 80){
+    hint.textContent = "At this level an acquisition is a checklist, not a project. The same team absorbs the next firm, and the next.";
+  } else if(gen >= 60){
+    hint.textContent = "Most of the firm reuses the platform. The bespoke list is small enough to own. This is the target after a few acquisitions sharpen the playbook.";
+  } else {
+    hint.textContent = "Too much is still bespoke. Firm #2 got integrated like a one-off. Push this share up with every acquisition.";
+  }
+}
+["s-gen","s-besp"].forEach(id=>document.getElementById(id).addEventListener("input", recompInt));
+recompInt();
+
+/* ===== module 5: financing calc ===== */
+function fmtUSD(m){ return m >= 1000 ? "$" + (m/1000).toFixed(2) + "B" : "$" + Math.round(m) + "M"; }
+function recompCap(){
+  const aum = +document.getElementById("s-aum").value;            /* $M AUM */
+  const fee = +document.getElementById("s-fee").value / 10000;    /* fee, from bps-ish slider (75 => 0.75%) */
+  const mult = +document.getElementById("s-mult").value / 10;     /* 80 => 8.0x */
+  const adv = +document.getElementById("s-adv").value / 100;      /* advance rate */
+  const eq = +document.getElementById("s-eq").value;              /* $M equity */
+  document.getElementById("v-aum").textContent = "$" + (aum/1000).toFixed(1) + "B";
+  document.getElementById("v-fee").textContent = (fee*100).toFixed(2) + "%";
+  document.getElementById("v-mult").textContent = mult.toFixed(1) + "×";
+  document.getElementById("v-adv").textContent = Math.round(adv*100) + "%";
+  document.getElementById("v-eq").textContent = "$" + eq + "M";
+
+  const revenue = aum * fee;                 /* $M annual fee revenue */
+  const ebitda = revenue * 0.30;             /* 30% margin */
+  const price = ebitda * mult;               /* $M price per firm */
+  const debt = price * adv;                  /* facility carries this */
+  const eqPerFirm = price - debt;            /* equity down payment per firm */
+  const firmsAllEq = Math.floor(eq / price);
+  const firmsWithDebt = eqPerFirm > 0 ? Math.floor(eq / eqPerFirm) : 99;
+
+  document.getElementById("c-price").textContent = fmtUSD(price);
+  document.getElementById("c-eqfirm").textContent = fmtUSD(eqPerFirm);
+  document.getElementById("c-nodebt").textContent = firmsAllEq + (firmsAllEq===1?" firm":" firms");
+  document.getElementById("c-withdebt").textContent = firmsWithDebt + (firmsWithDebt===1?" firm":" firms");
+
+  const extra = firmsWithDebt - firmsAllEq;
+  const hint = document.getElementById("c-hint");
+  if(adv === 0){
+    hint.textContent = "Zero advance is the all-equity case, how the company grows today. Slide it up and the same $" + eq + "M reaches more firms.";
+  } else {
+    hint.textContent = "The facility turns " + firmsAllEq + " firms into " + firmsWithDebt + " on the same $" + eq + "M. Debt carries " + Math.round(adv*100) + "% of each price against recurring fee revenue" + (extra>0?", about "+extra+" more "+(extra===1?"acquisition":"acquisitions")+" this year on no new equity":"") + ". The debt is serviced by client-asset fees, so retention keeps the facility safe too.";
+  }
+}
+["s-aum","s-fee","s-mult","s-adv","s-eq"].forEach(id=>document.getElementById(id).addEventListener("input", recompCap));
+recompCap();
+
+/* ===== module 6: vertical scoring ===== */
+const VERTS = [
+  {c:"Tax planning & filing", moment:"Every client, every year, on a deadline", data:"Accounts, gains, income already on the platform", reg:"High", score:9, brand:true},
+  {c:"Securities-based lending", moment:"Occasional, life-event driven", data:"Portfolio value is right there as collateral", reg:"Medium", score:7},
+  {c:"Estate & trust planning", moment:"Rare, but the highest-stakes moment", data:"Knows the family, weak on legal docs", reg:"High", score:6},
+  {c:"Insurance", moment:"Set once, revisited seldom", data:"Life events are known, products are not native", reg:"Medium", score:5},
+  {c:"Small-business 401(k)", moment:"Recurring but B2B, a different buyer", data:"Little overlap with the individual's book", reg:"High", score:4}
+];
+document.getElementById("vertrows").innerHTML = VERTS.map(x=>`
+  <tr${x.brand?' class="brandrow"':''}>
+    <td><span class="name">${x.c}</span></td>
+    <td>${x.moment}</td>
+    <td>${x.data}</td>
+    <td>${x.reg}</td>
+    <td><div class="scorewrap"><div class="scoretrack"><div class="scorefill" style="width:${x.score*10}%"></div></div><span class="scoreval">${x.score}</span></div></td>
+  </tr>`).join("");
+
+/* ===== module 7: leverage list ===== */
+const LEVER = [
+  {t:"Compliance renewals", h:"~6h / week"},
+  {t:"Quarterly review decks", h:"~5h / advisor"},
+  {t:"Investor + board reporting", h:"~8h / month"},
+  {t:"New-client data intake", h:"~2h / client"}
+];
+document.getElementById("leverlist").innerHTML = LEVER.map(x=>`
+  <li><span class="ck">→</span><span><b>${x.t}</b> <span style="color:var(--dim)">· ${x.h}</span></span></li>`).join("");
+</script>
+</body>
+</html>
