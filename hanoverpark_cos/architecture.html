@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hanover Park · Data Pipeline & MCP Architecture</title>
+<style>
+  :root{--ink:#0d1b16;--ink2:#3d4a44;--muted:#7b877f;--line:#e4e8e4;--bg:#f6f8f6;--card:#fff;
+    --green:#12a150;--green-d:#0b6b36;--over:#e0662a;--under:#c99a17;--db:#2f6df6;--slack:#7b5bd6;--email:#e0662a;
+    --radius:12px;--sh:0 1px 2px rgba(13,27,22,.06),0 6px 18px rgba(13,27,22,.05);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .mono{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums;font-size:.92em;}
+  h2,h4{margin:0;font-weight:650;letter-spacing:-.01em;}
+  header{background:var(--ink);color:#eafaf0;padding:16px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:20;}
+  .leaf{width:22px;height:22px;color:var(--green);flex:none;}
+  header b{font-size:15px;} header .sub{color:#8fb7a2;font-size:12.5px;}
+  header .spacer{flex:1;}
+  header .lnk{color:#cde2d8;font-size:12.5px;text-decoration:none;border:1px solid #2b4a3d;padding:6px 12px;border-radius:8px;}
+  .wrap{max-width:1080px;margin:0 auto;padding:22px 22px 90px;}
+  .sec{margin-top:30px;}
+  .sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;border-bottom:2px solid var(--ink);padding-bottom:6px;}
+  .sec-h h2{font-size:17px;} .sec-h .q{font-size:11px;font-weight:700;background:var(--green);color:#04140b;padding:2px 8px;border-radius:6px;}
+  .sec-h .hint{color:var(--muted);font-weight:400;font-size:12px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--sh);}
+  .pad{padding:16px 18px;}
+  [data-tip]{cursor:help;}
+  .tipbox{position:fixed;display:none;max-width:300px;background:#0d1b16;color:#eafaf0;padding:9px 12px;border-radius:9px;font-size:12px;line-height:1.5;z-index:200;pointer-events:none;box-shadow:0 8px 26px rgba(13,27,22,.3);}
+  .lead{font-size:15px;line-height:1.55;color:var(--ink2);max-width:760px;} .lead b{color:var(--ink);}
+  /* hero stats */
+  .hero{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--sh);}
+  .stat .sv{font-size:26px;font-weight:750;letter-spacing:-.02em;color:var(--green-d);}
+  .stat .sl{font-size:11.5px;color:var(--ink2);margin-top:2px;line-height:1.35;}
+  .stat .sq{font-size:9.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  /* architecture diagram */
+  .arch{display:flex;flex-direction:column;}
+  .layer{display:grid;grid-template-columns:140px 1fr;gap:14px;align-items:center;padding:10px 0;}
+  .layer+.layer{border-top:1px dashed var(--line);}
+  .lyl{text-align:right;} .lyl b{font-size:12px;display:block;} .lyl span{font-size:10px;color:var(--muted);}
+  .lyr{display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
+  .node{border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12px;background:#fbfdfb;}
+  .node.src{border-width:2px;font-weight:600;}
+  .node.db{border-color:var(--db);color:var(--db);}.node.ph{border-color:var(--green);color:var(--green-d);}
+  .node.slack{border-color:var(--slack);color:var(--slack);}.node.email{border-color:var(--email);color:var(--email);}
+  .node.later{border-style:dashed;color:var(--muted);} .node.dark{background:var(--ink);color:#eafaf0;border-color:var(--ink);font-weight:600;}
+  .node .mono{font-size:11px;color:var(--muted);}
+  .flowdown{grid-column:2;color:var(--muted);font-size:15px;margin:-3px 0;} .spine-tag{font-size:10px;background:var(--db);color:#fff;padding:1px 6px;border-radius:4px;margin-left:5px;}
+  /* coverage bars */
+  .cov{max-width:560px;}
+  .cov-row{display:grid;grid-template-columns:120px 1fr 70px;align-items:center;gap:12px;padding:7px 0;}
+  .cov-l{font-size:12.5px;color:var(--ink2);font-weight:600;}
+  .cov-track{height:20px;background:#eef2ee;border-radius:6px;overflow:hidden;} .cov-track i{display:block;height:100%;background:var(--green);border-radius:6px;transition:width .4s;}
+  .cov-row.pilot .cov-track i{background:var(--under);} .cov-v{font-size:14px;font-weight:700;color:var(--green-d);text-align:right;} .cov-row.pilot .cov-v{color:var(--under);font-size:12px;}
+  /* tier cards */
+  .tcards{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:6px;}
+  .tcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--card);box-shadow:var(--sh);transition:.15s;}
+  .tcard:hover{border-color:var(--green);transform:translateY(-2px);}
+  .tc-n{background:var(--ink);color:#eafaf0;font-size:20px;font-weight:750;text-align:center;padding:8px;}
+  .tcard.t1 .tc-n{background:#0b6b36;} .tcard.t2 .tc-n{background:#2a5a3f;}
+  .tc-body{padding:10px 11px;display:flex;flex-direction:column;gap:3px;flex:1;}
+  .tc-tag{font-size:9px;font-weight:700;letter-spacing:.05em;color:var(--muted);}
+  .tc-name{font-size:13px;font-weight:650;} .tc-mcp{font-size:10.5px;color:var(--muted);line-height:1.3;flex:1;}
+  .tc-foot{margin-top:6px;} .tc-eff{font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:5px;text-transform:uppercase;}
+  .tc-eff.low{background:#e7f6ec;color:var(--green-d);}.tc-eff.med{background:#fbf3dc;color:#8a6d12;}.tc-eff.later{background:#eef1ee;color:var(--muted);}
+  .tc-unlock{display:block;font-size:11px;color:var(--ink);font-weight:600;margin-top:5px;}
+  /* signal inventory */
+  .sig-inv{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .sig-src{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:#fbfdfb;}
+  .sig-src-h{font-size:12.5px;font-weight:700;color:var(--green-d);margin-bottom:7px;}
+  .sig-col{display:flex;align-items:center;gap:8px;padding:3px 0;border-top:1px solid #f0f3f0;}
+  .sig-col:first-of-type{border-top:none;} .sig-col:hover{background:#f2f6f2;}
+  .sig-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:2px 5px;border-radius:4px;min-width:58px;text-align:center;}
+  .sig-tag.time{background:#e7f0fb;color:#2f6df6;}.sig-tag.intensity{background:#e7f6ec;color:var(--green-d);}.sig-tag.quality{background:#f3ecfb;color:#7b5bd6;}.sig-tag.friction{background:#fbe9e0;color:var(--over);}.sig-tag.context,.sig-tag.join{background:#eef1ee;color:var(--muted);}
+  .sig-name{font-size:12px;color:var(--ink);font-weight:600;}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:10px;}
+  .legend b{color:var(--ink2);font-weight:600;}
+  /* estimator */
+  .eq{background:#0d1b16;color:#eafaf0;border-radius:10px;padding:13px 15px;font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.95;overflow-x:auto;white-space:pre;margin-bottom:12px;}
+  .est-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:14px;align-items:start;}
+  .stage{border:1px solid var(--line);border-radius:10px;padding:12px 13px;background:#fbfdfb;margin-bottom:10px;}
+  .stage h4{font-size:12.5px;color:var(--green-d);margin-bottom:4px;} .stage .sf{font-size:11.5px;color:var(--ink2);line-height:1.45;}
+  .stage .eqmini{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink);background:#eef2ee;border-radius:6px;padding:5px 8px;margin-top:6px;}
+  .viz-card{border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .viz-h{font-size:11.5px;font-weight:700;color:var(--ink2);margin-bottom:4px;}
+  .viz-sub{font-size:10.5px;color:var(--muted);margin-bottom:6px;}
+  .sc-svg{width:100%;height:auto;display:block;} .sc-ax{stroke:var(--line);stroke-width:1;} .sc-diag{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;} .sc-dot{fill:var(--green);opacity:.8;} .sc-al{fill:var(--muted);font-size:10px;text-anchor:middle;}
+  .cl-row{display:grid;grid-template-columns:64px 1fr 34px;align-items:center;gap:8px;padding:4px 0;font-size:12px;}
+  .cl-l{color:var(--ink2);} .cl-track{height:9px;background:#eef2ee;border-radius:5px;overflow:hidden;} .cl-track i{display:block;height:100%;background:var(--over);border-radius:5px;} .cl-v{text-align:right;font-weight:700;color:var(--over);font-variant-numeric:tabular-nums;}
+  .steps{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+  .step-chip{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:20px;padding:5px 12px 5px 6px;font-size:12px;background:#fbfdfb;}
+  .step-chip:hover{border-color:var(--green);} .step-n{width:19px;height:19px;border-radius:50%;background:var(--green-d);color:#eafaf0;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;} .step-chip b{color:var(--ink);font-weight:600;}
+  /* Q2 chart */
+  .q2-wrap{display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center;}
+  .q2-svg{width:100%;height:auto;display:block;overflow:visible;}
+  .q2-grid{stroke:#eef2ee;} .q2-yl{fill:var(--muted);font-size:10px;text-anchor:end;} .q2-xl{fill:var(--ink2);font-size:10.5px;font-weight:600;text-anchor:middle;} .q2-xc{fill:var(--muted);font-size:9.5px;text-anchor:middle;}
+  .q2-p{fill:none;stroke-width:2.4;} .q2-p.needed{stroke:var(--green);} .q2-p.supply{stroke:var(--ink);stroke-width:1.8;stroke-dasharray:4 3;} .q2-p.doing{stroke:var(--db);stroke-width:1.8;opacity:.65;}
+  .q2-d{stroke:#fff;stroke-width:.8;} .q2-d.needed{fill:var(--green);} .q2-d.supply{fill:var(--ink);} .q2-d.doing{fill:var(--db);opacity:.65;}
+  .q2-short{fill:var(--over);opacity:.14;} .q2-brk{stroke:var(--over);stroke-width:1.4;stroke-dasharray:3 3;} .q2-brkl{fill:var(--over);font-size:10.5px;font-weight:700;text-anchor:middle;}
+  .q2-end{font-size:10px;font-weight:650;} .q2-end.needed{fill:var(--green-d);}.q2-end.supply{fill:var(--ink);}.q2-end.doing{fill:var(--db);}
+  .q2-nums{display:flex;flex-direction:column;gap:10px;}
+  .q2-num .n{font-size:20px;font-weight:750;color:var(--green-d);} .q2-num .l{font-size:10.5px;color:var(--ink2);line-height:1.3;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+  .chip2{border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-size:12px;background:#fbfdfb;color:var(--ink2);} .chip2:hover{border-color:var(--green);} .chip2 b{color:var(--ink);}
+  /* cross-cutting */
+  .cc-grid{display:flex;flex-wrap:wrap;gap:10px;}
+  .cc-chip{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:10px;padding:10px 15px;background:var(--card);box-shadow:var(--sh);}
+  .cc-chip:hover{border-color:var(--green);} .cc-ico{font-size:16px;} .cc-l{font-size:12.5px;font-weight:650;}
+  .foot{margin-top:12px;font-size:11.5px;color:var(--muted);line-height:1.5;background:#fbfdfb;border:1px solid var(--line);border-radius:10px;padding:11px 14px;} .foot b{color:var(--green-d);}
+  .banner{display:flex;gap:9px;align-items:flex-start;background:#fbf3dc;border:1px solid #ecdca0;border-radius:10px;padding:10px 14px;font-size:12px;color:#7a5f10;line-height:1.5;margin-top:14px;}
+  .banner b{color:#5c470a;} .banner .bi{font-size:14px;}
+  .illus{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#8a6d12;background:#fbf3dc;border:1px solid #ecdca0;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;cursor:help;}
+  .prov{margin-left:auto;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:1px 6px;border-radius:4px;cursor:help;white-space:nowrap;}
+  .prov.native{background:#e3f5ea;color:var(--green-d);} .prov.calc{background:#e7f0fb;color:#2f6df6;} .prov.exp{background:#fbf3dc;color:#8a6d12;}
+  .legend .prov{margin-left:0;}
+  @media(max-width:820px){.hero,.tcards{grid-template-columns:repeat(2,1fr);}.sig-inv,.est-grid,.q2-wrap{grid-template-columns:1fr;}}
+</style></head><body>
+<header>
+  <svg class="leaf" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 6 5 10 5 14a7 7 0 0 0 14 0c0-4-2-8-7-12z"/></svg>
+  <div><b>Hanover Park · Data Pipeline & MCP Architecture</b><div class="sub">the plan before the dashboard. figures are illustrative on sample data. hover anything for detail.</div></div>
+  <div class="spacer"></div><a class="lnk" href="pulse-v2.html">&larr; the dashboard</a>
+</header>
+<div class="wrap">
+  <p class="lead">No clean <b>hours per client</b> exists. The work is spread across systems and a lot of it is now done by AI agents. I rebuild the effort from the data these systems already produce, then use it to staff the firm toward hundreds of clients.</p>
+  <div class="banner"><span class="bi">⚠</span><div><b>Illustrative prototype.</b> Every figure here runs on representative <b>sample data</b> to demonstrate the method, not real Hanover measurements. The <b>coverage percentages</b> and the <b>scatter</b> are hand-set to show the shape; the collinearity and staffing numbers come from the sample model.</div></div>
+  <div class="hero">
+    <div class="stat" data-tip="Wired in order: platform DB, PostHog, Slack, Gmail. Then a timesheet pilot to calibrate, then CRM, HRIS and Calendar to reach margin.">
+      <div class="sq">Q3 · sources</div><div class="sv">4 &rarr; 1</div><div class="sl">four MCP sources into one defensible number</div></div>
+    <div class="stat" data-tip="ILLUSTRATIVE, hand-set to show the shape. In production, coverage = the share of total effort minutes each cumulative source set captures, or the cumulative R-squared of predicting the pilot hours. DB review alone is a subset of in-app time, PostHog active adds the rest of in-app, and Slack plus Gmail add the off-platform work.">
+      <div class="sq">Q1 · coverage <span class="illus" data-tip="Hand-set illustrative numbers.">illus</span></div><div class="sv">38&rarr;98%</div><div class="sl">of true effort captured as sources are added</div></div>
+    <div class="stat" data-tip="The raw signals are 0.8 to 0.9 correlated. One busyness factor drives all of them, so they cannot be regressed apart naively.">
+      <div class="sq">Q1 · signals</div><div class="sv">0.9</div><div class="sl">collinearity between the effort signals</div></div>
+    <div class="stat" data-tip="Every accountant reviews, so the constraint is headcount: recruiting has a max pace and a new hire is only ~50% productive in their first quarter, so ramped capacity trails the bodies and hiring must lead demand. Sublinear: 2.8x clients on 1.4x people.">
+      <div class="sq">Q2 · scaling</div><div class="sv">+1 to +2Q</div><div class="sl">the hiring gap, ramped capacity trails demand (live model on the dashboard)</div></div>
+  </div>
+
+  <div class="sec"><div class="sec-h"><h2>The architecture</h2><span class="q">Q3</span><span class="hint">read-only MCPs, into raw, identity, signals, models, serving</span></div>
+    <div class="card pad"><div class="arch">
+      <div class="layer"><div class="lyl"><b>Sources</b><span>read-only MCPs</span></div><div class="lyr">
+        <span class="node src db" data-tip="First-party system of record. Work items, timestamps, AI flag, and the identity directory.">Platform DB<span class="spine-tag">SPINE</span></span>
+        <span class="node src ph" data-tip="Idle-stripped active time, instrumented events, session summaries, and friction signals.">PostHog</span>
+        <span class="node src slack" data-tip="Off-platform effort from character count, thread and mention structure. Metrics only, never content.">Slack</span>
+        <span class="node src email" data-tip="Client emails handled, keyed by handler and domain.">Gmail</span>
+        <span class="node src later" data-tip="Wired later, to turn hours into margin: contract type and fees, fully-loaded cost, and meeting time.">CRM · HRIS · Calendar</span></div></div>
+      <div class="flowdown">&darr;&nbsp; least-privilege connectors</div>
+      <div class="layer"><div class="lyl"><b>Ingestion</b><span>incremental</span></div><div class="lyr"><span class="node" data-tip="Change-data-capture or webhooks where possible, windowed API deltas otherwise. Re-runnable for any period.">CDC / windowed deltas · replayable</span></div></div>
+      <div class="flowdown">&darr;</div>
+      <div class="layer"><div class="lyl"><b>Raw store</b><span>immutable mirror</span></div><div class="lyr"><span class="node mono">RAW_DB_Work</span><span class="node mono">RAW_PostHog</span><span class="node mono">RAW_Slack</span><span class="node mono">RAW_Gmail</span></div></div>
+      <div class="flowdown">&darr;</div>
+      <div class="layer"><div class="lyl"><b>Identity</b><span>the join layer</span></div><div class="lyr"><span class="node mono" data-tip="The hard part. Owned by the platform, applied to stamp canonical IDs on every raw row.">person: id↔email↔slack &nbsp;·&nbsp; client: fund↔workspace↔channel↔domain</span></div></div>
+      <div class="flowdown">&darr;</div>
+      <div class="layer"><div class="lyl"><b>Signals</b><span>person × client</span></div><div class="lyr"><span class="node" data-tip="Join every source and roll up to one row per person, client, and period, with the per-source effort models applied.">join + roll up + effort models</span></div></div>
+      <div class="flowdown">&darr;</div>
+      <div class="layer"><div class="lyl"><b>Models</b><span>outputs</span></div><div class="lyr"><span class="node">Actual time <span class="mono">+ confidence</span></span><span class="node">Staffing</span><span class="node">Value / score</span></div></div>
+      <div class="flowdown">&darr;</div>
+      <div class="layer"><div class="lyl"><b>Serving</b><span>one source of truth</span></div><div class="lyr"><span class="node dark" data-tip="One kernel that both the dashboard and the Excel read from, so the two cannot disagree.">Dashboard</span><span class="node dark">Excel audit</span></div></div>
+    </div></div></div>
+
+  <div class="sec"><div class="sec-h"><h2>Which MCPs to wire, and in what order</h2><span class="q">Q3</span><span class="hint">each source adds coverage. hover a tier for why.</span></div>
+    <div class="card pad">
+      <div class="viz-h">Share of true effort captured, as each source is added <span class="illus" data-tip="Hand-set to show the shape. In production this is the share of total effort minutes each cumulative source set captures, or the cumulative R-squared against the pilot hours.">illustrative</span></div>
+      <div class="viz-sub">the ordering falls straight out of this: wire the source that adds the most coverage per unit of effort</div>
+      <div class="cov"><div class="cov-row" data-tip="DB review timestamps only. A real but partial number: review time, missing investigation and every off-platform minute."><span class="cov-l">Hanover DB</span><span class="cov-track"><i style="width:38%"></i></span><span class="cov-v">38%</span></div><div class="cov-row" data-tip="Add idle-stripped active time. Now you capture the investigation and thinking time the database never sees. The single biggest jump."><span class="cov-l">+ PostHog</span><span class="cov-track"><i style="width:86%"></i></span><span class="cov-v">86%</span></div><div class="cov-row" data-tip="Add the off-platform effort: client emails and coordination. Close to complete."><span class="cov-l">+ Slack, Gmail</span><span class="cov-track"><i style="width:98%"></i></span><span class="cov-v">98%</span></div><div class="cov-row pilot" data-tip="The pilot does not add coverage, it calibrates the weights. 4 to 5 accountants log hours per fund for one to two weeks, and the regressions fit to that ground truth."><span class="cov-l">+ pilot</span><span class="cov-track"><i style="width:98%;opacity:.25"></i></span><span class="cov-v">calibrates</span></div></div>
+      <div class="tcards"><div class="tcard t0" data-tip="Wire first. It gives a real if incomplete number on its own, it owns the IDs every other source joins to, and it is fully in-house, so no rate limits or privacy issues. Nothing joins without it.">
+          <div class="tc-n">0</div>
+          <div class="tc-body"><div class="tc-tag">SPINE</div><div class="tc-name">Platform DB</div><div class="tc-mcp">Postgres or the app API</div>
+          <div class="tc-foot"><span class="tc-eff low">low</span><span class="tc-unlock">a real number day one</span></div></div></div><div class="tcard t1" data-tip="Adds the most after the spine. It captures the research and thinking time the database never sees, and shows whether the time was well spent. Cheap to wire if they already run PostHog.">
+          <div class="tc-n">1</div>
+          <div class="tc-body"><div class="tc-tag">CORROBORATE</div><div class="tc-name">PostHog</div><div class="tc-mcp">sessions, events, summaries</div>
+          <div class="tc-foot"><span class="tc-eff low">low</span><span class="tc-unlock">the biggest coverage jump</span></div></div></div><div class="tcard t1" data-tip="Real but smaller effort, and the hardest to attribute to a client. Added after the in-app data is solid. Read-only and aggregated to effort metrics like character count, never message content.">
+          <div class="tc-n">2</div>
+          <div class="tc-body"><div class="tc-tag">OFF-APP</div><div class="tc-name">Slack + Gmail</div><div class="tc-mcp">conversations, metadata</div>
+          <div class="tc-foot"><span class="tc-eff med">med</span><span class="tc-unlock">the off-platform work</span></div></div></div><div class="tcard t2" data-tip="Not a system. Without a little ground truth the model weights are guesses. This is what the regressions fit against, and what turns a reasonable model into a defensible one.">
+          <div class="tc-n">3</div>
+          <div class="tc-body"><div class="tc-tag">CALIBRATE</div><div class="tc-name">Timesheet pilot</div><div class="tc-mcp">4 to 5 accountants, 1 to 2 weeks</div>
+          <div class="tc-foot"><span class="tc-eff low">low</span><span class="tc-unlock">the ground truth</span></div></div></div><div class="tcard t2" data-tip="Turns hours per client into margin per client, the question the business actually cares about. Comes last because the effort number has to be trustworthy first.">
+          <div class="tc-n">4</div>
+          <div class="tc-body"><div class="tc-tag">MONETIZE</div><div class="tc-name">CRM, HRIS, Calendar</div><div class="tc-mcp">billing, cost, meetings</div>
+          <div class="tc-foot"><span class="tc-eff later">later</span><span class="tc-unlock">margin per client</span></div></div></div></div>
+    </div></div>
+
+  <div class="sec"><div class="sec-h"><h2>Signal schema</h2><span class="q">Q1</span><span class="hint">every column each source gives us. hover for what it feeds.</span></div>
+    <div class="card pad"><div class="sig-inv"><div class="sig-src"><div class="sig-src-h">Hanover DB</div><div class="sig-col" data-tip="logged review minutes, a fusion feature. Provenance: Derived from the review window, ReviewedTs minus CreatedTs, or from logged active-review time."><span class="sig-tag time">time</span><span class="sig-name mono">ReviewMin</span><span class="prov calc" data-tip="Derived from the review window, ReviewedTs minus CreatedTs, or from logged active-review time.">calc</span></div><div class="sig-col" data-tip="the review window, start to sign-off. Provenance: Standard timestamps on any work-tracking record."><span class="sig-tag time">time</span><span class="sig-name mono">CreatedTs, ReviewedTs</span><span class="prov native" data-tip="Standard timestamps on any work-tracking record.">native</span></div><div class="sig-col" data-tip="was this item drafted by the AI agent. Provenance: Assumes the platform flags AI-drafted items. Reasonable for an AI-native shop, but their schema has to track it."><span class="sig-tag quality">quality</span><span class="sig-name mono">AI_flag</span><span class="prov exp" data-tip="Assumes the platform flags AI-drafted items. Reasonable for an AI-native shop, but their schema has to track it.">expected</span></div><div class="sig-col" data-tip="approved / edited / corrected / escalated. Provenance: Assumes a review-action enum. Their actual taxonomy may differ."><span class="sig-tag quality">quality</span><span class="sig-name mono">ReviewAction</span><span class="prov exp" data-tip="Assumes a review-action enum. Their actual taxonomy may differ.">expected</span></div><div class="sig-col" data-tip="how hard it was, and whether it came back. Provenance: Assumes the platform flags exceptions and downstream rework."><span class="sig-tag quality">quality</span><span class="sig-name mono">Exception, Reworked</span><span class="prov exp" data-tip="Assumes the platform flags exceptions and downstream rework.">expected</span></div><div class="sig-col" data-tip="materiality, weights the work-effort model. Provenance: Transaction or position amount, standard in a fund-admin ledger."><span class="sig-tag context">context</span><span class="sig-name mono">Amount</span><span class="prov native" data-tip="Transaction or position amount, standard in a fund-admin ledger.">native</span></div><div class="sig-col" data-tip="standard minutes and AI share per task. Provenance: The work-item category, standard."><span class="sig-tag join">join</span><span class="sig-name mono">WorkType</span><span class="prov native" data-tip="The work-item category, standard.">native</span></div></div><div class="sig-src"><div class="sig-src-h">PostHog</div><div class="sig-col" data-tip="idle-stripped active time, the backbone feature. Provenance: PostHog computes active time per session recording."><span class="sig-tag time">time</span><span class="sig-name mono">ActiveSec</span><span class="prov native" data-tip="PostHog computes active time per session recording.">native</span></div><div class="sig-col" data-tip="wall-clock session length. Provenance: Session duration, native."><span class="sig-tag time">time</span><span class="sig-name mono">DurationSec</span><span class="prov native" data-tip="Session duration, native.">native</span></div><div class="sig-col" data-tip="raw input intensity. Provenance: PostHog autocapture."><span class="sig-tag intensity">intensity</span><span class="sig-name mono">ClickCount, KeypressCount</span><span class="prov native" data-tip="PostHog autocapture.">native</span></div><div class="sig-col" data-tip="instrumented actions taken, a fusion feature. Provenance: A custom event via posthog.capture that Hanover would instrument."><span class="sig-tag intensity">intensity</span><span class="sig-name mono">ActionEvents</span><span class="prov exp" data-tip="A custom event via posthog.capture that Hanover would instrument.">expected</span></div><div class="sig-col" data-tip="how much they changed the AI draft. Provenance: Custom instrumentation: the size of edits to the AI draft. Not native."><span class="sig-tag intensity">intensity</span><span class="sig-name mono">EditDelta</span><span class="prov exp" data-tip="Custom instrumentation: the size of edits to the AI draft. Not native.">expected</span></div><div class="sig-col" data-tip="how often the human overrode the AI. Provenance: Custom instrumentation: human overrides of the AI. Not native."><span class="sig-tag quality">quality</span><span class="sig-name mono">AIOverrides</span><span class="prov exp" data-tip="Custom instrumentation: human overrides of the AI. Not native.">expected</span></div><div class="sig-col" data-tip="the tooling breaking mid-task. Provenance: Both are native PostHog features."><span class="sig-tag friction">friction</span><span class="sig-name mono">ConsoleErrors, RageClicks</span><span class="prov native" data-tip="Both are native PostHog features.">native</span></div><div class="sig-col" data-tip="the AI recap of the session and difficulty. Provenance: PostHog's AI session-summaries feature. Real, but you enable it."><span class="sig-tag quality">quality</span><span class="sig-name mono">AISummary</span><span class="prov native" data-tip="PostHog's AI session-summaries feature. Real, but you enable it.">native</span></div><div class="sig-col" data-tip="completed, partial, or dropped. Provenance: Custom event you define, not native."><span class="sig-tag quality">quality</span><span class="sig-name mono">Outcome</span><span class="prov exp" data-tip="Custom event you define, not native.">expected</span></div></div><div class="sig-src"><div class="sig-src-h">Slack</div><div class="sig-col" data-tip="converts to minutes via compose-rate. Provenance: Character count of the message text, derived from the Slack message."><span class="sig-tag time">time</span><span class="sig-name mono">CharCount</span><span class="prov calc" data-tip="Character count of the message text, derived from the Slack message.">calc</span></div><div class="sig-col" data-tip="thread depth and coordination load. Provenance: Slack API: thread_ts for replies, mentions in the message."><span class="sig-tag intensity">intensity</span><span class="sig-name mono">IsReply, Mentions</span><span class="prov native" data-tip="Slack API: thread_ts for replies, mentions in the message.">native</span></div><div class="sig-col" data-tip="a light signal, not effort. Provenance: Slack API reactions."><span class="sig-tag context">context</span><span class="sig-name mono">Reactions</span><span class="prov native" data-tip="Slack API reactions.">native</span></div></div><div class="sig-src"><div class="sig-src-h">Gmail</div><div class="sig-col" data-tip="client emails handled, via minutes-per-email. Provenance: Counted from the Gmail list API for the handler and domain."><span class="sig-tag time">time</span><span class="sig-name mono">message count</span><span class="prov calc" data-tip="Counted from the Gmail list API for the handler and domain.">calc</span></div><div class="sig-col" data-tip="inbound versus outbound. Provenance: Derived from the from and to headers."><span class="sig-tag context">context</span><span class="sig-name mono">Direction</span><span class="prov calc" data-tip="Derived from the from and to headers.">calc</span></div><div class="sig-col" data-tip="attributes the email to a fund. Provenance: Parsed from the email domain."><span class="sig-tag join">join</span><span class="sig-name mono">ClientDomain</span><span class="prov calc" data-tip="Parsed from the email domain.">calc</span></div></div></div>
+      <div class="legend"><b>role:</b> <span>time (feeds the estimate)</span> · <span>intensity</span> · <span>quality</span> · <span>friction</span> · <span>context / join</span></div><div class="legend"><b>provenance:</b> <span class="prov native">native</span> the source provides it &nbsp; · &nbsp; <span class="prov calc">calc</span> we derive it &nbsp; · &nbsp; <span class="prov exp">expected</span> needs instrumentation or assumes their schema</div>
+    </div></div>
+
+  <div class="sec"><div class="sec-h"><h2>The estimator, end to end</h2><span class="q">Q1</span><span class="hint">the full model behind the number. hover each step.</span></div>
+    <div class="card pad">
+      <div class="eq">in-app(p,c)  = max( wa·Active + wd·DBReview + wx·Actions ,  DBReview )
+off-app(p,c) = SlackChars / kslack  +  Emails · kemail
+Actual FTE   = ( in-app + off-app ) / ( weekly_hrs · 60 · (1 - overhead) )</div>
+      <div class="est-grid">
+        <div>
+          <div class="stage" data-tip="Active time is the backbone. I fit wa by regressing pilot hours on active time, floored at the logged DB review time so a dropped session never zeroes a real cell."><h4>Stage 1 · in-app</h4><div class="sf">Active time is the backbone, floored at DB review.</div><div class="eqmini">in-app = fit( pilot hours ~ active time )</div></div>
+          <div class="stage" data-tip="Take the residual, pilot hours minus in-app time, and regress it on Slack chars and email count to get the compose-rate and minutes-per-email. Separately identifiable because off-app is independent of in-app."><h4>Stage 2 · off-app</h4><div class="sf">Residual regressed on Slack and Gmail to learn the two rates.</div><div class="eqmini">rates = fit( hours − in-app ~ chars, emails )</div></div>
+        </div>
+        <div class="viz-card">
+          <div class="viz-h">The fit, out of sample</div>
+          <div class="viz-sub">pilot true hours vs model prediction, leave-one-out <span class="illus" data-tip="Illustrative points, to show what the out-of-sample fit looks like.">illus</span></div>
+          <svg viewBox="0 0 300 220" class="sc-svg"><line x1="32" y1="188.0" x2="290.0" y2="188.0" class="sc-ax"/><line x1="32" y1="10.0" x2="32" y2="188.0" class="sc-ax"/><line x1="32.0" y1="188.0" x2="290.0" y2="10.0" class="sc-diag"/><circle cx="68.9" cy="159.2" r="3.4" class="sc-dot"/><circle cx="87.3" cy="154.9" r="3.4" class="sc-dot"/><circle cx="99.6" cy="137.1" r="3.4" class="sc-dot"/><circle cx="118.0" cy="132.9" r="3.4" class="sc-dot"/><circle cx="130.3" cy="116.0" r="3.4" class="sc-dot"/><circle cx="148.7" cy="110.9" r="3.4" class="sc-dot"/><circle cx="167.1" cy="86.3" r="3.4" class="sc-dot"/><circle cx="185.6" cy="90.5" r="3.4" class="sc-dot"/><circle cx="204.0" cy="65.1" r="3.4" class="sc-dot"/><circle cx="222.4" cy="48.1" r="3.4" class="sc-dot"/><circle cx="240.9" cy="54.5" r="3.4" class="sc-dot"/><circle cx="265.4" cy="22.7" r="3.4" class="sc-dot"/>
+      <text x="166" y="214" class="sc-al">pilot true hours</text>
+      <text x="12" y="110" class="sc-al" transform="rotate(-90 12 110)">model predicted</text></svg>
+          <div class="viz-h" style="margin-top:10px;" data-tip="One busyness factor drives all the signals, so a naive five-way regression cannot separate them and collapses onto active time. That is why the fit is two staged.">Why two stages: collinearity</div>
+          <div class="viz-sub">each signal's correlation with active time <span class="illus" data-tip="Measured on the sample model, so representative not real Hanover data.">sample</span></div>
+          <div class="cl-row"><span class="cl-l">DB review</span><span class="cl-track"><i style="width:81%"></i></span><span class="cl-v">0.81</span></div><div class="cl-row"><span class="cl-l">Slack</span><span class="cl-track"><i style="width:91%"></i></span><span class="cl-v">0.91</span></div><div class="cl-row"><span class="cl-l">Gmail</span><span class="cl-track"><i style="width:92%"></i></span><span class="cl-v">0.92</span></div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step-chip" data-tip="The only ground truth: 4 to 5 accountants log hours per fund for one to two weeks. That gives true minutes per person and fund."><span class="step-n">1</span><b>Target</b></div>
+        <div class="step-chip" data-tip="Linear, non-negative, through the origin. Zero signal means zero effort, and no signal can carry a negative weight. Interpretable and hard to overfit on a small pilot."><span class="step-n">2</span><b>Form</b></div>
+        <div class="step-chip" data-tip="Active time carries in-app effort, floored at DB review. The collinear extras take only a small incremental weight or are pooled."><span class="step-n">3</span><b>In-app fit</b></div>
+        <div class="step-chip" data-tip="The off-app rates, compose-rate and minutes-per-email, are fit on the residual. This is the signal-conversion regression in the dashboard's Calibration section."><span class="step-n">4</span><b>Off-app fit</b></div>
+        <div class="step-chip" data-tip="In-sample R2 on a dozen pilot points is near one and meaningless. I validate with leave-one-out cross-validation and report the out-of-sample error."><span class="step-n">5</span><b>Validate</b></div>
+        <div class="step-chip" data-tip="Occasional spot timesheets keep adding ground truth. Refit monthly, and treat a materially moving weight as a flag to investigate."><span class="step-n">6</span><b>Re-fit</b></div>
+        <div class="step-chip" data-tip="The time is all human. AI-agent DB actions are excluded, which is what netted against AI means. Overhead is measured, not assumed. Every cell carries a confidence score from how many sources back it."><span class="step-n">7</span><b>Denominator, netting, confidence</b></div>
+      </div>
+    </div></div>
+
+  <div class="sec"><div class="sec-h"><h2>Cross-cutting</h2><span class="hint">what makes it real, not a demo. hover each.</span></div>
+    <div class="card pad"><div class="cc-grid"><div class="cc-chip" data-tip="Nightly batch to start. The platform database syncs incrementally, and PostHog, Slack, and Gmail pull windowed deltas. Near real-time only where a decision needs it."><span class="cc-ico">↻</span><span class="cc-l">Refresh</span></div><div class="cc-chip" data-tip="The raw layer is immutable and keyed, so re-running any period gives the same result. I can rebuild any past number exactly, which is what defensible requires."><span class="cc-ico">⟲</span><span class="cc-l">Replayable</span></div><div class="cc-chip" data-tip="The entity map lives in the platform, the master, not stitched together downstream. A new hire or a new fund is one directory edit, not a pipeline change."><span class="cc-ico">⌗</span><span class="cc-l">Identity</span></div><div class="cc-chip" data-tip="Every connector read-only and least-privilege. Comms aggregated to effort metrics like character counts, never content. Gaps show up as low confidence, never made up."><span class="cc-ico">🔒</span><span class="cc-l">Privacy</span></div><div class="cc-chip" data-tip="Every number reports its sources and a score. The output separates what was measured three ways from what was inferred from one."><span class="cc-ico">◔</span><span class="cc-l">Confidence</span></div></div>
+      <div class="foot">The point of the pipeline is not to produce a number. It is to produce a number <b>I can defend</b>: traceable to source, calibrated against real data, and honest about what it does not know. The dashboard is just how that number gets looked at.</div>
+    </div></div>
+</div>
+<script>(function(){var box=document.createElement("div");box.className="tipbox";document.body.appendChild(box);var cur=null;
+function place(e){var p=13,x=e.clientX+p,y=e.clientY+p,r=box.getBoundingClientRect();if(x+r.width>innerWidth-8)x=e.clientX-r.width-p;if(y+r.height>innerHeight-8)y=e.clientY-r.height-p;box.style.left=x+"px";box.style.top=y+"px";}
+document.addEventListener("mouseover",function(e){var t=e.target.closest("[data-tip]");if(!t)return;cur=t;box.textContent=t.getAttribute("data-tip");box.style.display="block";place(e);});
+document.addEventListener("mousemove",function(e){if(cur)place(e);});
+document.addEventListener("mouseout",function(e){var t=e.target.closest("[data-tip]");if(t&&t===cur){box.style.display="none";cur=null;}});})();</script>
+</body></html>
