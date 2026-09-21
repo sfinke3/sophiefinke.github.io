@@ -673,3 +673,8 @@ footer {
     width: auto;
   }
 }
+
+/* ── Linked card ── */
+.project-card-link { color: inherit; }
+.project-card-link:hover { opacity: 1; border-color: var(--accent); }
+.project-card-link .project-url { margin: 4px 0 0; }
