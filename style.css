@@ -678,3 +678,6 @@ footer {
 .project-card-link { color: inherit; }
 .project-card-link:hover { opacity: 1; border-color: var(--accent); }
 .project-card-link .project-url { margin: 4px 0 0; }
+
+.hero-sub a { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+a.hero-chip { color: var(--accent); }
